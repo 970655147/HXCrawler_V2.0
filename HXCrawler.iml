@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="EclipseModuleManager">
+    <libelement value="jar://D:/Assist/jar/apache/httpClient/commons-logging-1.2.jar!/" />
+    <libelement value="jar://D:/Assist/jar/apache/httpClient/fluent-hc-4.5.jar!/" />
+    <libelement value="jar://D:/Assist/jar/apache/httpClient/httpclient-4.5.jar!/" />
+    <libelement value="jar://D:/Assist/jar/apache/httpClient/httpclient-cache-4.5.jar!/" />
+    <libelement value="jar://D:/Assist/jar/apache/httpClient/httpclient-win-4.5.jar!/" />
+    <libelement value="jar://D:/Assist/jar/apache/httpClient/httpcore-4.4.1.jar!/" />
+    <libelement value="jar://D:/Assist/jar/apache/httpClient/httpmime-4.5.jar!/" />
+    <libelement value="jar://D:/Assist/jar/apache/httpClient/jna-4.1.0.jar!/" />
+    <libelement value="jar://D:/Assist/jar/apache/httpClient/jna-platform-4.1.0.jar!/" />
+    <libelement value="jar://D:/Assist/jar/json/commons-beanutils.jar!/" />
+    <libelement value="jar://D:/Assist/jar/json/commons-collections-3.2.1.jar!/" />
+    <libelement value="jar://D:/Assist/jar/json/commons-lang-2.2.jar!/" />
+    <libelement value="jar://D:/Assist/jar/json/commons-logging.jar!/" />
+    <libelement value="jar://D:/Assist/jar/json/ezmorph-1.0.6.jar!/" />
+    <libelement value="jar://D:/Assist/jar/json/json.jar!/" />
+    <libelement value="jar://D:/Assist/jar/json/json-lib-2.2.3-jdk15.jar!/" />
+    <libelement value="jar://D:/Assist/jar/xml/dom4j.jar!/" />
+    <libelement value="jar://D:/Assist/jar/xml/jaxen.jar!/" />
+    <libelement value="jar://D:/Assist/jar/xml/tagsoup-1.2.1.jar!/" />
+    <src_description expected_position="0">
+      <src_folder value="file://$MODULE_DIR$/src" expected_position="0" />
+    </src_description>
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="false">
+    <output url="file://$MODULE_DIR$/bin" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+    </content>
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="module-library">
+      <library name="commons-logging-1.2.jar">
+        <CLASSES>
+          <root url="jar://D:/Assist/jar/apache/httpClient/commons-logging-1.2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="fluent-hc-4.5.jar">
+        <CLASSES>
+          <root url="jar://D:/Assist/jar/apache/httpClient/fluent-hc-4.5.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="httpclient-4.5.jar">
+        <CLASSES>
+          <root url="jar://D:/Assist/jar/apache/httpClient/httpclient-4.5.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="httpclient-cache-4.5.jar">
+        <CLASSES>
+          <root url="jar://D:/Assist/jar/apache/httpClient/httpclient-cache-4.5.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="httpclient-win-4.5.jar">
+        <CLASSES>
+          <root url="jar://D:/Assist/jar/apache/httpClient/httpclient-win-4.5.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="httpcore-4.4.1.jar">
+        <CLASSES>
+          <root url="jar://D:/Assist/jar/apache/httpClient/httpcore-4.4.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://D:/Assist/src/apache/common/httpcomponents-client-4.5-src.zip!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="httpmime-4.5.jar">
+        <CLASSES>
+          <root url="jar://D:/Assist/jar/apache/httpClient/httpmime-4.5.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jna-4.1.0.jar">
+        <CLASSES>
+          <root url="jar://D:/Assist/jar/apache/httpClient/jna-4.1.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jna-platform-4.1.0.jar">
+        <CLASSES>
+          <root url="jar://D:/Assist/jar/apache/httpClient/jna-platform-4.1.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="commons-beanutils.jar">
+        <CLASSES>
+          <root url="jar://D:/Assist/jar/json/commons-beanutils.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="commons-collections-3.2.1.jar">
+        <CLASSES>
+          <root url="jar://D:/Assist/jar/json/commons-collections-3.2.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="commons-lang-2.2.jar">
+        <CLASSES>
+          <root url="jar://D:/Assist/jar/json/commons-lang-2.2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="commons-logging.jar">
+        <CLASSES>
+          <root url="jar://D:/Assist/jar/json/commons-logging.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="ezmorph-1.0.6.jar">
+        <CLASSES>
+          <root url="jar://D:/Assist/jar/json/ezmorph-1.0.6.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="json.jar">
+        <CLASSES>
+          <root url="jar://D:/Assist/jar/json/json.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="json-lib-2.2.3-jdk15.jar">
+        <CLASSES>
+          <root url="jar://D:/Assist/jar/json/json-lib-2.2.3-jdk15.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="dom4j.jar">
+        <CLASSES>
+          <root url="jar://D:/Assist/jar/xml/dom4j.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://D:/Assist/src/xml/dom4j/dom4j-code.zip!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jaxen.jar">
+        <CLASSES>
+          <root url="jar://D:/Assist/jar/xml/jaxen.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="tagsoup-1.2.1.jar">
+        <CLASSES>
+          <root url="jar://D:/Assist/jar/xml/tagsoup-1.2.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+  </component>
+</module>

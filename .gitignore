@@ -1,0 +1,5 @@
+# ignore all ".class" file
+*.class
+*.jar
+
+./bin/*
