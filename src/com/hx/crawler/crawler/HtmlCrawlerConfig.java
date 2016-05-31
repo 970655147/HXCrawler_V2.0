@@ -18,9 +18,21 @@ import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
 
 import com.hx.crawler.crawler.interf.CrawlerConfig;
+import com.hx.log.log.Tools;
 
 // CrawlerConfig
 public class HtmlCrawlerConfig implements CrawlerConfig<Header, String, NameValuePair, String, String> {
+	
+	// 获取get, post 的默认的CrawlerConfig方法
+	public static HtmlCrawlerConfig get() {
+		HtmlCrawlerConfig config = new HtmlCrawlerConfig();
+		return config;
+	}
+	public static HtmlCrawlerConfig post() {
+		HtmlCrawlerConfig config = new HtmlCrawlerConfig();
+		config.addHeader(Tools.CONTENT_TYPE, Tools.APPLICATION_URL_ENCODED);
+		return config;
+	}
 	
 	// 请求头信息, cookies信息, postData信息
 	// 超时配置
@@ -33,8 +45,8 @@ public class HtmlCrawlerConfig implements CrawlerConfig<Header, String, NameValu
 	private static int DEFAULT_TIMEOUT = 10 * 1000;
 	private static Map<String, String> DEFAULT_HEADERS = new HashMap<>();
 	static {
-		DEFAULT_HEADERS.put("Content-Type", "text/html;charset=utf-8");
-		DEFAULT_HEADERS.put("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.134 Safari/537.36");
+		DEFAULT_HEADERS.put(Tools.CONTENT_TYPE, "text/html;charset=utf-8");
+		DEFAULT_HEADERS.put(Tools.USER_AGENT, "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.134 Safari/537.36");
 //		DEFAULT_HEADERS.put("Accept-Encoding", "gzip, deflate, sdch");
 //		DEFAULT_HEADERS.put("Accept-Language", "zh-CN,zh;q=0.8");
 //		DEFAULT_HEADERS.put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
