@@ -15,7 +15,7 @@ import com.hx.crawler.crawler.HtmlCrawler;
 import com.hx.crawler.crawler.HtmlCrawlerConfig;
 import com.hx.crawler.crawler.interf.Page;
 import com.hx.log.log.Log;
-import com.hx.log.log.Tools;
+import com.hx.log.util.Tools;
 
 
 // Main

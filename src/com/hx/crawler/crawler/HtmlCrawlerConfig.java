@@ -18,7 +18,7 @@ import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
 
 import com.hx.crawler.crawler.interf.CrawlerConfig;
-import com.hx.log.log.Tools;
+import com.hx.log.util.Tools;
 
 // CrawlerConfig
 public class HtmlCrawlerConfig implements CrawlerConfig<Header, String, NameValuePair, String, String> {

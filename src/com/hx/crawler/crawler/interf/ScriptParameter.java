@@ -6,7 +6,9 @@
 
 package com.hx.crawler.crawler.interf;
 
+import java.util.LinkedHashSet;
 import java.util.Map;
+import java.util.Set;
 
 // 脚本的参数
 public abstract class ScriptParameter<ResponseType, HeaderType, HeaderValType, DataType, DataValType, CookieValType> {
@@ -58,6 +60,10 @@ public abstract class ScriptParameter<ResponseType, HeaderType, HeaderValType, D
 	}
 	public String getParamStr(String key) {
 		return String.valueOf(getParam(key) );
+	}
+	// add at 2016.06.09
+	public Set<String> paramNames() {
+		return new LinkedHashSet<>(param.keySet() );
 	}
 	
 }

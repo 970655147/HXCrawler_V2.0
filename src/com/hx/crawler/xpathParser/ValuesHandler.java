@@ -13,7 +13,7 @@ import net.sf.json.JSONObject;
 
 import org.dom4j.Element;
 
-import com.hx.crawler.util.Constants;
+import com.hx.crawler.util.CrawlerConstants;
 import com.hx.crawler.xpathParser.interf.EndPoint;
 import com.hx.crawler.xpathParser.interf.EndPointHandler;
 
@@ -39,7 +39,7 @@ public class ValuesHandler extends EndPointHandler {
 	private static boolean checkCompatible(Values values) {
 		boolean isContainArrayAttribute = false, isContainOther = false;
 		for(int i=0; i<values.childSize(); i++) {
-			if(values.getChild(i).getName().equals(Constants.ARRAY_ATTR) ) {
+			if(values.getChild(i).getName().equals(CrawlerConstants.ARRAY_ATTR) ) {
 				isContainArrayAttribute = true;
 			} else {
 				isContainOther = true;

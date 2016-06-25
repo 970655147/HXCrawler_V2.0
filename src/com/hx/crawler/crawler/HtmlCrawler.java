@@ -7,21 +7,21 @@
 package com.hx.crawler.crawler;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Iterator;
 
 import org.apache.http.Header;
+import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.fluent.Request;
 import org.apache.http.client.fluent.Response;
 import org.apache.http.entity.ContentType;
-import org.apache.http.message.BasicHeader;
 
 import com.hx.crawler.crawler.interf.Crawler;
 import com.hx.crawler.crawler.interf.CrawlerConfig;
 import com.hx.crawler.crawler.interf.Page;
-import com.hx.crawler.util.CrawlerUtils;
-import com.hx.log.log.Tools;
+import com.hx.log.util.Tools;
 
 // HtmlCrawler
 public class HtmlCrawler extends Crawler<HttpResponse, Header, String, NameValuePair, String, String> {
@@ -50,9 +50,21 @@ public class HtmlCrawler extends Crawler<HttpResponse, Header, String, NameValue
 		return getPage(url, new HtmlCrawlerConfig());
 	}
 	public Page<HttpResponse> getPage(String url, CrawlerConfig<Header, String, NameValuePair, String, String> config) throws IOException {
+		return getPage(url, config, null);
+	}
+	public Page<HttpResponse> getPage(String url, HttpHost proxy) throws IOException {
+		return getPage(url, new HtmlCrawlerConfig(), proxy);
+	}
+	public Page<HttpResponse> getPage(String url, CrawlerConfig<Header, String, NameValuePair, String, String> config, HttpHost proxy) throws IOException {
+		Tools.assert0(url != null, "url can't be null ");
+		Tools.assert0(config != null, "CrawlerConfig can't be null ");
+		
 		Request req = Request.Get(url);
 		req.connectTimeout(config.getTimeout() );
 		setHeadersAndCookies(req, config);
+		if(proxy != null) {
+			req.viaProxy(proxy);
+		}
 		
 		Response resp = req.execute();
 		return new HtmlPage(resp);
@@ -63,16 +75,58 @@ public class HtmlCrawler extends Crawler<HttpResponse, Header, String, NameValue
 		return postPage(url, new HtmlCrawlerConfig());
 	}
 	public Page<HttpResponse> postPage(String url, CrawlerConfig<Header, String, NameValuePair, String, String> config) throws IOException {
+		return postPage(url, config, null);
+	}
+	public Page<HttpResponse> postPage(String url, CrawlerConfig<Header, String, NameValuePair, String, String> config, String bodyData, ContentType contentType) throws IOException {
+		return postPage(url, config, bodyData, contentType, null);
+	}
+	public Page<HttpResponse> postPage(String url, CrawlerConfig<Header, String, NameValuePair, String, String> config, InputStream inputStream, ContentType contentType) throws IOException {
+		return postPage(url, config, inputStream, contentType, null);
+	}
+	public Page<HttpResponse> postPage(String url, HttpHost proxy) throws IOException {
+		return postPage(url, new HtmlCrawlerConfig(), proxy);
+	}
+	public Page<HttpResponse> postPage(String url, CrawlerConfig<Header, String, NameValuePair, String, String> config, HttpHost proxy) throws IOException {
+		Tools.assert0(url != null, "url can't be null ");
+		Tools.assert0(config != null, "CrawlerConfig can't be null ");
+		
 		Request req = Request.Post(url);
 		config(req, config);
+		if(proxy != null) {
+			req.viaProxy(proxy);
+		}
 		
 		Response resp = req.execute();
 		return new HtmlPage(resp);
 	}
-	public Page<HttpResponse> postPage(String url, CrawlerConfig<Header, String, NameValuePair, String, String> config, String bodyData, ContentType contentType) throws IOException {
+	public Page<HttpResponse> postPage(String url, CrawlerConfig<Header, String, NameValuePair, String, String> config, String bodyData, ContentType contentType, HttpHost proxy) throws IOException {
+		Tools.assert0(url != null, "url can't be null ");
+		Tools.assert0(config != null, "CrawlerConfig can't be null ");
+		Tools.assert0(bodyData != null, "bodyData can't be null ");
+		Tools.assert0(contentType != null, "contentType can't be null ");
+		
 		Request req = Request.Post(url);
 		config(req, config);
 		req.bodyString(bodyData, contentType);
+		if(proxy != null) {
+			req.viaProxy(proxy);
+		}
+		
+		Response resp = req.execute();
+		return new HtmlPage(resp);
+	}
+	public Page<HttpResponse> postPage(String url, CrawlerConfig<Header, String, NameValuePair, String, String> config, InputStream inputStream, ContentType contentType, HttpHost proxy) throws IOException {
+		Tools.assert0(url != null, "url can't be null ");
+		Tools.assert0(config != null, "CrawlerConfig can't be null ");
+		Tools.assert0(inputStream != null, "inputStream can't be null ");
+		Tools.assert0(contentType != null, "contentType can't be null ");
+		
+		Request req = Request.Post(url);
+		config(req, config);
+		req.bodyStream(inputStream, contentType);
+		if(proxy != null) {
+			req.viaProxy(proxy);
+		}
 		
 		Response resp = req.execute();
 		return new HtmlPage(resp);
@@ -83,7 +137,6 @@ public class HtmlCrawler extends Crawler<HttpResponse, Header, String, NameValue
 		setHeadersAndCookies(req, config);
 		req.bodyForm(config.getData() );
 	}
-	
 	// 为request设置请求头 & cookies
 	private static void setHeadersAndCookies(Request req, CrawlerConfig<Header, String, NameValuePair, String, String> config) {
 		Iterator<Header> it = config.getHeaders().iterator();

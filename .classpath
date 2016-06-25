@@ -22,6 +22,6 @@
 	<classpathentry kind="lib" path="D:/Assist/jar/xml/jaxen.jar"/>
 	<classpathentry kind="lib" path="D:/Assist/jar/xml/tagsoup-1.2.1.jar"/>
 	<classpathentry kind="lib" path="D:/Assist/jar/crawler/HXAttrHandler.jar"/>
-	<classpathentry kind="lib" path="D:/Assist/jar/crawler/HXLog.jar"/>
+	<classpathentry kind="lib" path="D:/Assist/jar/crawler/HXLog.jar" sourcepath="D:/Assist/src/crawler/HXLogSrc.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

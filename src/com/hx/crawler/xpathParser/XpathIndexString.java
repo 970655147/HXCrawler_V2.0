@@ -13,7 +13,7 @@ import java.util.LinkedList;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
-import com.hx.crawler.util.Constants;
+import com.hx.crawler.util.CrawlerConstants;
 import com.hx.crawler.xpathParser.interf.EndPoint;
 import com.hx.crawler.xpathParser.interf.IndexString;
 
@@ -61,7 +61,7 @@ public final class XpathIndexString extends IndexString {
 		stack = new LinkedList<>();
 		valuesStack = new LinkedList<>();
 		stack.push(idxArr.iterator());
-		root = new Values(Constants.ROOT, null, null, null);
+		root = new Values(CrawlerConstants.ROOT, null, null, null);
 		valuesStack.push(root);
 		
 		parse();
@@ -91,17 +91,17 @@ public final class XpathIndexString extends IndexString {
 				JSONObject current = (JSONObject) it.next();
 				if(current.containsKey(EndPoint.VALUES) ) {
 					JSONArray values = current.getJSONArray(EndPoint.VALUES);
-					res = new Values(current.getString(Constants.NAME), current.getString(Constants.XPATH),
-									current.optString(Constants.HANDLER, null), valuesStack.peek() 
+					res = new Values(current.getString(CrawlerConstants.NAME), current.getString(CrawlerConstants.XPATH),
+									current.optString(CrawlerConstants.HANDLER, null), valuesStack.peek() 
 									);
 					stack.push(values.iterator() );
 					valuesStack.peek().addChild(res);
 					valuesStack.push(res);
 					break ;
 				} else if(current.containsKey(EndPoint.ATTRIBUTE) ) {
-					res = new Attribute(current.optString(Constants.NAME, Constants.ARRAY_ATTR), 
-										current.optString(Constants.XPATH, null), current.getString(EndPoint.ATTRIBUTE), 
-										current.optString(Constants.HANDLER, null), valuesStack.peek() 
+					res = new Attribute(current.optString(CrawlerConstants.NAME, CrawlerConstants.ARRAY_ATTR), 
+										current.optString(CrawlerConstants.XPATH, null), current.getString(EndPoint.ATTRIBUTE), 
+										current.optString(CrawlerConstants.HANDLER, null), valuesStack.peek() 
 										);
 					valuesStack.peek().addChild(res);
 					break ;

@@ -22,8 +22,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
 import com.hx.crawler.crawler.interf.Page;
-import com.hx.crawler.util.CrawlerUtils;
-import com.hx.log.log.Tools;
+import com.hx.log.util.Tools;
 
 // Page
 public class HtmlPage implements Page<HttpResponse> {

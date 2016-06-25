@@ -6,20 +6,19 @@
 
 package com.hx.crawler.xpathParser.interf;
 
-import net.sf.json.JSONObject;
-
 import com.hx.attrHandler.attrHandler.operation.interf.OperationAttrHandler;
 import com.hx.attrHandler.util.HandlerParserUtil;
-import com.hx.crawler.util.Constants;
-import com.hx.crawler.util.CrawlerUtils;
-import com.hx.log.log.Tools;
+import com.hx.crawler.util.CrawlerConstants;
+import com.hx.log.util.Tools;
+
+import net.sf.json.JSONObject;
 
 // 一个EndPint[终端结点 : "values" & "attribute"]
 public abstract class EndPoint {
 	
 	// 常量
-	public static String VALUES = Constants.VALUES;
-	public static String ATTRIBUTE = Constants.ATTRIBUTE;
+	public static String VALUES = CrawlerConstants.VALUES;
+	public static String ATTRIBUTE = CrawlerConstants.ATTRIBUTE;
 	
 	// 类型, 名称, xpath
 	// 注意 : 对于values来说, xpath必需存在
@@ -38,7 +37,7 @@ public abstract class EndPoint {
 		this.parent = parent;
 		this.xpath = xpath;
 		
-		initHandler(Constants.HANDLER, handlerStr);
+		initHandler(CrawlerConstants.HANDLER, handlerStr);
 //		if(xpath != null) {
 //			this.xpath = Tools.getXPath(this, xpath);
 //		}
@@ -80,37 +79,37 @@ public abstract class EndPoint {
 	// 4. 否则  combine parent的Handler, 和自己的Handler
 	private void initHandler(String handlerType, String handlerStr) {
 		if(handlerStr != null) {
-			if((handlerStr.startsWith(Constants.HANDLER_ADDED) 
-					&& (Constants.HANDLER.equals(handlerType) && (parent.handler == null)) )
-					|| handlerStr.startsWith(Constants.HANDLER_OVERRIDE)
+			if((handlerStr.startsWith(CrawlerConstants.HANDLER_ADDED) 
+					&& (CrawlerConstants.HANDLER.equals(handlerType) && (parent.handler == null)) )
+					|| handlerStr.startsWith(CrawlerConstants.HANDLER_OVERRIDE)
 					) {
-					if(Constants.HANDLER.equals(handlerType) ) {
-						this.handler = HandlerParserUtil.handlerParse(handlerStr.substring(1), Constants.HANDLER );
+					if(CrawlerConstants.HANDLER.equals(handlerType) ) {
+						this.handler = HandlerParserUtil.handlerParse(handlerStr.substring(1), CrawlerConstants.HANDLER );
 					} else {
 						Tools.assert0("have no this handlerType : " + handlerType + ", please check it !");
 					}
-			} else if(handlerStr.startsWith(Constants.HANDLER_ADDED)
-					&& (Constants.HANDLER.equals(handlerType) && (parent.handler != null) ) 
+			} else if(handlerStr.startsWith(CrawlerConstants.HANDLER_ADDED)
+					&& (CrawlerConstants.HANDLER.equals(handlerType) && (parent.handler != null) ) 
 					) {
-				if(Constants.HANDLER.equals(handlerType) ) {
-					this.handler = HandlerParserUtil.combineHandler(parent.handler, HandlerParserUtil.handlerParse(handlerStr.substring(1), Constants.HANDLER) );
+				if(CrawlerConstants.HANDLER.equals(handlerType) ) {
+					this.handler = HandlerParserUtil.combineHandler(parent.handler, HandlerParserUtil.handlerParse(handlerStr.substring(1), CrawlerConstants.HANDLER) );
 				} else {
 					Tools.assert0("have no this handlerType : " + handlerType + ", please check it !");
 				}
 			} else {
-				Tools.assert0("the handler should startWith : [" + Constants.HANDLER_ADDED + ", " + Constants.HANDLER_OVERRIDE + "], around : " + handlerStr );
+				Tools.assert0("the handler should startWith : [" + CrawlerConstants.HANDLER_ADDED + ", " + CrawlerConstants.HANDLER_OVERRIDE + "], around : " + handlerStr );
 			}
 		} else {
 			// default inhert from parent
 			if(parent != null) {
-				if(Constants.HANDLER.equals(handlerType) ) {
+				if(CrawlerConstants.HANDLER.equals(handlerType) ) {
 					this.handler = parent.handler;
 				} else {
 					Tools.assert0("have no this handlerType : " + handlerType + ", please check it !");
 				}
 			} else {
 				// doNothing
-				this.handler = Constants.defaultOperationAttrHandler;
+				this.handler = CrawlerConstants.defaultOperationAttrHandler;
 			}
 		}
 	}

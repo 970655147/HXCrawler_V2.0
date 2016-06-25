@@ -11,9 +11,6 @@ import java.io.StringWriter;
 import java.lang.reflect.Method;
 import java.util.Map;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
@@ -31,7 +28,11 @@ import com.hx.crawler.xpathParser.interf.ResultJudger;
 import com.hx.log.log.Log;
 import com.hx.log.log.LogPattern.LogPatternChain;
 import com.hx.log.log.LogPattern.LogPatternType;
-import com.hx.log.log.Tools;
+import com.hx.log.util.Constants;
+import com.hx.log.util.Tools;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 // 工具类
 public class CrawlerUtils {
@@ -197,16 +198,16 @@ public class CrawlerUtils {
 	
 	// ------------ 日志相关 --------------------
 	// 相关的logPattern
-	public static LogPatternChain taskBeforeLogPatternChain = com.hx.log.log.Constants.taskBeforeLogPatternChain;
-	public static LogPatternChain taskAfterLogPatternChain = com.hx.log.log.Constants.taskAfterLogPatternChain;
-	public static LogPatternChain taskExceptionLogPatternChain = com.hx.log.log.Constants.taskExceptionLogPatternChain;
+	public static LogPatternChain taskBeforeLogPatternChain = Constants.taskBeforeLogPatternChain;
+	public static LogPatternChain taskAfterLogPatternChain = Constants.taskAfterLogPatternChain;
+	public static LogPatternChain taskExceptionLogPatternChain = Constants.taskExceptionLogPatternChain;
 	// 打印任务的日志信息
 	public static void logBeforeTask(ScriptParameter<?, ?, ?, ?, ?, ?> singleUrlTask, boolean debugEnable) {
 		Tools.assert0(singleUrlTask != null, "'singleUrlTask' can't be null ");
 		if(debugEnable ) {
-			String info = com.hx.log.log.Constants.formatLogInfo(taskBeforeLogPatternChain, new JSONObject()
+			String info = Constants.formatLogInfo(taskBeforeLogPatternChain, new JSONObject()
 			.element(LogPatternType.URL.typeKey(), singleUrlTask.getUrl()).element(LogPatternType.TASK_NAME.typeKey(), CrawlerUtils.getTaskName(singleUrlTask))
-			.element(LogPatternType.MODE.typeKey(), com.hx.log.log.Constants.LOG_MODES[com.hx.log.log.Constants.OUT_IDX])
+			.element(LogPatternType.MODE.typeKey(), Constants.LOG_MODES[Constants.OUT_IDX])
 			);
 			Log.log(info );
 		}
@@ -217,9 +218,9 @@ public class CrawlerUtils {
 	public static void logAfterTask(ScriptParameter<?, ?, ?, ?, ?, ?> singleUrlTask, String fetchedResult, String spent, boolean debugEnable) {
 		Tools.assert0(singleUrlTask != null, "'singleUrlTask' can't be null ");
 		if(debugEnable ) {
-			String info = com.hx.log.log.Constants.formatLogInfo(taskAfterLogPatternChain, new JSONObject()
+			String info = Constants.formatLogInfo(taskAfterLogPatternChain, new JSONObject()
 							.element(LogPatternType.RESULT.typeKey(), fetchedResult).element(LogPatternType.TASK_NAME.typeKey(), CrawlerUtils.getTaskName(singleUrlTask))
-							.element(LogPatternType.SPENT.typeKey(), spent).element(LogPatternType.MODE.typeKey(), com.hx.log.log.Constants.LOG_MODES[com.hx.log.log.Constants.OUT_IDX])
+							.element(LogPatternType.SPENT.typeKey(), spent).element(LogPatternType.MODE.typeKey(), Constants.LOG_MODES[Constants.OUT_IDX])
 							);
 		    Log.log(info );
 		}
@@ -229,10 +230,10 @@ public class CrawlerUtils {
 	}
 	public static void logErrorMsg(ScriptParameter<?, ?, ?, ?, ?, ?> singleUrlTask, Exception e) {
 		Tools.assert0(singleUrlTask != null, "'singleUrlTask' can't be null ");
-		String info = com.hx.log.log.Constants.formatLogInfo(taskExceptionLogPatternChain, new JSONObject()
+		String info = Constants.formatLogInfo(taskExceptionLogPatternChain, new JSONObject()
 						.element(LogPatternType.EXCEPTION.typeKey(), e.getClass().getName() + " : " + e.getMessage() )
 						.element(LogPatternType.TASK_NAME.typeKey(), CrawlerUtils.getTaskName(singleUrlTask))
-						.element(LogPatternType.URL.typeKey(), singleUrlTask.getUrl()).element(LogPatternType.MODE.typeKey(), com.hx.log.log.Constants.LOG_MODES[com.hx.log.log.Constants.ERR_IDX])
+						.element(LogPatternType.URL.typeKey(), singleUrlTask.getUrl()).element(LogPatternType.MODE.typeKey(), Constants.LOG_MODES[Constants.ERR_IDX])
 						);
 		Log.err(info );
 	}

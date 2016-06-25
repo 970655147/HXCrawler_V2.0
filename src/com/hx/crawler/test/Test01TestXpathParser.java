@@ -6,14 +6,13 @@
 
 package com.hx.crawler.test;
 
-import net.sf.json.JSONArray;
-
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
 import com.hx.crawler.util.CrawlerUtils;
 import com.hx.log.log.Log;
-import com.hx.log.log.Tools;
+
+import net.sf.json.JSONArray;
 
 // Main 
 public class Test01TestXpathParser {
