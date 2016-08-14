@@ -14,7 +14,7 @@ import org.apache.http.entity.ContentType;
 import com.hx.crawler.crawler.HtmlCrawler;
 import com.hx.crawler.crawler.HtmlCrawlerConfig;
 import com.hx.crawler.crawler.interf.Page;
-import com.hx.log.log.Log;
+import com.hx.log.util.Log;
 import com.hx.log.util.Tools;
 
 

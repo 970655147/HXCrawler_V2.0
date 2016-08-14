@@ -27,6 +27,7 @@ public interface CrawlerConfig<HeaderType, HeaderValType, DataType, DataValType,
 	
 	public CrawlerConfig<HeaderType, HeaderValType, DataType, DataValType, CookieValType> addHeader(String key, HeaderValType value);
 	public CrawlerConfig<HeaderType, HeaderValType, DataType, DataValType, CookieValType> addHeaders(List<HeaderType> headers);
+	public CrawlerConfig<HeaderType, HeaderValType, DataType, DataValType, CookieValType> addHeaders(Map<String, HeaderValType> headers);
 	public CrawlerConfig<HeaderType, HeaderValType, DataType, DataValType, CookieValType> addCookie(String key, CookieValType value);
 	public CrawlerConfig<HeaderType, HeaderValType, DataType, DataValType, CookieValType> addCookies(Map<String, CookieValType> cookies);
 	public CrawlerConfig<HeaderType, HeaderValType, DataType, DataValType, CookieValType> addData(String key, DataValType value);

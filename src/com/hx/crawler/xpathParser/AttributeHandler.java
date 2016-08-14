@@ -11,7 +11,7 @@ import java.util.List;
 
 import org.dom4j.Element;
 
-import com.hx.crawler.util.CrawlerConstants;
+import com.hx.crawler.util.HXCrawlerConstants;
 import com.hx.crawler.xpathParser.interf.EndPoint;
 import com.hx.crawler.xpathParser.interf.EndPointHandler;
 import com.hx.log.util.Tools;
@@ -24,7 +24,7 @@ public class AttributeHandler extends EndPointHandler {
 
 	@Override
 	public void handle(Element root, Element currentEle, String url, JSONArray res, int idx, EndPoint child, JSONObject curObj) {
-		if(! child.getName().equals(CrawlerConstants.ARRAY_ATTR) ) {
+		if(! child.getName().equals(HXCrawlerConstants.ARRAY_ATTR) ) {
 			child.getHandler().cleanImmediateReturnFlag();
 			if(child.getXPath() != null ) {
 //				List<Element> eles = getResultByXPath(root, currentEle, child.getXPath());
@@ -71,30 +71,30 @@ public class AttributeHandler extends EndPointHandler {
  	}
 	// 通过element 和attribute属性 获取其对应的值
 	private static String getValueByAttribute(Element ele, String attribute, String url, int idx) {
-		if(CrawlerConstants.INDEX.equals(attribute)) {
+		if(HXCrawlerConstants.INDEX.equals(attribute)) {
 			return String.valueOf(idx);
 		}
 		if(ele == null) {
-			return CrawlerConstants.NULL;
+			return HXCrawlerConstants.NULL;
 		}
-		if(CrawlerConstants.TEXT.equals(attribute)) {
+		if(HXCrawlerConstants.TEXT.equals(attribute)) {
 			return ele.getText();
-		} else if(CrawlerConstants.INNER_TEXT.equals(attribute)) {
+		} else if(HXCrawlerConstants.INNER_TEXT.equals(attribute)) {
 			StringBuilder sb = new StringBuilder();
 			getInnerText(ele, sb);
 			return sb.toString();
-		} else if(CrawlerConstants.INNER_HTML.equals(attribute)) {
+		} else if(HXCrawlerConstants.INNER_HTML.equals(attribute)) {
 			StringBuilder sb = new StringBuilder();
 			getInnerHtml(ele, sb);
 			return sb.toString();
-		} else if(CrawlerConstants.OUTER_HTML.equals(attribute)) {
+		} else if(HXCrawlerConstants.OUTER_HTML.equals(attribute)) {
 			StringBuilder sb = new StringBuilder();
 			getOuterHtml(ele, sb);
 			return sb.toString();
 		}
 		
-		String res = ele.attributeValue(attribute, CrawlerConstants.ATTR_NOT_SUPPORT);
-		if((! res.equals(CrawlerConstants.ATTR_NOT_SUPPORT)) && CrawlerConstants.links.contains(attribute) ) {
+		String res = ele.attributeValue(attribute, HXCrawlerConstants.ATTR_NOT_SUPPORT);
+		if((! res.equals(HXCrawlerConstants.ATTR_NOT_SUPPORT)) && HXCrawlerConstants.links.contains(attribute) ) {
 			res = Tools.transformUrl(url, res);
 		}
 		return res;

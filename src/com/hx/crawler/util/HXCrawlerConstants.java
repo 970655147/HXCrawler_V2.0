@@ -20,7 +20,7 @@ import com.hx.crawler.xpathParser.ValuesHandler;
 import com.hx.crawler.xpathParser.interf.EndPointHandler;
 
 // ³£Á¿
-public class CrawlerConstants {
+public class HXCrawlerConstants {
 	
 	// the key may occur in 'xpathTemplate'
 	public final static String NAME = "name";

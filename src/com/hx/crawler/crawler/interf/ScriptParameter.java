@@ -65,5 +65,16 @@ public abstract class ScriptParameter<ResponseType, HeaderType, HeaderValType, D
 	public Set<String> paramNames() {
 		return new LinkedHashSet<>(param.keySet() );
 	}
+	// add at 2016.08.13
+	public ScriptParameter<ResponseType, HeaderType, HeaderValType, DataType, DataValType, CookieValType> addParam(String key, Object value) {
+		this.param.put(key, value);
+		return this;
+	}
+	public ScriptParameter<ResponseType, HeaderType, HeaderValType, DataType, DataValType, CookieValType> addParam(Map<String, Object> incParam) {
+		this.param.putAll(incParam);
+		return this;
+	}
+	
+	
 	
 }

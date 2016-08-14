@@ -10,7 +10,7 @@ import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
 import com.hx.crawler.util.CrawlerUtils;
-import com.hx.log.log.Log;
+import com.hx.log.util.Log;
 
 import net.sf.json.JSONArray;
 

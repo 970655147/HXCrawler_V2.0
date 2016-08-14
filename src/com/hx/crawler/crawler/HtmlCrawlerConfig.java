@@ -76,11 +76,15 @@ public class HtmlCrawlerConfig implements CrawlerConfig<Header, String, NameValu
 		this.headers = headers;
 	}
 	public void setHeaders(Map<String, String> headers) {
-		List<Header> headersTmp = new ArrayList<>(headers.size() );
-		for(Map.Entry<String, String> entry : headers.entrySet() ) {
-			headersTmp.add(new BasicHeader(entry.getKey(), entry.getValue()) );
+		if(headers == null) {
+			this.headers = null;
+			return ;
 		}
-		this.headers = headersTmp;
+		
+		this.headers.clear();
+		for(Map.Entry<String, String> entry : headers.entrySet() ) {
+			addHeader(entry.getKey(), entry.getValue() );
+		}
 	}
 	public void setCookies(Map<String, String> cookies) {
 		this.cookies = cookies;
@@ -89,11 +93,15 @@ public class HtmlCrawlerConfig implements CrawlerConfig<Header, String, NameValu
 		this.data = data;
 	}
 	public void setData(Map<String, String> data) {
-		List<NameValuePair> dataTmp = new ArrayList<>(data.size() );
-		for(Map.Entry<String, String> entry : data.entrySet() ) {
-			dataTmp.add(new BasicNameValuePair(entry.getKey(), entry.getValue()) );
+		if(data == null) {
+			this.data = null;
+			return ;
 		}
-		this.data = dataTmp;
+		
+		this.data.clear();
+		for(Map.Entry<String, String> entry : data.entrySet() ) {
+			addData(entry.getKey(), entry.getValue() );
+		}
 	}
 	public int getTimeout() {
 		return timeout;
@@ -121,21 +129,34 @@ public class HtmlCrawlerConfig implements CrawlerConfig<Header, String, NameValu
 		return this;
 	}
 	public HtmlCrawlerConfig addHeaders(List<Header> headers) {
+		if(headers == null) {
+			return this;
+		}
 		for(Header header : headers ) {
 			addHeader(header.getName(), header.getValue() );
 		}
-		
+		return this;
+	}
+	public HtmlCrawlerConfig addHeaders(Map<String, String> headers) {
+		if(headers == null) {
+			return this;
+		}
+		for(Entry<String, String> entry : headers.entrySet() ) {
+			addHeader(entry.getKey(), entry.getValue() );
+		}
 		return this;
 	}
 	public HtmlCrawlerConfig addCookie(String key, String value) {
 		cookies.put(key, value);
 		return this;
 	}
-	public HtmlCrawlerConfig addCookies(Map<String, String> headers) {
-		for(Entry<String, String> header : headers.entrySet() ) {
+	public HtmlCrawlerConfig addCookies(Map<String, String> cookies) {
+		if(cookies == null) {
+			return this;
+		}
+		for(Entry<String, String> header : cookies.entrySet() ) {
 			addCookie(header.getKey(), header.getValue() );
 		}
-		
 		return this;
 	}
 	public HtmlCrawlerConfig addData(String key, String value) {
@@ -148,17 +169,21 @@ public class HtmlCrawlerConfig implements CrawlerConfig<Header, String, NameValu
 		return this;
 	}
 	public HtmlCrawlerConfig addData(List<NameValuePair> datas) {
+		if(datas == null) {
+			return this;
+		}
 		for(NameValuePair data : datas ) {
 			addData(data.getName(), data.getValue() );
 		}
-		
 		return this;
 	}
 	public HtmlCrawlerConfig addData(Map<String, String> datas) {
+		if(datas == null) {
+			return this;
+		}
 		for(Entry<String, String> data : datas.entrySet() ) {
 			addData(data.getKey(), data.getValue() );
 		}
-		
 		return this;
 	}
 	

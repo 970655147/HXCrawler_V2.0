@@ -6,6 +6,8 @@
 
 package com.hx.crawler.util;
 
+import static com.hx.log.util.Log.err;
+
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.lang.reflect.Method;
@@ -20,15 +22,19 @@ import org.ccil.cowan.tagsoup.XMLWriter;
 import org.xml.sax.InputSource;
 
 import com.hx.crawler.crawler.HtmlCrawler;
+import com.hx.crawler.crawler.HtmlCrawlerConfig;
 import com.hx.crawler.crawler.SingleUrlTask;
 import com.hx.crawler.crawler.interf.Crawler;
+import com.hx.crawler.crawler.interf.CrawlerConfig;
+import com.hx.crawler.crawler.interf.Page;
 import com.hx.crawler.crawler.interf.ScriptParameter;
 import com.hx.crawler.xpathParser.XPathParser;
 import com.hx.crawler.xpathParser.interf.ResultJudger;
-import com.hx.log.log.Log;
-import com.hx.log.log.LogPattern.LogPatternChain;
-import com.hx.log.log.LogPattern.LogPatternType;
 import com.hx.log.util.Constants;
+import com.hx.log.util.JSONExtractor;
+import com.hx.log.util.Log;
+import com.hx.log.util.LogPattern.LogPatternChain;
+import com.hx.log.util.LogPattern.LogPatternType;
 import com.hx.log.util.Tools;
 
 import net.sf.json.JSONArray;
@@ -198,16 +204,17 @@ public class CrawlerUtils {
 	
 	// ------------ 日志相关 --------------------
 	// 相关的logPattern
-	public static LogPatternChain taskBeforeLogPatternChain = Constants.taskBeforeLogPatternChain;
-	public static LogPatternChain taskAfterLogPatternChain = Constants.taskAfterLogPatternChain;
-	public static LogPatternChain taskExceptionLogPatternChain = Constants.taskExceptionLogPatternChain;
+	public static final Map<String, String> logPatternArgs = new JSONObject();
+	public static LogPatternChain taskBeforeLogPatternChain = Constants.initLogPattern(Constants.optString(Constants._TASK_BEFORE_LOG_PATTERN), logPatternArgs);
+	public static LogPatternChain taskAfterLogPatternChain = Constants.initLogPattern(Constants.optString(Constants._TASK_AFTER_LOG_PATTERN), logPatternArgs);
+	public static LogPatternChain taskExceptionLogPatternChain = Constants.initLogPattern(Constants.optString(Constants._TASK_EXCEPTION_LOG_PATTERN), logPatternArgs);
 	// 打印任务的日志信息
 	public static void logBeforeTask(ScriptParameter<?, ?, ?, ?, ?, ?> singleUrlTask, boolean debugEnable) {
 		Tools.assert0(singleUrlTask != null, "'singleUrlTask' can't be null ");
 		if(debugEnable ) {
 			String info = Constants.formatLogInfo(taskBeforeLogPatternChain, new JSONObject()
-			.element(LogPatternType.URL.typeKey(), singleUrlTask.getUrl()).element(LogPatternType.TASK_NAME.typeKey(), CrawlerUtils.getTaskName(singleUrlTask))
-			.element(LogPatternType.MODE.typeKey(), Constants.LOG_MODES[Constants.OUT_IDX])
+				.element(LogPatternType.URL.typeKey(), singleUrlTask.getUrl()).element(LogPatternType.TASK_NAME.typeKey(), CrawlerUtils.getTaskName(singleUrlTask))
+				.element(LogPatternType.MODE.typeKey(), Constants.LOG_MODES[Constants.OUT_IDX])
 			);
 			Log.log(info );
 		}
@@ -219,8 +226,8 @@ public class CrawlerUtils {
 		Tools.assert0(singleUrlTask != null, "'singleUrlTask' can't be null ");
 		if(debugEnable ) {
 			String info = Constants.formatLogInfo(taskAfterLogPatternChain, new JSONObject()
-							.element(LogPatternType.RESULT.typeKey(), fetchedResult).element(LogPatternType.TASK_NAME.typeKey(), CrawlerUtils.getTaskName(singleUrlTask))
-							.element(LogPatternType.SPENT.typeKey(), spent).element(LogPatternType.MODE.typeKey(), Constants.LOG_MODES[Constants.OUT_IDX])
+								.element(LogPatternType.RESULT.typeKey(), fetchedResult).element(LogPatternType.TASK_NAME.typeKey(), CrawlerUtils.getTaskName(singleUrlTask))
+								.element(LogPatternType.SPENT.typeKey(), spent).element(LogPatternType.MODE.typeKey(), Constants.LOG_MODES[Constants.OUT_IDX])
 							);
 		    Log.log(info );
 		}
@@ -231,12 +238,307 @@ public class CrawlerUtils {
 	public static void logErrorMsg(ScriptParameter<?, ?, ?, ?, ?, ?> singleUrlTask, Exception e) {
 		Tools.assert0(singleUrlTask != null, "'singleUrlTask' can't be null ");
 		String info = Constants.formatLogInfo(taskExceptionLogPatternChain, new JSONObject()
-						.element(LogPatternType.EXCEPTION.typeKey(), e.getClass().getName() + " : " + e.getMessage() )
-						.element(LogPatternType.TASK_NAME.typeKey(), CrawlerUtils.getTaskName(singleUrlTask))
-						.element(LogPatternType.URL.typeKey(), singleUrlTask.getUrl()).element(LogPatternType.MODE.typeKey(), Constants.LOG_MODES[Constants.ERR_IDX])
+							.element(LogPatternType.EXCEPTION.typeKey(), e.getClass().getName() + " : " + e.getMessage() )
+							.element(LogPatternType.TASK_NAME.typeKey(), CrawlerUtils.getTaskName(singleUrlTask))
+							.element(LogPatternType.URL.typeKey(), singleUrlTask.getUrl()).element(LogPatternType.MODE.typeKey(), Constants.LOG_MODES[Constants.ERR_IDX])
 						);
 		Log.err(info );
 	}
+	
+	// ------------ PipelineTask相关  add at 2016.08.13 --------------------
+	// PipelineTask相关常量
+	public static final String URL = "url";
+	public static final String METHOD = "method";
+	public static final String XPATHES = "xpathes";
+	public static final String JUDGER = "judger";
+	public static final String START_UP = "startUp";
+	public static final String TASK_PARAM = "taskParam";
+	public static final String CRAWLER_CONFIG = "crawlerConfig";
+	public static final String CLEAR_PREV_HEADERS = "clearPrevHeaders";
+	public static final String CLEAR_PREV_COOKIES = "clearPrevCookies";
+	public static final String CLEAR_PREV_DATA = "clearPrevData";
+	public static final String HEADERS = "headers";
+	public static final String COOKIES = "cookies";
+	public static final String DATA = "data";
+	public static final String TIMEOUT = "timeout";
+	public static final String DEBUG_ENABLE = "debugEnable";
+	public static final String SAVE_PREPARE_DOC = "savePreparedDoc";
+	public static final String SAVE_FETCHED_RESULT = "saveFetchedResult";
+	public static final String EXTRACT_FETCHED_RESULT = "extractFetchedResult";
+	public static final String NEXT_STAGE_PARSE_ASYNC = "nextStageParseAsync";
+	public static final String NEXT_STAGE_URL_PATTERN = "nextStageUrlPat";
+	public static final String NEXT_STAGE_PARAM_PATTERN = "nextStageParamPat";
+	
+	// 其他配置
+	public static String SAVE_PREPARED_DOC_PATH = Tools.getTmpPath("preparedDoc", Tools.HTML);
+	public static String SAVE_FETCHED_RESULT_PATH = Tools.getTmpPath("fetchedResult", Tools.TXT);
+	public static final String DO_PIPELINE_TASK_NAME = "doPipelineTask";
+	
+	// 获取给定的configPath对应的配置, 然后 执行流水线式的执行任务
+	public static void doPipelineTaskAsync(String configPath) throws Exception {
+		doPipelineTask0(configPath, null, null, true);
+	}
+	public static void doPipelineTaskAsync(String configPath, SingleUrlTask scriptParameter) throws Exception {
+		doPipelineTask0(configPath, scriptParameter, null, true);
+	}
+	public static void doPipelineTaskAsync(String configPath, HtmlCrawlerConfig crawlerConfig) throws Exception {
+		doPipelineTask0(configPath, null, crawlerConfig, true);
+	}
+	public static void doPipelineTaskAsync(String configPath, SingleUrlTask scriptParameter, HtmlCrawlerConfig crawlerConfig) throws Exception {
+		doPipelineTask0(configPath, scriptParameter, crawlerConfig, true);
+	}
+	public static void doPipelineTaskAsync(JSONArray globalConfig) throws Exception {
+		doPipelineTask0(globalConfig, null, null, true);
+	}
+	public static void doPipelineTaskAsync(JSONArray globalConfig, SingleUrlTask scriptParameter) throws Exception {
+		doPipelineTask0(globalConfig, scriptParameter, null, true);
+	}
+	public static void doPipelineTaskAsync(JSONArray globalConfig, HtmlCrawlerConfig crawlerConfig) throws Exception {
+		doPipelineTask0(globalConfig, null, crawlerConfig, true);
+	}
+	public static void doPipelineTaskAsync(JSONArray globalConfig, SingleUrlTask scriptParameter, HtmlCrawlerConfig crawlerConfig) throws Exception {
+		doPipelineTask0(globalConfig, scriptParameter, crawlerConfig, true);
+	}
+	
+	public static JSONArray doPipelineTask(String configPath) throws Exception {
+		return doPipelineTask0(configPath, null, null, false);
+	}
+	public static JSONArray doPipelineTask(String configPath, SingleUrlTask scriptParameter) throws Exception {
+		return doPipelineTask0(configPath, scriptParameter, null, false);
+	}
+	public static JSONArray doPipelineTask(String configPath, HtmlCrawlerConfig crawlerConfig) throws Exception {
+		return doPipelineTask0(configPath, null, crawlerConfig, false);
+	}
+	public static JSONArray doPipelineTask(String configPath, SingleUrlTask scriptParameter, HtmlCrawlerConfig crawlerConfig) throws Exception {
+		return doPipelineTask0(configPath, scriptParameter, crawlerConfig, false);
+	}
+	public static JSONArray doPipelineTask(JSONArray globalConfig) throws Exception {
+		return doPipelineTask0(globalConfig, null, null, false);
+	}
+	public static JSONArray doPipelineTask(JSONArray globalConfig, SingleUrlTask scriptParameter) throws Exception {
+		return doPipelineTask0(globalConfig, scriptParameter, null, false);
+	}
+	public static JSONArray doPipelineTask(JSONArray globalConfig, HtmlCrawlerConfig crawlerConfig) throws Exception {
+		return doPipelineTask0(globalConfig, null, crawlerConfig, false);
+	}
+	public static JSONArray doPipelineTask(JSONArray globalConfig, SingleUrlTask scriptParameter, HtmlCrawlerConfig crawlerConfig) throws Exception {
+		return doPipelineTask0(globalConfig, scriptParameter, crawlerConfig, false);
+	}
+	
+	private static JSONArray doPipelineTask0(String configPath, SingleUrlTask scriptParameter, HtmlCrawlerConfig crawlerConfig, boolean async) throws Exception {
+		JSONArray globalConfig = JSONArray.fromObject(Tools.getContent(configPath) );
+		return doPipelineTask0(globalConfig, scriptParameter, crawlerConfig, async);
+	}
+	private static JSONArray doPipelineTask0(JSONArray globalConfig, SingleUrlTask scriptParameter, HtmlCrawlerConfig crawlerConfig, boolean async) throws Exception {
+		JSONArray res = null;
+		
+		for(Object _stageConfig : globalConfig) {
+			JSONObject stageConfig = (JSONObject) _stageConfig;
+			if(stageConfig.optBoolean(START_UP) ) {
+				HtmlCrawlerConfig nextStageCrawlerConfig = crawlerConfig;
+				if(crawlerConfig == null) {
+					nextStageCrawlerConfig = HtmlCrawlerConfig.get();
+				}
+				encapCrawlerConfig(stageConfig.optJSONObject(CRAWLER_CONFIG), nextStageCrawlerConfig);
+				SingleUrlTask nextStageScriptParameter = scriptParameter;
+				if(scriptParameter == null) {
+					Crawler crawler = HtmlCrawler.getInstance();
+					nextStageScriptParameter = CrawlerUtils.newSingleUrlTask(crawler, stageConfig.optString(URL), stageConfig.optJSONObject(TASK_PARAM) );
+				} else {
+					nextStageScriptParameter.addParam(stageConfig.optJSONObject(TASK_PARAM) );
+				}
+				
+				if(async) {
+					Runnable task = new CrawlerPipelineTask(nextStageScriptParameter, nextStageCrawlerConfig, globalConfig, 0);
+					Tools.execute(task);
+				} else {
+					res = doPipelineParse(nextStageScriptParameter, nextStageCrawlerConfig, globalConfig, 0);
+				}
+				break ;
+			}
+		}
+		
+		// user's program do 
+//		if(async) {
+//			Tools.awaitShutdown();
+//		}
+//		Tools.closeAnBuffer(DO_PIPELINE_TASK_NAME);
+		return res;
+	}
+	
+	// parse
+	public static JSONArray doPipelineParse(SingleUrlTask scriptParameter, HtmlCrawlerConfig crawlerConfig, JSONArray globalConfig, int stageId) throws Exception {
+		// prepare
+		if(stageId == globalConfig.size() ) {
+			// after finalStage
+			return null;
+		}
+		final JSONObject config = globalConfig.getJSONObject(stageId);
+		if(Tools.isEmpty(config) ) {
+			err("got empty config while stageId : '" + stageId + "'");
+			return null;
+		}
+		Crawler crawler = scriptParameter.getCrawler();
+		String url = scriptParameter.getUrl();
+		boolean debugEnable = Boolean.valueOf(scriptParameter.getParam(Tools.DEBUG_ENABLE).toString() );
+		
+		// encap xpathes
+		JSONArray xpathesFromConfig = config.getJSONArray(XPATHES);
+		String[] xpathes = new String[xpathesFromConfig.size()];
+		for(int i=0, len=xpathesFromConfig.size(); i<len; i++) {
+			xpathes[i] = xpathesFromConfig.getString(i);
+		}
+		
+		long start = System.currentTimeMillis();
+		CrawlerUtils.logBeforeTask(scriptParameter, debugEnable);
+		
+		// encap config, post requests
+		encapCrawlerConfig(config.optJSONObject(CRAWLER_CONFIG), crawlerConfig);
+		Page<HttpResponse> page = null;
+		if(Tools.GET.equalsIgnoreCase(config.optString(METHOD)) ) {
+			page = crawler.getPage(url, crawlerConfig);
+		} else if(Tools.POST.equalsIgnoreCase(config.optString(METHOD)) ) {
+			page = crawler.postPage(url, crawlerConfig);
+		}
+		if(page == null) {
+			err("got empty page while fetch : '" + url + "'");
+			return null;
+		}
+		
+		// get result by xpathes
+		String html = page.getContent();
+		if(config.optBoolean(SAVE_PREPARE_DOC) ) {
+			CrawlerUtils.getPreparedDoc(url, html, SAVE_PREPARED_DOC_PATH);
+		}
+		JSONArray fetchedResult = CrawlerUtils.getResultByXPathes(html, url, xpathes, new ResultJudger() {
+			@Override
+			public boolean isResultNull(int idx, JSONArray fetchedData) {
+				JSONArray judgersConfig = config.optJSONArray(JUDGER);
+				int gotResNum = -1;
+				for(Object _judger : judgersConfig) {
+					String judgerPat = _judger.toString();
+					if(! Tools.isEmpty(judgerPat) ) {
+						JSONArray arr = JSONExtractor.extractInfoFromJSON(fetchedData, judgerPat);
+						if(Tools.isEmpty(arr) ) {
+							return true;
+						}
+						
+						if(gotResNum < 0) {
+							gotResNum = arr.size();
+						} else {
+							if(gotResNum != arr.size() ) {
+								return true;
+							}
+						}
+					}
+				}
+				
+				return false;
+			}
+		});
+		
+		long spent = System.currentTimeMillis() - start;
+		CrawlerUtils.logAfterTask(scriptParameter, String.valueOf(fetchedResult), String.valueOf(spent), debugEnable);
+		
+		if(fetchedResult == null) {
+			err("fetched nothing with url : '" + url + "'");
+			return null;
+		}
+		
+		if(config.optBoolean(SAVE_FETCHED_RESULT) ) {
+//			Tools.append(String.valueOf(fetchedResult), SAVE_FETCHED_RESULT_PATH);
+			JSONArray saveFetchedResult = fetchedResult;
+			if(! Tools.isEmpty(config.optString(EXTRACT_FETCHED_RESULT)) ) {
+				saveFetchedResult = JSONExtractor.extractInfoFromJSON(fetchedResult, config.optString(EXTRACT_FETCHED_RESULT) );
+			}
+			Tools.appendBufferCRLF(DO_PIPELINE_TASK_NAME, String.valueOf(saveFetchedResult) );
+		}
+		
+		// process next stage
+		if(stageId < globalConfig.size() -1) {
+			String nextStageUrlPat = config.optString(NEXT_STAGE_URL_PATTERN);
+			JSONObject nextStageUrlParam = config.optJSONObject(NEXT_STAGE_PARAM_PATTERN);
+			boolean parseAsync = config.optBoolean(NEXT_STAGE_PARSE_ASYNC);
+			
+			if(! Tools.isEmpty(nextStageUrlPat) ) {
+				JSONArray nextStageUrls = JSONExtractor.extractInfoFromJSON(fetchedResult, nextStageUrlPat);
+				JSONObject nextStageParams = new JSONObject();
+				for(Object _key : nextStageUrlParam.names() ) {
+					String key = (String) _key;
+					if(! Tools.isEmpty(key) ) {
+						nextStageParams.element(key, JSONExtractor.extractInfoFromJSON(fetchedResult, nextStageUrlParam.getString(key)) );
+					}
+				}
+				
+				for(int i=0; i<nextStageUrls.size(); i++) {
+					String nextStageUrl = (String) nextStageUrls.getString(i);
+					JSONObject nextStageConfig = globalConfig.getJSONObject(stageId + 1);
+					HtmlCrawlerConfig nextStageCrawlerConfig = new HtmlCrawlerConfig(crawlerConfig);
+					encapCrawlerConfig(nextStageConfig.optJSONObject(CRAWLER_CONFIG), nextStageCrawlerConfig);
+					SingleUrlTask nextStageScriptParameter = CrawlerUtils.newSingleUrlTask(crawler, nextStageUrl, nextStageConfig.optJSONObject(TASK_PARAM) );
+					for(Object _key : nextStageParams.names() ) {
+						String key = (String) _key;
+						JSONArray attrs = nextStageParams.getJSONArray(key);
+						if(! Tools.isEmpty(attrs) ) {
+							nextStageScriptParameter.addParam(key, attrs.opt(i) );
+						}
+					}
+					
+					Runnable nextStage = new CrawlerPipelineTask(nextStageScriptParameter, nextStageCrawlerConfig, globalConfig, stageId+1);
+					if(parseAsync) {
+						Tools.execute(nextStage);
+					} else {
+						nextStage.run();
+					}
+				}
+			}
+		}
+		
+		return fetchedResult;
+	}
+	
+	// 根据给定的配置处理CrawlerConfig
+	public static void encapCrawlerConfig(JSONObject crawlerConfigObj, CrawlerConfig crawlerConfig) {
+		if(! Tools.isEmpty(crawlerConfigObj) ) {
+			if(crawlerConfigObj.optBoolean(CLEAR_PREV_HEADERS) ) {
+				crawlerConfig.getHeaders().clear();
+			}
+			if(crawlerConfigObj.optBoolean(CLEAR_PREV_COOKIES) ) {
+				crawlerConfig.getCookies().clear();
+			}
+			if(crawlerConfigObj.optBoolean(CLEAR_PREV_DATA) ) {
+				crawlerConfig.getData().clear();
+			}
+			// headers, cookies, data
+			crawlerConfig.addHeaders(crawlerConfigObj.optJSONObject(HEADERS) );
+			crawlerConfig.addCookies(crawlerConfigObj.optJSONObject(COOKIES) );
+			crawlerConfig.addData(crawlerConfigObj.optJSONObject(DATA) );
+		}
+	}
+	
+	// --------------- bean --------------------
+	// CrawlerPipeline 的一个Task
+	static class CrawlerPipelineTask implements Runnable {
+		private SingleUrlTask scriptParameter;
+		private HtmlCrawlerConfig crawlerConfig;
+		private JSONArray globalConfig;
+		private int stageId;
+		public CrawlerPipelineTask(SingleUrlTask scriptParameter, HtmlCrawlerConfig crawlerConfig, JSONArray globalConfig, int stageId) {
+			this.scriptParameter = scriptParameter;
+			this.crawlerConfig = crawlerConfig;
+			this.globalConfig = globalConfig;
+			this.stageId = stageId;
+		}
+		@Override
+		public void run() {
+			try {
+				doPipelineParse(scriptParameter, crawlerConfig, globalConfig, stageId);
+			} catch (Exception e) {
+				err("error while parse : '" + scriptParameter.getUrl() + "', exception : '" + Tools.errorMsg(e) + "'");
+			}
+		}
+	}
+	
    // ------------ 待续 --------------------
 
 	

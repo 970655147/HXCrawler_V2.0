@@ -16,7 +16,7 @@ import org.dom4j.Element;
 import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
 
-import com.hx.crawler.util.CrawlerConstants;
+import com.hx.crawler.util.HXCrawlerConstants;
 import com.hx.crawler.xpathParser.XpathIndexString;
 import com.hx.crawler.xpathParser.interf.EndPoint;
 
@@ -33,8 +33,8 @@ public abstract class Parser {
 		boolean beFiltered = false;
 		for(int i=0; i<ep.childSize(); i++) {
 			EndPoint child = ep.getChild(i);
-			CrawlerConstants.endpointToHandler.get(child.getType() ).handle(root, currentEle, url, res, idx, child, curObj);
-			if(! child.getName().equals(CrawlerConstants.ARRAY_ATTR) ) {
+			HXCrawlerConstants.endpointToHandler.get(child.getType() ).handle(root, currentEle, url, res, idx, child, curObj);
+			if(! child.getName().equals(HXCrawlerConstants.ARRAY_ATTR) ) {
 				if(child.getHandler().immediateReturn() ) {
 					child.getHandler().handleImmediateReturn();
 					beFiltered = true;
