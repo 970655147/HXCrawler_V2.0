@@ -35,13 +35,19 @@ import com.hx.log.util.JSONExtractor;
 import com.hx.log.util.Log;
 import com.hx.log.util.LogPattern.LogPatternChain;
 import com.hx.log.util.LogPattern.LogPatternType;
+import com.hx.log.util.LogPatternUtils;
 import com.hx.log.util.Tools;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 // 工具类
-public class CrawlerUtils {
+public final class CrawlerUtils {
+	
+	// disable constructor
+	private CrawlerUtils() {
+		Tools.assert0("can't instantiate !");
+	}
 	
 	// parse 相关常量
 	public static final String PARSE_METHOD_NAME = "parse";
@@ -204,17 +210,16 @@ public class CrawlerUtils {
 	
 	// ------------ 日志相关 --------------------
 	// 相关的logPattern
-	public static final Map<String, String> logPatternArgs = new JSONObject();
-	public static LogPatternChain taskBeforeLogPatternChain = Constants.initLogPattern(Constants.optString(Constants._TASK_BEFORE_LOG_PATTERN), logPatternArgs);
-	public static LogPatternChain taskAfterLogPatternChain = Constants.initLogPattern(Constants.optString(Constants._TASK_AFTER_LOG_PATTERN), logPatternArgs);
-	public static LogPatternChain taskExceptionLogPatternChain = Constants.initLogPattern(Constants.optString(Constants._TASK_EXCEPTION_LOG_PATTERN), logPatternArgs);
+	public static LogPatternChain taskBeforeLogPatternChain = LogPatternUtils.initLogPattern(Constants.optString(Constants._TASK_BEFORE_LOG_PATTERN) );
+	public static LogPatternChain taskAfterLogPatternChain = LogPatternUtils.initLogPattern(Constants.optString(Constants._TASK_AFTER_LOG_PATTERN) );
+	public static LogPatternChain taskExceptionLogPatternChain = LogPatternUtils.initLogPattern(Constants.optString(Constants._TASK_EXCEPTION_LOG_PATTERN) );
 	// 打印任务的日志信息
 	public static void logBeforeTask(ScriptParameter<?, ?, ?, ?, ?, ?> singleUrlTask, boolean debugEnable) {
 		Tools.assert0(singleUrlTask != null, "'singleUrlTask' can't be null ");
 		if(debugEnable ) {
-			String info = Constants.formatLogInfo(taskBeforeLogPatternChain, new JSONObject()
-				.element(LogPatternType.URL.typeKey(), singleUrlTask.getUrl()).element(LogPatternType.TASK_NAME.typeKey(), CrawlerUtils.getTaskName(singleUrlTask))
-				.element(LogPatternType.MODE.typeKey(), Constants.LOG_MODES[Constants.OUT_IDX])
+			String info = LogPatternUtils.formatLogInfo(taskBeforeLogPatternChain, new JSONObject()
+				.element(Constants.LOG_PATTERN_URL, singleUrlTask.getUrl()).element(Constants.LOG_PATTERN_TASK_NAME, CrawlerUtils.getTaskName(singleUrlTask))
+				.element(Constants.LOG_PATTERN_MODE, Constants.LOG_MODES[Constants.OUT_IDX])
 			);
 			Log.log(info );
 		}
@@ -225,9 +230,9 @@ public class CrawlerUtils {
 	public static void logAfterTask(ScriptParameter<?, ?, ?, ?, ?, ?> singleUrlTask, String fetchedResult, String spent, boolean debugEnable) {
 		Tools.assert0(singleUrlTask != null, "'singleUrlTask' can't be null ");
 		if(debugEnable ) {
-			String info = Constants.formatLogInfo(taskAfterLogPatternChain, new JSONObject()
-								.element(LogPatternType.RESULT.typeKey(), fetchedResult).element(LogPatternType.TASK_NAME.typeKey(), CrawlerUtils.getTaskName(singleUrlTask))
-								.element(LogPatternType.SPENT.typeKey(), spent).element(LogPatternType.MODE.typeKey(), Constants.LOG_MODES[Constants.OUT_IDX])
+			String info = LogPatternUtils.formatLogInfo(taskAfterLogPatternChain, new JSONObject()
+								.element(Constants.LOG_PATTERN_RESULT, fetchedResult).element(Constants.LOG_PATTERN_TASK_NAME, CrawlerUtils.getTaskName(singleUrlTask))
+								.element(Constants.LOG_PATTERN_SPENT, spent).element(Constants.LOG_PATTERN_MODE, Constants.LOG_MODES[Constants.OUT_IDX])
 							);
 		    Log.log(info );
 		}
@@ -237,10 +242,10 @@ public class CrawlerUtils {
 	}
 	public static void logErrorMsg(ScriptParameter<?, ?, ?, ?, ?, ?> singleUrlTask, Exception e) {
 		Tools.assert0(singleUrlTask != null, "'singleUrlTask' can't be null ");
-		String info = Constants.formatLogInfo(taskExceptionLogPatternChain, new JSONObject()
-							.element(LogPatternType.EXCEPTION.typeKey(), e.getClass().getName() + " : " + e.getMessage() )
-							.element(LogPatternType.TASK_NAME.typeKey(), CrawlerUtils.getTaskName(singleUrlTask))
-							.element(LogPatternType.URL.typeKey(), singleUrlTask.getUrl()).element(LogPatternType.MODE.typeKey(), Constants.LOG_MODES[Constants.ERR_IDX])
+		String info = LogPatternUtils.formatLogInfo(taskExceptionLogPatternChain, new JSONObject()
+							.element(Constants.LOG_PATTERN_EXCEPTION, e.getClass().getName() + " : " + e.getMessage() )
+							.element(Constants.LOG_PATTERN_TASK_NAME, CrawlerUtils.getTaskName(singleUrlTask))
+							.element(Constants.LOG_PATTERN_URL, singleUrlTask.getUrl()).element(Constants.LOG_PATTERN_MODE, Constants.LOG_MODES[Constants.ERR_IDX])
 						);
 		Log.err(info );
 	}

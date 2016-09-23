@@ -18,9 +18,15 @@ import com.hx.attrHandler.attrHandler.operation.interf.OperationAttrHandler;
 import com.hx.crawler.xpathParser.AttributeHandler;
 import com.hx.crawler.xpathParser.ValuesHandler;
 import com.hx.crawler.xpathParser.interf.EndPointHandler;
+import com.hx.log.util.Tools;
 
 // ³£Á¿
-public class HXCrawlerConstants {
+public final class HXCrawlerConstants {
+	
+	// disable constructor
+	private HXCrawlerConstants() {
+		Tools.assert0("can't instantiate !");
+	}
 	
 	// the key may occur in 'xpathTemplate'
 	public final static String NAME = "name";
