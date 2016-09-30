@@ -21,6 +21,8 @@ import org.ccil.cowan.tagsoup.Parser;
 import org.ccil.cowan.tagsoup.XMLWriter;
 import org.xml.sax.InputSource;
 
+import com.hx.attrHandler.attrHandler.interf.AttrHandler;
+import com.hx.attrHandler.util.AttrHandlerUtils;
 import com.hx.crawler.crawler.HtmlCrawler;
 import com.hx.crawler.crawler.HtmlCrawlerConfig;
 import com.hx.crawler.crawler.SingleUrlTask;
@@ -270,6 +272,7 @@ public final class CrawlerUtils {
 	public static final String SAVE_PREPARE_DOC = "savePreparedDoc";
 	public static final String SAVE_FETCHED_RESULT = "saveFetchedResult";
 	public static final String EXTRACT_FETCHED_RESULT = "extractFetchedResult";
+	public static final String FETCHED_RESULT_MAPPER = "fetchedResultMapper";
 	public static final String NEXT_STAGE_PARSE_ASYNC = "nextStageParseAsync";
 	public static final String NEXT_STAGE_URL_PATTERN = "nextStageUrlPat";
 	public static final String NEXT_STAGE_PARAM_PATTERN = "nextStageParamPat";
@@ -334,11 +337,26 @@ public final class CrawlerUtils {
 		JSONArray globalConfig = JSONArray.fromObject(Tools.getContent(configPath) );
 		return doPipelineTask0(globalConfig, scriptParameter, crawlerConfig, async);
 	}
+	/**
+	 * @Name: doPipelineTask0 
+	 * @Description: 流水线式的执行给定的配置的任务
+	 * 	遍历globalConfig, 找到startUp为true的任务, 从该任务开始执行
+	 * 	初始化scriptParameter, crawlerConfig, 然后根据是否异步执行任务 决定使用当前线程执行任务, 还是使用Tools中的线程池执行任务
+	 * 	如果是异步执行任务, res为null, 否则 res为给定的任务返回的结果
+	 * @param globalConfig 一级一级的任务配置
+	 * @param scriptParameter scriptParameter[通过startUp的任务进行初始化]
+	 * @param crawlerConfig crawlerConfig[通过startUp的任务进行初始化]
+	 * @param async 是否异步执行
+	 * @return
+	 * @throws Exception  
+	 * @Create at 2016-09-30 20:02:54 by '970655147'
+	 */
 	private static JSONArray doPipelineTask0(JSONArray globalConfig, SingleUrlTask scriptParameter, HtmlCrawlerConfig crawlerConfig, boolean async) throws Exception {
-		JSONArray res = null;
+		Tools.assert0(globalConfig != null, "'globalConfig' can't be null ");
 		
-		for(Object _stageConfig : globalConfig) {
-			JSONObject stageConfig = (JSONObject) _stageConfig;
+		JSONArray res = null;
+		for(int i=0, len=globalConfig.size(); i<len; i++) {
+			JSONObject stageConfig = globalConfig.getJSONObject(i);
 			if(stageConfig.optBoolean(START_UP) ) {
 				HtmlCrawlerConfig nextStageCrawlerConfig = crawlerConfig;
 				if(crawlerConfig == null) {
@@ -354,10 +372,10 @@ public final class CrawlerUtils {
 				}
 				
 				if(async) {
-					Runnable task = new CrawlerPipelineTask(nextStageScriptParameter, nextStageCrawlerConfig, globalConfig, 0);
+					Runnable task = new CrawlerPipelineTask(nextStageScriptParameter, nextStageCrawlerConfig, globalConfig, i);
 					Tools.execute(task);
 				} else {
-					res = doPipelineParse(nextStageScriptParameter, nextStageCrawlerConfig, globalConfig, 0);
+					res = doPipelineParse(nextStageScriptParameter, nextStageCrawlerConfig, globalConfig, i);
 				}
 				break ;
 			}
@@ -371,10 +389,32 @@ public final class CrawlerUtils {
 		return res;
 	}
 	
-	// parse
+	/**
+	 * @Name: doPipelineParse 
+	 * @Description: 流水线式的执行给定的任务
+	 * 	校验scriptParameter, crawerConfig, globalConfig, 收尾剪枝
+	 * 	获取当前任务的配置, 并校验
+	 * 	是否需要打印日志, 打印抓取任务开始的日志
+	 * 	获取当前任务的xpathes, 然后根据配置的请求决定发送get, post请求, 校验获取到的结果, 如果需要保存抓取的文档, 则保存文档
+	 * 	然后 根据xpathes解析文档, 并根据配置的JUDGER确保"关键的数据"存在[根据JUDGER构造ResultJudger]
+	 * 	校验结果, 如果需要保存结果, 则保存结果
+	 * 
+	 * 	如果还有接下来需要执行的任务, 则从fetchedResult中获取下一个任务的url(们), 然后抓取需要的参数, 封装scriptParameter, 根据是否异步执行任务, 决定是使用当前线程执行任务, 还是使用Tools线程池中的线程执行任务
+	 * @param scriptParameter 
+	 * @param crawlerConfig 
+	 * @param globalConfig
+	 * @param stageId 当前的任务属于哪一个stage
+	 * @return 返回当前任务抓取到的结果
+	 * @throws Exception  
+	 * @Create at 2016-09-30 20:08:18 by '970655147'
+	 */
 	public static JSONArray doPipelineParse(SingleUrlTask scriptParameter, HtmlCrawlerConfig crawlerConfig, JSONArray globalConfig, int stageId) throws Exception {
+		Tools.assert0(scriptParameter != null, "'scriptParameter' can't be null ");
+		Tools.assert0(crawlerConfig != null, "'crawlerConfig' can't be null ");
+		Tools.assert0(globalConfig != null, "'globalConfig' can't be null ");
+		
 		// prepare
-		if(stageId == globalConfig.size() ) {
+		if(stageId >= globalConfig.size() ) {
 			// after finalStage
 			return null;
 		}
@@ -452,15 +492,21 @@ public final class CrawlerUtils {
 		
 		if(config.optBoolean(SAVE_FETCHED_RESULT) ) {
 //			Tools.append(String.valueOf(fetchedResult), SAVE_FETCHED_RESULT_PATH);
-			JSONArray saveFetchedResult = fetchedResult;
+			JSONArray extractedFetchedResult = fetchedResult;
 			if(! Tools.isEmpty(config.optString(EXTRACT_FETCHED_RESULT)) ) {
-				saveFetchedResult = JSONExtractor.extractInfoFromJSON(fetchedResult, config.optString(EXTRACT_FETCHED_RESULT) );
+				extractedFetchedResult = JSONExtractor.extractInfoFromJSON(extractedFetchedResult, config.optString(EXTRACT_FETCHED_RESULT) );
+			}
+			
+			String saveFetchedResult = String.valueOf(extractedFetchedResult);
+			if(! Tools.isEmpty(config.optString(FETCHED_RESULT_MAPPER)) ) {
+				AttrHandler handler = AttrHandlerUtils.handlerParse(config.optString(FETCHED_RESULT_MAPPER), Constants.HANDLER);
+				saveFetchedResult = handler.handle(String.valueOf(saveFetchedResult) );
 			}
 			Tools.appendBufferCRLF(DO_PIPELINE_TASK_NAME, String.valueOf(saveFetchedResult) );
 		}
 		
 		// process next stage
-		if(stageId < globalConfig.size() -1) {
+		if(stageId < globalConfig.size() - 1) {
 			String nextStageUrlPat = config.optString(NEXT_STAGE_URL_PATTERN);
 			JSONObject nextStageUrlParam = config.optJSONObject(NEXT_STAGE_PARAM_PATTERN);
 			boolean parseAsync = config.optBoolean(NEXT_STAGE_PARSE_ASYNC);
@@ -479,7 +525,8 @@ public final class CrawlerUtils {
 					String nextStageUrl = (String) nextStageUrls.getString(i);
 					JSONObject nextStageConfig = globalConfig.getJSONObject(stageId + 1);
 					HtmlCrawlerConfig nextStageCrawlerConfig = new HtmlCrawlerConfig(crawlerConfig);
-					encapCrawlerConfig(nextStageConfig.optJSONObject(CRAWLER_CONFIG), nextStageCrawlerConfig);
+					// duplicate, rm
+					// encapCrawlerConfig(nextStageConfig.optJSONObject(CRAWLER_CONFIG), nextStageCrawlerConfig);
 					SingleUrlTask nextStageScriptParameter = CrawlerUtils.newSingleUrlTask(crawler, nextStageUrl, nextStageConfig.optJSONObject(TASK_PARAM) );
 					for(Object _key : nextStageParams.names() ) {
 						String key = (String) _key;
@@ -502,7 +549,15 @@ public final class CrawlerUtils {
 		return fetchedResult;
 	}
 	
-	// 根据给定的配置处理CrawlerConfig
+	/**
+	 * @Name: encapCrawlerConfig 
+	 * @Description: 根据给定的配置封装crawlerConfig
+	 * 	如果需要清除 header, cookie, data, 则先清除crawlerConfig中的数据
+	 * 	然后再添加config中配置的header, cookie, data
+	 * @param crawlerConfigObj
+	 * @param crawlerConfig  
+	 * @Create at 2016-09-30 20:25:14 by '970655147'
+	 */
 	public static void encapCrawlerConfig(JSONObject crawlerConfigObj, CrawlerConfig crawlerConfig) {
 		if(! Tools.isEmpty(crawlerConfigObj) ) {
 			if(crawlerConfigObj.optBoolean(CLEAR_PREV_HEADERS) ) {
