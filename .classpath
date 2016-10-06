@@ -1,27 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="D:/Assist/jar/apache/httpClient/commons-logging-1.2.jar"/>
-	<classpathentry kind="lib" path="D:/Assist/jar/apache/httpClient/fluent-hc-4.5.jar"/>
-	<classpathentry kind="lib" path="D:/Assist/jar/apache/httpClient/httpclient-4.5.jar"/>
-	<classpathentry kind="lib" path="D:/Assist/jar/apache/httpClient/httpclient-cache-4.5.jar"/>
-	<classpathentry kind="lib" path="D:/Assist/jar/apache/httpClient/httpclient-win-4.5.jar"/>
-	<classpathentry kind="lib" path="D:/Assist/jar/apache/httpClient/httpcore-4.4.1.jar" sourcepath="D:/Assist/src/apache/common/httpcomponents-client-4.5-src.zip"/>
-	<classpathentry kind="lib" path="D:/Assist/jar/apache/httpClient/httpmime-4.5.jar"/>
-	<classpathentry kind="lib" path="D:/Assist/jar/apache/httpClient/jna-4.1.0.jar"/>
-	<classpathentry kind="lib" path="D:/Assist/jar/apache/httpClient/jna-platform-4.1.0.jar"/>
-	<classpathentry kind="lib" path="D:/Assist/jar/json/commons-beanutils.jar"/>
-	<classpathentry kind="lib" path="D:/Assist/jar/json/commons-collections-3.2.1.jar"/>
-	<classpathentry kind="lib" path="D:/Assist/jar/json/commons-lang-2.2.jar"/>
-	<classpathentry kind="lib" path="D:/Assist/jar/json/commons-logging.jar"/>
-	<classpathentry kind="lib" path="D:/Assist/jar/json/ezmorph-1.0.6.jar"/>
-	<classpathentry kind="lib" path="D:/Assist/jar/json/json.jar"/>
-	<classpathentry kind="lib" path="D:/Assist/jar/json/json-lib-2.2.3-jdk15.jar"/>
-	<classpathentry kind="lib" path="D:/Assist/jar/xml/dom4j.jar" sourcepath="D:/Assist/src/xml/dom4j/dom4j-code.zip"/>
-	<classpathentry kind="lib" path="D:/Assist/jar/xml/jaxen.jar"/>
-	<classpathentry kind="lib" path="D:/Assist/jar/xml/tagsoup-1.2.1.jar"/>
-	<classpathentry kind="lib" path="D:/Assist/jar/crawler/HXAttrHandler.jar"/>
-	<classpathentry kind="lib" path="D:/Assist/jar/crawler/HXLog.jar" sourcepath="D:/Assist/src/crawler/HXLogSrc.jar"/>
-	<classpathentry kind="output" path="bin"/>
+	<classpathentry kind="output" path="target/classes"/>
 </classpath>
