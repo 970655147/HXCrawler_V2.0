@@ -8,7 +8,11 @@ package com.hx.crawler.crawler;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Collections;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.http.Header;
 import org.apache.http.HttpHost;
@@ -59,6 +63,7 @@ public class HtmlCrawler extends Crawler<HttpResponse, Header, String, NameValue
 		Tools.assert0(url != null, "url can't be null ");
 		Tools.assert0(config != null, "CrawlerConfig can't be null ");
 		
+		url = encapQueryStrIfNeeded(url, config);
 		Request req = Request.Get(url);
 		req.connectTimeout(config.getTimeout() );
 		setHeadersAndCookies(req, config);
@@ -91,6 +96,7 @@ public class HtmlCrawler extends Crawler<HttpResponse, Header, String, NameValue
 		Tools.assert0(config != null, "CrawlerConfig can't be null ");
 		
 		Request req = Request.Post(url);
+		req.connectTimeout(config.getTimeout() );
 		config(req, config);
 		if(proxy != null) {
 			req.viaProxy(proxy);
@@ -106,6 +112,7 @@ public class HtmlCrawler extends Crawler<HttpResponse, Header, String, NameValue
 		Tools.assert0(contentType != null, "contentType can't be null ");
 		
 		Request req = Request.Post(url);
+		req.connectTimeout(config.getTimeout() );
 		config(req, config);
 		req.bodyString(bodyData, contentType);
 		if(proxy != null) {
@@ -122,6 +129,7 @@ public class HtmlCrawler extends Crawler<HttpResponse, Header, String, NameValue
 		Tools.assert0(contentType != null, "contentType can't be null ");
 		
 		Request req = Request.Post(url);
+		req.connectTimeout(config.getTimeout() );
 		config(req, config);
 		req.bodyStream(inputStream, contentType);
 		if(proxy != null) {
@@ -159,6 +167,32 @@ public class HtmlCrawler extends Crawler<HttpResponse, Header, String, NameValue
 		if((config.getCookies().size() > 0) ) {
 			req.addHeader(Tools.COOKIE_STR, Tools.getCookieStr(config.getCookies()) );
 		}
+	}
+	// 将给定的List<NameValuePair> 转换为Map<Name, Value>
+	private Map<String, String> data2Map(List<NameValuePair> data) {
+		if(Tools.isEmpty(data) ) {
+			return Collections.emptyMap();
+		}
+		
+		Map<String, String> result = new LinkedHashMap(Tools.estimateMapSize(data.size()) );
+		for(NameValuePair pair : data) {
+			result.put(pair.getName(), pair.getValue() );
+		}
+		return result;
+	}
+	// url 和查询字符串的分隔符
+	public static final String URL_QUERYSTR_SEP = "?";
+	// 如果需要封装数据到查询字符串, 则将数据拼接到url后面
+	private String encapQueryStrIfNeeded(String url, CrawlerConfig<Header, String, NameValuePair, String, String> config) {
+		String queryStr = Tools.encapQueryString(data2Map(config.getData()) );
+		StringBuilder sb = new StringBuilder(url.length() + queryStr.length() + URL_QUERYSTR_SEP.length() );
+		
+		sb.append(url);
+		if(! Tools.isEmpty(queryStr) && (! url.contains(URL_QUERYSTR_SEP)) ) {
+			sb.append(URL_QUERYSTR_SEP);
+		}
+		sb.append(queryStr);
+		return sb.toString();
 	}
 	
 }

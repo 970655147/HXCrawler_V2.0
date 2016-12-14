@@ -44,6 +44,10 @@ public class Test02TestCrawler {
 		Log.log(html);
 		
 		
+		url = "http://localhost:8080/api/query";
+//		crawler.getPage(url, config.addData("name", "hx") );
+		crawler.getPage(url, config );
+		
 		
 	}
 	
