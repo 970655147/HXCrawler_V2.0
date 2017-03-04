@@ -22,6 +22,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
 import com.hx.crawler.crawler.interf.Page;
+import com.hx.log.util.BizUtils;
 import com.hx.log.util.Tools;
 
 // Page
@@ -135,7 +136,7 @@ public class HtmlPage implements Page<HttpResponse> {
 	// 这样解析不太好啊[鲁棒性],, 直接split就行了		add at 2016.05.02
 	private NameValuePair[] getCookie(String value, Set<String>nonCookieKeys) {
 		NameValuePair[] cookie = new BasicNameValuePair[0];
-		int lastIdxSemicolon = 0, idxEqu = value.indexOf(Tools.COOKIE_KV_SEP), idxSemicolon = value.indexOf(Tools.COOKIE_COOKIE_SEP);
+		int lastIdxSemicolon = 0, idxEqu = value.indexOf(BizUtils.COOKIE_KV_SEP), idxSemicolon = value.indexOf(BizUtils.COOKIE_COOKIE_SEP);
 		while((idxSemicolon > 0) && (idxEqu > 0) ) {
 			String key = value.substring(lastIdxSemicolon, idxEqu);
 			String val = value.substring(idxEqu+1, idxSemicolon);
@@ -147,8 +148,8 @@ public class HtmlPage implements Page<HttpResponse> {
 			}
 			
 			lastIdxSemicolon = idxSemicolon+1;
-			idxEqu = value.indexOf(Tools.COOKIE_KV_SEP, idxSemicolon);
-			idxSemicolon = value.indexOf(Tools.COOKIE_COOKIE_SEP, idxSemicolon+1);
+			idxEqu = value.indexOf(BizUtils.COOKIE_KV_SEP, idxSemicolon);
+			idxSemicolon = value.indexOf(BizUtils.COOKIE_COOKIE_SEP, idxSemicolon+1);
 		}
 		// 处理最后一组kv对  
 		// 鲁棒性判断 : Set-Cookie: __cfduid=d97fc04a3d79d4567d86b62582fbaa4bc1444897363; expires=Fri, 14-Oct-16 08:22:43 GMT; path=/; domain=.tom365.co; HttpOnly

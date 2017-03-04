@@ -65,14 +65,7 @@ public class HtmlCrawler extends Crawler<HttpResponse, Header, String, NameValue
 		
 		url = encapQueryStrIfNeeded(url, config);
 		Request req = Request.Get(url);
-		req.connectTimeout(config.getTimeout() );
-		setHeadersAndCookies(req, config);
-		if(proxy != null) {
-			req.viaProxy(proxy);
-		}
-		
-		Response resp = req.execute();
-		return new HtmlPage(resp);
+		return doExecute(req, config, proxy);
 	}
 	
 	// postPage
@@ -132,6 +125,64 @@ public class HtmlCrawler extends Crawler<HttpResponse, Header, String, NameValue
 		req.connectTimeout(config.getTimeout() );
 		config(req, config);
 		req.bodyStream(inputStream, contentType);
+		if(proxy != null) {
+			req.viaProxy(proxy);
+		}
+		
+		Response resp = req.execute();
+		return new HtmlPage(resp);
+	}
+	
+	// putPage
+	public Page<HttpResponse> putPage(String url) throws IOException {
+		return putPage(url, new HtmlCrawlerConfig());
+	}
+	public Page<HttpResponse> putPage(String url, CrawlerConfig<Header, String, NameValuePair, String, String> config) throws IOException {
+		return putPage(url, config, null);
+	}
+	public Page<HttpResponse> putPage(String url, HttpHost proxy) throws IOException {
+		return putPage(url, new HtmlCrawlerConfig(), proxy);
+	}
+	public Page<HttpResponse> putPage(String url, CrawlerConfig<Header, String, NameValuePair, String, String> config, HttpHost proxy) throws IOException {
+		Tools.assert0(url != null, "url can't be null ");
+		Tools.assert0(config != null, "CrawlerConfig can't be null ");
+		
+		url = encapQueryStrIfNeeded(url, config);
+		Request req = Request.Put(url);
+		return doExecute(req, config, proxy);
+	}	
+	
+	// deletePage
+	public Page<HttpResponse> deletePage(String url) throws IOException {
+		return deletePage(url, new HtmlCrawlerConfig());
+	}
+	public Page<HttpResponse> deletePage(String url, CrawlerConfig<Header, String, NameValuePair, String, String> config) throws IOException {
+		return deletePage(url, config, null);
+	}
+	public Page<HttpResponse> deletePage(String url, HttpHost proxy) throws IOException {
+		return deletePage(url, new HtmlCrawlerConfig(), proxy);
+	}
+	public Page<HttpResponse> deletePage(String url, CrawlerConfig<Header, String, NameValuePair, String, String> config, HttpHost proxy) throws IOException {
+		Tools.assert0(url != null, "url can't be null ");
+		Tools.assert0(config != null, "CrawlerConfig can't be null ");
+		
+		url = encapQueryStrIfNeeded(url, config);
+		Request req = Request.Delete(url);
+		return doExecute(req, config, proxy);
+	}
+	
+	/**
+	 * @Description: 封装给定的请求, 并发送请求, 将结果返回回来 [处理get, put, delete请求]
+	 * @param req	给定的请求
+	 * @param config 请求配置信息
+	 * @param proxy 代理信息
+	 * @return
+	 * @throws IOException  
+	 * @Create at 2017-03-04 22:04:14 by '970655147'
+	 */
+	private HtmlPage doExecute(Request req, CrawlerConfig<Header, String, NameValuePair, String, String> config, HttpHost proxy) throws IOException {
+		req.connectTimeout(config.getTimeout() );
+		setHeadersAndCookies(req, config);
 		if(proxy != null) {
 			req.viaProxy(proxy);
 		}

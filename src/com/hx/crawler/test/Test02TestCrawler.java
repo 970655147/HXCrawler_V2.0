@@ -6,6 +6,8 @@
 
 package com.hx.crawler.test;
 
+import static com.hx.log.util.Log.info;
+
 import java.io.IOException;
 
 import org.apache.http.HttpResponse;
@@ -48,6 +50,9 @@ public class Test02TestCrawler {
 //		crawler.getPage(url, config.addData("name", "hx") );
 		crawler.getPage(url, config );
 		
+//		page = crawler.putPage("http://www.baidu.com");
+		page = crawler.getPage("http://www.baidu.com");
+		info(page.getContent() );
 		
 	}
 	
