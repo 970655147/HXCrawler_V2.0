@@ -53,6 +53,7 @@ public class Test02TestCrawler {
 //		page = crawler.putPage("http://www.baidu.com");
 		page = crawler.getPage("http://www.baidu.com");
 		info(page.getContent() );
+	
 		
 	}
 	
