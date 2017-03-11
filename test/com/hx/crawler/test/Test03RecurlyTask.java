@@ -6,10 +6,15 @@ import com.hx.crawler.crawler.interf.CrawlerConfig;
 import com.hx.crawler.crawler.interf.HttpMethod;
 import com.hx.crawler.crawler.interf.Page;
 import com.hx.crawler.util.CrawlerUtils;
+import com.hx.crawler.util.recursely_task.interf.RecurseCrawlCallback;
+import com.hx.crawler.util.recursely_task.interf.RecurseCrawlTask;
+import com.hx.crawler.util.recursely_task.interf.RecurseCrawlTaskFacade;
+import com.hx.crawler.util.recursely_task.interf.RecurseTaskList;
 import com.hx.log.util.Log;
 import com.hx.log.util.Tools;
 import com.sun.xml.internal.ws.api.message.ExceptionHasMessage;
 import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import org.junit.Test;
 
 import static com.hx.log.util.Log.err;
@@ -43,12 +48,19 @@ public class Test03RecurlyTask {
 
     }
 
+    @Test
+    public void testElementNull() {
+
+        info(new JSONObject().element("name", (String) null).element("sdf", "sdff"));
+
+    }
+
     /**
      * 爬取readNovel.com的callback
      */
-    CrawlerUtils.RecurseCrawlCallback callback = new CrawlerUtils.RecurseCrawlCallback<CrawlerUtils.RecurseCrawlTask>() {
+    RecurseCrawlCallback callback = new RecurseCrawlCallback<RecurseCrawlTask>() {
         @Override
-        public void run(CrawlerUtils.RecurseCrawlTaskFacade task, CrawlerUtils.RecurseTaskList<CrawlerUtils.RecurseCrawlTask> todo) {
+        public void run(RecurseCrawlTaskFacade task, RecurseTaskList<RecurseCrawlTask> todo) {
             int depth = task.getDepth();
             try {
                 if (depth == 0) {
@@ -67,7 +79,7 @@ public class Test03RecurlyTask {
          * bizes
          */
         // 抓取首页数据
-        private void doForHomePage(CrawlerUtils.RecurseCrawlTaskFacade task, CrawlerUtils.RecurseTaskList<CrawlerUtils.RecurseCrawlTask> todo) throws Exception {
+        private void doForHomePage(RecurseCrawlTaskFacade task, RecurseTaskList<RecurseCrawlTask> todo) throws Exception {
             String url = task.getUrl();
             Page page = task.getPage();
 
@@ -79,7 +91,7 @@ public class Test03RecurlyTask {
                 for(Object _link : links ) {
                     String link = (String) _link;
                     link = reCoupleUrl(link);
-                    CrawlerUtils.RecurseCrawlTask todoTask = CrawlerUtils.newRecurseCrawlTask(task, link, HttpMethod.GET, HtmlCrawlerConfig.get());
+                    RecurseCrawlTask todoTask = CrawlerUtils.newRecurseCrawlTask(task, link, HttpMethod.GET, HtmlCrawlerConfig.get());
                     todo.add(todoTask);
                 }
             }
@@ -91,7 +103,7 @@ public class Test03RecurlyTask {
             return "https://" + link.substring(link.indexOf(sep) + sep.length());
         }
         // 抓取小说详情数据
-        private void doForDetail(CrawlerUtils.RecurseCrawlTaskFacade task, CrawlerUtils.RecurseTaskList<CrawlerUtils.RecurseCrawlTask> todo) throws Exception {
+        private void doForDetail(RecurseCrawlTaskFacade task, RecurseTaskList<RecurseCrawlTask> todo) throws Exception {
             final String url = task.getUrl();
             final Page page = task.getPage();
             final String nameXpath = "{\"name\":\"bookName\",\"xpath\":\"//div[@class='book-info']/h1/em\",\"attribute\":\"text\"}";

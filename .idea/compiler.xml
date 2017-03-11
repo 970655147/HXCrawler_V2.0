@@ -23,10 +23,12 @@
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
         <module name="HXCrawler" />
+        <module name="HXLog" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.7">
       <module name="HXCrawler" target="1.7" />
+      <module name="HXLog" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>

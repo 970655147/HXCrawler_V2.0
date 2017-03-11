@@ -50,125 +50,87 @@ public class HtmlCrawler extends Crawler<HttpResponse, Header, String, NameValue
 	}
 	
 	// getPage
+	@Override
 	public Page<HttpResponse> getPage(String url) throws IOException {
-		return getPage(url, new HtmlCrawlerConfig());
+		return getPage(url, HtmlCrawlerConfig.get());
 	}
+	@Override
 	public Page<HttpResponse> getPage(String url, CrawlerConfig<Header, String, NameValuePair, String, String> config) throws IOException {
-		return getPage(url, config, null);
-	}
-	public Page<HttpResponse> getPage(String url, HttpHost proxy) throws IOException {
-		return getPage(url, new HtmlCrawlerConfig(), proxy);
-	}
-	public Page<HttpResponse> getPage(String url, CrawlerConfig<Header, String, NameValuePair, String, String> config, HttpHost proxy) throws IOException {
 		Tools.assert0(url != null, "url can't be null ");
 		Tools.assert0(config != null, "CrawlerConfig can't be null ");
-		
+
 		url = encapQueryStrIfNeeded(url, config);
 		Request req = Request.Get(url);
-		return doExecute(req, config, proxy);
+		return doExecute(req, config, config.getProxy());
 	}
-	
+
 	// postPage
+	@Override
 	public Page<HttpResponse> postPage(String url) throws IOException {
 		return postPage(url, new HtmlCrawlerConfig());
 	}
+	@Override
 	public Page<HttpResponse> postPage(String url, CrawlerConfig<Header, String, NameValuePair, String, String> config) throws IOException {
-		return postPage(url, config, null);
-	}
-	public Page<HttpResponse> postPage(String url, CrawlerConfig<Header, String, NameValuePair, String, String> config, String bodyData, ContentType contentType) throws IOException {
-		return postPage(url, config, bodyData, contentType, null);
-	}
-	public Page<HttpResponse> postPage(String url, CrawlerConfig<Header, String, NameValuePair, String, String> config, InputStream inputStream, ContentType contentType) throws IOException {
-		return postPage(url, config, inputStream, contentType, null);
-	}
-	public Page<HttpResponse> postPage(String url, HttpHost proxy) throws IOException {
-		return postPage(url, new HtmlCrawlerConfig(), proxy);
-	}
-	public Page<HttpResponse> postPage(String url, CrawlerConfig<Header, String, NameValuePair, String, String> config, HttpHost proxy) throws IOException {
 		Tools.assert0(url != null, "url can't be null ");
 		Tools.assert0(config != null, "CrawlerConfig can't be null ");
-		
-		Request req = Request.Post(url);
-		req.connectTimeout(config.getTimeout() );
-		config(req, config);
-		if(proxy != null) {
-			req.viaProxy(proxy);
-		}
-		
+
+		Request req = encapPostReq(url, config);
 		Response resp = req.execute();
 		return new HtmlPage(resp);
 	}
-	public Page<HttpResponse> postPage(String url, CrawlerConfig<Header, String, NameValuePair, String, String> config, String bodyData, ContentType contentType, HttpHost proxy) throws IOException {
+	@Override
+	public Page<HttpResponse> postPage(String url, CrawlerConfig<Header, String, NameValuePair, String, String> config, String bodyData, ContentType contentType) throws IOException {
 		Tools.assert0(url != null, "url can't be null ");
 		Tools.assert0(config != null, "CrawlerConfig can't be null ");
 		Tools.assert0(bodyData != null, "bodyData can't be null ");
 		Tools.assert0(contentType != null, "contentType can't be null ");
-		
-		Request req = Request.Post(url);
-		req.connectTimeout(config.getTimeout() );
-		config(req, config);
+
+		Request req = encapPostReq(url, config);
 		req.bodyString(bodyData, contentType);
-		if(proxy != null) {
-			req.viaProxy(proxy);
-		}
-		
 		Response resp = req.execute();
 		return new HtmlPage(resp);
 	}
-	public Page<HttpResponse> postPage(String url, CrawlerConfig<Header, String, NameValuePair, String, String> config, InputStream inputStream, ContentType contentType, HttpHost proxy) throws IOException {
+	@Override
+	public Page<HttpResponse> postPage(String url, CrawlerConfig<Header, String, NameValuePair, String, String> config, InputStream inputStream, ContentType contentType) throws IOException {
 		Tools.assert0(url != null, "url can't be null ");
 		Tools.assert0(config != null, "CrawlerConfig can't be null ");
 		Tools.assert0(inputStream != null, "inputStream can't be null ");
 		Tools.assert0(contentType != null, "contentType can't be null ");
-		
-		Request req = Request.Post(url);
-		req.connectTimeout(config.getTimeout() );
-		config(req, config);
+
+		Request req = encapPostReq(url, config);
 		req.bodyStream(inputStream, contentType);
-		if(proxy != null) {
-			req.viaProxy(proxy);
-		}
-		
 		Response resp = req.execute();
 		return new HtmlPage(resp);
 	}
 	
 	// putPage
+	@Override
 	public Page<HttpResponse> putPage(String url) throws IOException {
 		return putPage(url, new HtmlCrawlerConfig());
 	}
+	@Override
 	public Page<HttpResponse> putPage(String url, CrawlerConfig<Header, String, NameValuePair, String, String> config) throws IOException {
-		return putPage(url, config, null);
-	}
-	public Page<HttpResponse> putPage(String url, HttpHost proxy) throws IOException {
-		return putPage(url, new HtmlCrawlerConfig(), proxy);
-	}
-	public Page<HttpResponse> putPage(String url, CrawlerConfig<Header, String, NameValuePair, String, String> config, HttpHost proxy) throws IOException {
 		Tools.assert0(url != null, "url can't be null ");
 		Tools.assert0(config != null, "CrawlerConfig can't be null ");
-		
+
 		url = encapQueryStrIfNeeded(url, config);
 		Request req = Request.Put(url);
-		return doExecute(req, config, proxy);
-	}	
+		return doExecute(req, config, config.getProxy());
+	}
 	
 	// deletePage
+	@Override
 	public Page<HttpResponse> deletePage(String url) throws IOException {
 		return deletePage(url, new HtmlCrawlerConfig());
 	}
+	@Override
 	public Page<HttpResponse> deletePage(String url, CrawlerConfig<Header, String, NameValuePair, String, String> config) throws IOException {
-		return deletePage(url, config, null);
-	}
-	public Page<HttpResponse> deletePage(String url, HttpHost proxy) throws IOException {
-		return deletePage(url, new HtmlCrawlerConfig(), proxy);
-	}
-	public Page<HttpResponse> deletePage(String url, CrawlerConfig<Header, String, NameValuePair, String, String> config, HttpHost proxy) throws IOException {
 		Tools.assert0(url != null, "url can't be null ");
 		Tools.assert0(config != null, "CrawlerConfig can't be null ");
-		
+
 		url = encapQueryStrIfNeeded(url, config);
 		Request req = Request.Delete(url);
-		return doExecute(req, config, proxy);
+		return doExecute(req, config, config.getProxy());
 	}
 	
 	/**
@@ -244,6 +206,27 @@ public class HtmlCrawler extends Crawler<HttpResponse, Header, String, NameValue
 		}
 		sb.append(queryStr);
 		return sb.toString();
+	}
+
+	/**
+	 * ·â×°postµÄrequestÇëÇó
+	 *
+	 * @param url
+	 * @param config
+	 * @return org.apache.http.client.fluent.Request
+	 * @throws
+	 * @author 970655147 created at 2017-03-11 15:38
+	 */
+	private Request encapPostReq(String url, CrawlerConfig<Header, String, NameValuePair, String, String> config) {
+		Request req = Request.Post(url);
+		req.connectTimeout(config.getTimeout() );
+		config(req, config);
+		HttpHost proxy = config.getProxy();
+		if(proxy != null) {
+			req.viaProxy(proxy);
+		}
+
+		return req;
 	}
 	
 }

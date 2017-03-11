@@ -4,7 +4,7 @@
  * created by 970655147
  */
 
-package com.hx.crawler.xpathParser.interf;
+package com.hx.crawler.parser.interf;
 
 // 索引字符串接口
 public abstract class IndexString {
@@ -14,7 +14,13 @@ public abstract class IndexString {
 		
 	}
 
-	// 获取解析之后的root结点
+	/**
+	 * 获取索引字符串解析之后的根节点
+	 *
+	 * @return com.hx.crawler.parser.interf.EndPoint
+	 * @throws
+	 * @author 970655147 created at 2017-03-11 12:02
+	 */
 	public abstract EndPoint getRoot();
 	
 }

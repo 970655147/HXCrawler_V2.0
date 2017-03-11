@@ -15,9 +15,9 @@ import com.hx.attrHandler.attrHandler.DoNothingAttrHandler;
 import com.hx.attrHandler.attrHandler.StandardHandlerParser.Types;
 import com.hx.attrHandler.attrHandler.operation.MapOperationAttrHandler;
 import com.hx.attrHandler.attrHandler.operation.interf.OperationAttrHandler;
-import com.hx.crawler.xpathParser.AttributeHandler;
-import com.hx.crawler.xpathParser.ValuesHandler;
-import com.hx.crawler.xpathParser.interf.EndPointHandler;
+import com.hx.crawler.parser.AttributeHandler;
+import com.hx.crawler.parser.ValuesHandler;
+import com.hx.crawler.parser.interf.EndPointHandler;
 import com.hx.log.util.Tools;
 
 // 常量
@@ -29,6 +29,13 @@ public final class HXCrawlerConstants {
 	}
 	
 	// the key may occur in 'xpathTemplate'
+	/**
+	 * 'name', represents the key in result of currentNode, ARRAY_ATTR is special, it without 'name'
+	 * 'xpath', represents the search path[in grammar of xpath], of current node
+	 * 'values', represents the current node's structure of childNodes [ValueNode only]
+	 * 'attribute', represents the way to got current node's value [AttributeNode only]
+	 * 'hanler', represents the handler to handle the result of currentNode[AttributeNode only]
+	 */
 	public final static String NAME = "name";
 	public final static String XPATH = "xpath";
 	public final static String VALUES = "values";
@@ -79,22 +86,22 @@ public final class HXCrawlerConstants {
 	// 'rootNode' int result of 'XpathIndexString'
 	public final static String ROOT = "#root";
 	
-	// the 'attr' maybe a 'hyperLink'
-	public final static Set<String> links = new HashSet<>();
+	// the 'attr' maybe a 'hyperLink', some time may need recouple absolute url
+	public final static Set<String> ATTR_MAY_LINKS = new HashSet<>();
 	static {
-		links.add("href");
-		links.add("src");
+		ATTR_MAY_LINKS.add("href");
+		ATTR_MAY_LINKS.add("src");
 	}
 	
 	// {'attribute' : AttributeHandler, ... }
-	public final static Map<String, EndPointHandler> endpointToHandler = new HashMap<>();
-	public final static OperationAttrHandler defaultOperationAttrHandler = new MapOperationAttrHandler(new DoNothingAttrHandler(), Types.String);
+	public final static Map<String, EndPointHandler> ENDPOINT_TO_HANDLER = new HashMap<>();
+	public final static OperationAttrHandler DEFAULT_OPERATION_ATTR_HANDLER = new MapOperationAttrHandler(new DoNothingAttrHandler(), Types.String);
 	
 	static {
-		endpointToHandler.put(ATTRIBUTE, new AttributeHandler() );
-		endpointToHandler.put(VALUES, new ValuesHandler() );
+		ENDPOINT_TO_HANDLER.put(ATTRIBUTE, new AttributeHandler() );
+		ENDPOINT_TO_HANDLER.put(VALUES, new ValuesHandler() );
 		// 不能向下面 这样写, 因为是EndPoint.ATTRIBUTE的初始化导致了Constants.class的加载, 而执行当前staticBlock的时候, Endpoint.ATTRIBUTE 以及EndPoint.VALUES在初始化阶段初始化的null值		--2016.02.02
-//		endpointToHandler.put(EndPoint.ATTRIBUTE, new ValuesHandler() );
+//		ENDPOINT_TO_HANDLER.put(EndPoint.ATTRIBUTE, new ValuesHandler() );
 	}
 
 }

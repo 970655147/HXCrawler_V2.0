@@ -4,8 +4,10 @@
  * created by 970655147
  */
 
-package com.hx.crawler.xpathParser;
+package com.hx.crawler.parser.xpathImpl;
 
+import com.hx.crawler.parser.Attribute;
+import com.hx.crawler.parser.Values;
 import java.util.Deque;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -14,8 +16,8 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import com.hx.crawler.util.HXCrawlerConstants;
-import com.hx.crawler.xpathParser.interf.EndPoint;
-import com.hx.crawler.xpathParser.interf.IndexString;
+import com.hx.crawler.parser.interf.EndPoint;
+import com.hx.crawler.parser.interf.IndexString;
 
 // 索引字符串 : 用于查找指定的结果
 //[
@@ -99,7 +101,7 @@ public final class XpathIndexString extends IndexString {
 					valuesStack.push(res);
 					break ;
 				} else if(current.containsKey(EndPoint.ATTRIBUTE) ) {
-					res = new Attribute(current.optString(HXCrawlerConstants.NAME, HXCrawlerConstants.ARRAY_ATTR), 
+					res = new Attribute(current.optString(HXCrawlerConstants.NAME, HXCrawlerConstants.ARRAY_ATTR),
 										current.optString(HXCrawlerConstants.XPATH, null), current.getString(EndPoint.ATTRIBUTE), 
 										current.optString(HXCrawlerConstants.HANDLER, null), valuesStack.peek() 
 										);
@@ -132,10 +134,6 @@ public final class XpathIndexString extends IndexString {
 	
 	// for debug ...
 	public String toString() {
-//		Iterator<EndPoint> it = valuesStack.iterator();
-//		while(it.hasNext()) {
-//			Log.log(it.next().toString() );
-//		}
 		return "[ " + root.toString() + " ]";
 	}
 	

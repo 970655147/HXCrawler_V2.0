@@ -7,6 +7,7 @@
 package com.hx.crawler.test;
 
 import com.hx.crawler.util.CrawlerUtils;
+import com.hx.crawler.util.pipeline_task.PipelineTaskUtils;
 import com.hx.log.util.Tools;
 
 import net.sf.json.JSONArray;
@@ -17,14 +18,14 @@ public class Test04CrawlForGZMeal_Novel {
 
 	// 爬取gzmeal.com的小说
 	public static void main(String[] args) throws Exception {
-		Tools.createAnBuffer(CrawlerUtils.DO_PIPELINE_TASK_NAME, CrawlerUtils.SAVE_FETCHED_RESULT_PATH);
+		Tools.createAnBuffer(PipelineTaskUtils.DO_PIPELINE_TASK_NAME, PipelineTaskUtils.SAVE_FETCHED_RESULT_PATH);
 
 //		log(categoryConfigPath);
 		JSONArray categories = CrawlerUtils.doPipelineTask(categoryConfigPath);
 
 		Tools.awaitTasksEnd();
 		Tools.awaitShutdown();
-		Tools.closeAnBuffer(CrawlerUtils.DO_PIPELINE_TASK_NAME);
+		Tools.closeAnBuffer(PipelineTaskUtils.DO_PIPELINE_TASK_NAME);
 	}
 
 }

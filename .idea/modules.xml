@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/HXCrawler.iml" filepath="$PROJECT_DIR$/HXCrawler.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../HXLog/HXLog.iml" filepath="$PROJECT_DIR$/../HXLog/HXLog.iml" />
     </modules>
   </component>
 </project>

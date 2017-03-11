@@ -8,6 +8,7 @@ package com.hx.crawler.crawler.interf;
 
 import java.util.List;
 import java.util.Map;
+import org.apache.http.HttpHost;
 
 // CrawlerConfig
 public interface CrawlerConfig<HeaderType, HeaderValType, DataType, DataValType, CookieValType> {
@@ -19,11 +20,13 @@ public interface CrawlerConfig<HeaderType, HeaderValType, DataType, DataValType,
 	public void setData(Map<String, DataValType> data);
 	public void setCookies(Map<String, CookieValType> cookies);
 	public void setTimeout(int timeout);
+	public void setProxy(HttpHost proxy);
 	
 	public List<HeaderType> getHeaders();
 	public Map<String, CookieValType> getCookies();
 	public List<DataType> getData();
 	public int getTimeout();
+	public HttpHost getProxy();
 	
 	public CrawlerConfig<HeaderType, HeaderValType, DataType, DataValType, CookieValType> addHeader(String key, HeaderValType value);
 	public CrawlerConfig<HeaderType, HeaderValType, DataType, DataValType, CookieValType> addHeaders(List<HeaderType> headers);
