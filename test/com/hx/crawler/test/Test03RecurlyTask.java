@@ -1,6 +1,10 @@
 package com.hx.crawler.test;
 
-import com.hx.crawler.crawler.HtmlCrawler;
+import static com.hx.log.util.Log.err;
+import static com.hx.log.util.Log.info;
+
+import org.junit.Test;
+
 import com.hx.crawler.crawler.HtmlCrawlerConfig;
 import com.hx.crawler.crawler.interf.CrawlerConfig;
 import com.hx.crawler.crawler.interf.HttpMethod;
@@ -10,15 +14,10 @@ import com.hx.crawler.util.recursely_task.interf.RecurseCrawlCallback;
 import com.hx.crawler.util.recursely_task.interf.RecurseCrawlTask;
 import com.hx.crawler.util.recursely_task.interf.RecurseCrawlTaskFacade;
 import com.hx.crawler.util.recursely_task.interf.RecurseTaskList;
-import com.hx.log.util.Log;
 import com.hx.log.util.Tools;
-import com.sun.xml.internal.ws.api.message.ExceptionHasMessage;
+
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
-import org.junit.Test;
-
-import static com.hx.log.util.Log.err;
-import static com.hx.log.util.Log.info;
 
 /**
  * file name : Test03RecurlyTask.java

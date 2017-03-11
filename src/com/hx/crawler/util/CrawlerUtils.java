@@ -6,20 +6,11 @@
 
 package com.hx.crawler.util;
 
-import static com.hx.log.util.Log.err;
-import static com.hx.log.util.Log.info;
-
-import com.hx.crawler.crawler.interf.*;
-import com.hx.crawler.util.pipeline_task.PipelineTaskUtils;
-import com.hx.crawler.util.recursely_task.RecurselyTaskUtils;
-import com.hx.crawler.util.recursely_task.interf.RecurseCrawlCallback;
-import com.hx.crawler.util.recursely_task.interf.RecurseCrawlTask;
-import com.hx.crawler.util.recursely_task.interf.RecurseCrawlTaskFacade;
-import com.hx.log.util.*;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.lang.reflect.Method;
-import java.util.*;
+import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.http.Header;
@@ -32,8 +23,22 @@ import org.xml.sax.InputSource;
 import com.hx.crawler.crawler.HtmlCrawler;
 import com.hx.crawler.crawler.HtmlCrawlerConfig;
 import com.hx.crawler.crawler.SingleUrlTask;
-import com.hx.crawler.parser.xpathImpl.XPathParser;
+import com.hx.crawler.crawler.interf.Crawler;
+import com.hx.crawler.crawler.interf.CrawlerConfig;
+import com.hx.crawler.crawler.interf.HttpMethod;
+import com.hx.crawler.crawler.interf.ScriptParameter;
 import com.hx.crawler.parser.interf.ResultJudger;
+import com.hx.crawler.parser.xpathImpl.XPathParser;
+import com.hx.crawler.util.pipeline_task.PipelineTaskUtils;
+import com.hx.crawler.util.recursely_task.RecurselyTaskUtils;
+import com.hx.crawler.util.recursely_task.interf.RecurseCrawlCallback;
+import com.hx.crawler.util.recursely_task.interf.RecurseCrawlTask;
+import com.hx.crawler.util.recursely_task.interf.RecurseCrawlTaskFacade;
+import com.hx.log.util.Constants;
+import com.hx.log.util.Log;
+import com.hx.log.util.LogPatternUtils;
+import com.hx.log.util.Tools;
+import com.hx.log.util.WordsSeprator;
 import com.hx.log.util.interf.LogPattern.LogPatternChain;
 
 import net.sf.json.JSONArray;
@@ -127,7 +132,7 @@ public final class CrawlerUtils {
 
         // 就是因为多了这个xmlns的声明, 导致了我的xPath读取数据有问题。。。, 或者说 只能通过/*[@XX='XXX'] 来读取数据
         // 并且读取到的数据 还有一个xmlns的声明...						--2015.07.31
-//		String html = "<html xmlns=\"http://www.w3.org/1999/xhtml\"><body><strong><span id=\"ctl01_ContentPlaceHolder1_lblPriceTitle\">ProductPricing</span>:</strong></body></html>";
+//		String html = "<html xmlns=\"http://www.w3.org/1999/xhtml\"><body><strong><span ID=\"ctl01_ContentPlaceHolder1_lblPriceTitle\">ProductPricing</span>:</strong></body></html>";
         // 所以 这里对res进行统一的处理, 去掉html标签的xmlns的声明
         // 增加对于unicode high-UNICODE_SURROGATES, low-UNICODE_SURROGATES 范围内的code的处理..        -- 2017.03.10
         res = res.replaceAll(NEED_BE_FILTER_REG, Tools.EMPTY_STR);
