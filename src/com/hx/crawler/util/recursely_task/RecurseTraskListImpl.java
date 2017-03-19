@@ -1,6 +1,10 @@
 package com.hx.crawler.util.recursely_task;
 
+import com.hx.crawler.crawler.interf.CrawlerConfig;
+import com.hx.crawler.crawler.interf.HttpMethod;
+import com.hx.crawler.util.CrawlerUtils;
 import com.hx.crawler.util.recursely_task.interf.RecurseCrawlTask;
+import com.hx.crawler.util.recursely_task.interf.RecurseCrawlTaskFacade;
 import com.hx.crawler.util.recursely_task.interf.RecurseTaskList;
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -42,6 +46,12 @@ public class RecurseTraskListImpl implements RecurseTaskList<RecurseCrawlTask> {
                 list.addLast(recurseCrawlTask);
             }
         }
+    }
+
+    @Override
+    public void add(RecurseCrawlTaskFacade parent, String url, HttpMethod method, CrawlerConfig config) {
+        RecurseCrawlTask task = RecurselyTaskUtils.newRecurseCrawlTask(parent, url, method, config);
+        add(task);
     }
 
     @Override

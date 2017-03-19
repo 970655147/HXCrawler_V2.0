@@ -90,8 +90,7 @@ public class Test03RecurlyTask {
                 for(Object _link : links ) {
                     String link = (String) _link;
                     link = reCoupleUrl(link);
-                    RecurseCrawlTask todoTask = CrawlerUtils.newRecurseCrawlTask(task, link, HttpMethod.GET, HtmlCrawlerConfig.get());
-                    todo.add(todoTask);
+                    todo.add(task, link, HttpMethod.GET, HtmlCrawlerConfig.get());
                 }
             }
             info("crawl for homePage end !");
