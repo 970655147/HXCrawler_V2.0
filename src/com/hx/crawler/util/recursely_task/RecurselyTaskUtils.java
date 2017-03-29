@@ -43,16 +43,15 @@ public final class RecurselyTaskUtils {
      * @param callback 拿到page之后处理的回调
      * @param isBfs    bfs or dfs
      * @return void
-     * @throws
      * @author 970655147 created at 2017-03-10 19:03
      */
-    public static void recurselyTask(String seedUrl, HttpMethod method, CrawlerConfig config, RecurseCrawlCallback callback, boolean isAsync, boolean isBfs) {
+    public static void recurselyTask(String seedUrl, HttpMethod method, CrawlerConfig config, RecurseCrawlCallback<RecurseCrawlTask> callback, boolean isAsync, boolean isBfs) {
         Tools.assert0(seedUrl != null, "'seedUrl' can't be null ");
         Tools.assert0(method != null, "'method' can't be null ");
         Tools.assert0(config != null, "'config' can't be null ");
         Tools.assert0(callback != null, "'callback' can't be null ");
 
-        final RecurseCrawlCallback fCallback = callback;
+        final RecurseCrawlCallback<RecurseCrawlTask> fCallback = callback;
         final RecurseTaskList<RecurseCrawlTask> todo = new RecurseTraskListImpl(isBfs);
         RecurseCrawlTask seedTask = new RecurseCrawlTaskImpl(seedUrl, 0, method, config);
         todo.add(seedTask);
@@ -81,7 +80,6 @@ public final class RecurselyTaskUtils {
      * @param method 当前结点的请求方式
      * @param config 当前url所需要的参数
      * @return com.hx.crawler.util.CrawlerUtils.RecurseCrawlTaskImpl
-     * @throws
      * @author 970655147 created at 2017-03-10 19:43
      */
     public static RecurseCrawlTask newRecurseCrawlTask(RecurseCrawlTaskFacade parent, String url, HttpMethod method, CrawlerConfig config) {
@@ -96,10 +94,10 @@ public final class RecurselyTaskUtils {
      * @param callback 处理结果的回调
      * @param todo     任务列表
      * @return boolean
-     * @throws
      * @author 970655147 created at 2017-03-10 22:43
      */
-    private static boolean recurselyTask0(RecurseCrawlTask task, RecurseCrawlCallback callback, RecurseTaskList<RecurseCrawlTask> todo) {
+    private static boolean recurselyTask0(RecurseCrawlTask task, RecurseCrawlCallback<RecurseCrawlTask> callback,
+                                          RecurseTaskList<RecurseCrawlTask> todo) {
         if (task == null) {
             Log.err("got an 'null' task, ignore ");
             return false;
@@ -107,23 +105,27 @@ public final class RecurselyTaskUtils {
 
         Page page = null;
         task.setRunTime(System.currentTimeMillis());
+        boolean isSucc = false;
+        boolean sendPosts = false;
         try {
             page = dispatchSendPost(task, task.getMethod());
+            sendPosts = true;
+            task.setPage(page);
+
+            if(page != null) {
+                callback.run(new RecurseCrawlTaskFacadeImpl(task), todo);
+                isSucc = true;
+            }
         } catch (Exception e) {
-            Log.err("error while send post for url : " + task.getUrl() + ", with config : " + task.getConfig());
-            page = null;
-        }
-        task.setPage(page);
-
-        if (page == null) {
-            task.setFinishTime(System.currentTimeMillis());
-            // logged
-            return false;
+            if(sendPosts) {
+                Log.err("error while send post for url : " + task.getUrl() + ", with config : " + task.getConfig());
+            } else {
+                Log.err("error while do callback's task for url : " + task.getUrl() + ", with config : " + task.getConfig());
+            }
         }
 
-        callback.run(new RecurseCrawlTaskFacadeImpl(task), todo);
         task.setFinishTime(System.currentTimeMillis());
-        return true;
+        return isSucc;
     }
 
     /**
@@ -132,7 +134,6 @@ public final class RecurselyTaskUtils {
      * @param task   给定的task
      * @param method task对应的任务需要请求的方式
      * @return com.hx.crawler.crawler.interf.Page
-     * @throws
      * @author 970655147 created at 2017-03-10 18:58
      */
     private static Page dispatchSendPost(RecurseCrawlTask task, HttpMethod method) throws Exception {

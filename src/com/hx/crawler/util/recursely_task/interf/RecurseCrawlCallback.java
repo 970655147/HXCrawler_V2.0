@@ -14,10 +14,9 @@ public interface RecurseCrawlCallback<Task> {
      *
      * @param task 当前任务信息
      * @param todo 任务列表
-     * @return
-     * @throws
+     * @return void
      * @author 970655147 created at 2017-03-10 18:14
      */
-    void run(RecurseCrawlTaskFacade task, RecurseTaskList<Task> todo);
+    void run(RecurseCrawlTaskFacade task, RecurseTaskList<Task> todo) throws Exception;
 
 }

@@ -59,7 +59,7 @@ public class Test03RecurlyTask {
      */
     RecurseCrawlCallback callback = new RecurseCrawlCallback<RecurseCrawlTask>() {
         @Override
-        public void run(RecurseCrawlTaskFacade task, RecurseTaskList<RecurseCrawlTask> todo) {
+        public void run(RecurseCrawlTaskFacade task, RecurseTaskList<RecurseCrawlTask> todo) throws Exception {
             int depth = task.getDepth();
             try {
                 if (depth == 0) {
