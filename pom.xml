@@ -17,7 +17,7 @@
 
   <groupId>com.hx</groupId>
   <artifactId>HXCrawler_V2.0</artifactId>
-  <version>0.0.1</version>
+  <version>0.0.2</version>
   <packaging>jar</packaging>
 
   <name>HXCrawler_V2.0</name>
@@ -25,9 +25,8 @@
 
   <properties>
     <project.build.sourceEncoding>GBK</project.build.sourceEncoding>
-    
-    <HXAttrHandler.version>0.0.1</HXAttrHandler.version>
-    <HXLog.version>0.0.1</HXLog.version>
+
+    <HXLog.version>0.0.2</HXLog.version>
     
     <httpClient.version>4.5</httpClient.version>
     <dom4j.version>1.6.1</dom4j.version>
@@ -40,7 +39,7 @@
       <dependency>
           <groupId>com.hx</groupId>
           <artifactId>HXAttrHandler</artifactId>
-          <version>${HXAttrHandler.version}</version>
+          <version>${HXLog.version}</version>
       </dependency>
       <dependency>
           <groupId>com.hx</groupId>
