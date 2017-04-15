@@ -10,7 +10,7 @@ import com.hx.crawler.crawler.interf.CrawlerConfig;
 import com.hx.crawler.crawler.interf.Page;
 import com.hx.crawler.parser.interf.ResultJudger;
 import com.hx.crawler.util.CrawlerUtils;
-import com.hx.log.json.JSONExtractor;
+import com.hx.log.json.util.JSONExtractor;
 import com.hx.log.util.Constants;
 import com.hx.log.util.Tools;
 import net.sf.json.JSONArray;
