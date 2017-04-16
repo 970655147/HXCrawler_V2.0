@@ -1,8 +1,12 @@
-# ignore all ".class" file
+# some folder to ignore
+.idea/
+target/
+bin/
+out/
+
+# some types file to ignore
+*.iml
 *.class
 *.jar
 
-bin/*
-target/*
-.idea/*
-/target/
+
