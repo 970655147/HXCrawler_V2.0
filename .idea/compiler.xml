@@ -7,10 +7,13 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="HXCrawler" />
+        <module name="HXCrawler_V2.0" />
+        <module name="HXLog" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.7">
       <module name="HXCrawler" target="1.7" />
+      <module name="HXCrawler_V2.0" target="1.7" />
       <module name="HXLog" target="1.7" />
     </bytecodeTargetLevel>
   </component>

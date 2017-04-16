@@ -1,7 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1e86db1d-262e-4b0a-bc51-2f8693bb2f58" name="Default" comment="" />
+    <list default="true" id="1e86db1d-262e-4b0a-bc51-2f8693bb2f58" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/HXCrawler.iml" afterPath="$PROJECT_DIR$/HXCrawler.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/hx/crawler/parser/Attribute.java" afterPath="$PROJECT_DIR$/src/main/java/com/hx/crawler/parser/Attribute.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/hx/crawler/parser/AttributeHandler.java" afterPath="$PROJECT_DIR$/src/main/java/com/hx/crawler/parser/AttributeHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/hx/crawler/parser/Values.java" afterPath="$PROJECT_DIR$/src/main/java/com/hx/crawler/parser/Values.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/hx/crawler/parser/ValuesHandler.java" afterPath="$PROJECT_DIR$/src/main/java/com/hx/crawler/parser/ValuesHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/hx/crawler/parser/interf/EndPoint.java" afterPath="$PROJECT_DIR$/src/main/java/com/hx/crawler/parser/interf/EndPoint.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/hx/crawler/parser/interf/EndPointHandler.java" afterPath="$PROJECT_DIR$/src/main/java/com/hx/crawler/parser/interf/EndPointHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/hx/crawler/parser/interf/Parser.java" afterPath="$PROJECT_DIR$/src/main/java/com/hx/crawler/parser/interf/Parser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/hx/crawler/parser/interf/ResultJudger.java" afterPath="$PROJECT_DIR$/src/main/java/com/hx/crawler/parser/interf/ResultJudger.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/hx/crawler/parser/xpathImpl/XPathParser.java" afterPath="$PROJECT_DIR$/src/main/java/com/hx/crawler/parser/xpathImpl/XPathParser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/hx/crawler/parser/xpathImpl/XpathIndexString.java" afterPath="$PROJECT_DIR$/src/main/java/com/hx/crawler/parser/xpathImpl/XpathIndexString.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/hx/crawler/util/CrawlerUtils.java" afterPath="$PROJECT_DIR$/src/main/java/com/hx/crawler/util/CrawlerUtils.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/hx/crawler/util/pipeline_task/PipelineCrawlTask.java" afterPath="$PROJECT_DIR$/src/main/java/com/hx/crawler/util/pipeline_task/PipelineCrawlTask.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/hx/crawler/util/pipeline_task/PipelineTaskUtils.java" afterPath="$PROJECT_DIR$/src/main/java/com/hx/crawler/util/pipeline_task/PipelineTaskUtils.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/com/hx/crawler/test/Test01TestXpathParser.java" afterPath="$PROJECT_DIR$/test/com/hx/crawler/test/Test01TestXpathParser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/com/hx/crawler/test/Test03RecurlyTask.java" afterPath="$PROJECT_DIR$/test/com/hx/crawler/test/Test03RecurlyTask.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/com/hx/crawler/test/Test04CrawlForGZMeal_Novel.java" afterPath="$PROJECT_DIR$/test/com/hx/crawler/test/Test04CrawlForGZMeal_Novel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../HXLog/.gitignore" afterPath="$PROJECT_DIR$/../HXLog/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../HXLog/HXLog.iml" afterPath="$PROJECT_DIR$/../HXLog/HXLog.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../HXLog/pom.xml" afterPath="$PROJECT_DIR$/../HXLog/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../HXLog/src/main/java/com/hx/log/alogrithm/tree/TreeUtils.java" afterPath="$PROJECT_DIR$/../HXLog/src/main/java/com/hx/log/alogrithm/tree/TreeUtils.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../HXLog/src/main/java/com/hx/log/biz/BizUtils.java" afterPath="$PROJECT_DIR$/../HXLog/src/main/java/com/hx/log/biz/BizUtils.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../HXLog/src/main/java/com/hx/log/collection/MapUtils.java" afterPath="$PROJECT_DIR$/../HXLog/src/main/java/com/hx/log/collection/MapUtils.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../HXLog/src/main/java/com/hx/log/interf/JSONTransferable.java" afterPath="$PROJECT_DIR$/../HXLog/src/main/java/com/hx/log/interf/JSONTransferable.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../HXLog/src/main/java/com/hx/log/json/JSONExtractor.java" afterPath="$PROJECT_DIR$/../HXLog/src/main/java/com/hx/log/json/JSONExtractor.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../HXLog/src/main/java/com/hx/log/json/JSONTransferableUtils.java" afterPath="$PROJECT_DIR$/../HXLog/src/main/java/com/hx/log/json/JSONTransferableUtils.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../HXLog/src/main/java/com/hx/log/json/JSONUtils.java" afterPath="$PROJECT_DIR$/../HXLog/src/main/java/com/hx/log/json/JSONUtils.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../HXLog/src/main/java/com/hx/log/log/LogPatternUtils.java" afterPath="$PROJECT_DIR$/../HXLog/src/main/java/com/hx/log/log/LogPatternUtils.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../HXLog/src/main/java/com/hx/log/log/Logger.java" afterPath="$PROJECT_DIR$/../HXLog/src/main/java/com/hx/log/log/Logger.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../HXLog/src/main/java/com/hx/log/str/MysqlSqlGenerator.java" afterPath="$PROJECT_DIR$/../HXLog/src/main/java/com/hx/log/str/MysqlSqlGenerator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../HXLog/src/main/java/com/hx/log/util/Constants.java" afterPath="$PROJECT_DIR$/../HXLog/src/main/java/com/hx/log/util/Constants.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../HXLog/src/main/java/com/hx/log/util/Tools.java" afterPath="$PROJECT_DIR$/../HXLog/src/main/java/com/hx/log/util/Tools.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../HXLog/src/test/java/com/hx/log/test/Test01_JsonExtractor.java" afterPath="$PROJECT_DIR$/../HXLog/src/test/java/com/hx/log/test/Test01_JsonExtractor.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../HXLog/src/test/java/com/hx/log/test/Test02ForJSONTransferableUtils.java" afterPath="$PROJECT_DIR$/../HXLog/src/test/java/com/hx/log/test/Test02ForJSONTransferableUtils.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../HXLog/src/test/java/com/hx/log/test/Test03TestTools.java" afterPath="$PROJECT_DIR$/../HXLog/src/test/java/com/hx/log/test/Test03TestTools.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../HXLog/src/test/java/com/hx/log/test/Test06SepLogPattern.java" afterPath="$PROJECT_DIR$/../HXLog/src/test/java/com/hx/log/test/Test06SepLogPattern.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../HXLog/src/test/java/com/hx/log/test/Test12LogPattern.java" afterPath="$PROJECT_DIR$/../HXLog/src/test/java/com/hx/log/test/Test12LogPattern.java" />
+    </list>
     <ignored path="HXCrawler.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/bin/" />
@@ -25,21 +68,33 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="RecurselyTaskUtils.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/hx/crawler/util/recursely_task/RecurselyTaskUtils.java">
+      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="19" column="39" lean-forward="false" selection-start-line="19" selection-start-column="39" selection-end-line="19" selection-end-column="39" />
+            <state relative-caret-position="350">
+              <caret line="44" column="18" lean-forward="false" selection-start-line="44" selection-start-column="18" selection-end-line="44" selection-end-column="18" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/pom.xml">
+      <file leaf-file-name="CrawlerUtils.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/hx/crawler/util/CrawlerUtils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="75">
+              <caret line="60" column="30" lean-forward="false" selection-start-line="60" selection-start-column="30" selection-end-line="60" selection-end-column="30" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Attribute.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/hx/crawler/parser/Attribute.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="125">
+              <caret line="9" column="7" lean-forward="false" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
               <folding />
             </state>
           </provider>
@@ -51,7 +106,7 @@
             <state relative-caret-position="375">
               <caret line="32" column="47" lean-forward="false" selection-start-line="32" selection-start-column="47" selection-end-line="32" selection-end-column="47" />
               <folding>
-                <marker date="1490754515888" expanded="true" signature="3659:4883" ph="{...}" />
+                <marker date="1492323729371" expanded="true" signature="3659:4883" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -67,6 +122,24 @@
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>net</find>
+      <find>net.s</find>
+      <find>net.sf</find>
+      <find>net.sf.JS</find>
+      <find>net.sf.JSON</find>
+      <find>net.sf.JSO</find>
+      <find>net.sf.J</find>
+      <find>net.sf.</find>
+      <find>net.sf.j</find>
+      <find>net.sf.json</find>
+    </findStrings>
+    <replaceStrings>
+      <replace />
+      <replace>com.hx.json</replace>
+    </replaceStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -78,7 +151,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/com/hx/crawler/xpathParser/AttributeHandler.java" />
         <option value="$PROJECT_DIR$/src/com/hx/crawler/xpathParser/interf/ResultJudger.java" />
         <option value="$PROJECT_DIR$/src/com/hx/crawler/xpathParser/interf/Parser.java" />
         <option value="$PROJECT_DIR$/src/com/hx/crawler/xpathParser/XPathParser.java" />
@@ -128,6 +200,7 @@
         <option value="$PROJECT_DIR$/src/com/hx/crawler/util/recursely_task/interf/RecurseCrawlCallback.java" />
         <option value="$PROJECT_DIR$/src/com/hx/crawler/util/recursely_task/RecurselyTaskUtils.java" />
         <option value="$PROJECT_DIR$/test/com/hx/crawler/test/Test03RecurlyTask.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/hx/crawler/parser/Attribute.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
       </list>
     </option>
@@ -152,6 +225,20 @@
   </component>
   <component name="MavenProjectNavigator">
     <treeState>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="HXCrawler_V2.0" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Dependencies" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$DependenciesNode" />
+        </PATH_ELEMENT>
+      </PATH>
       <PATH>
         <PATH_ELEMENT>
           <option name="myItemId" value="" />
@@ -202,10 +289,50 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="HXCrawler_V2.0" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="HXLog" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="HXCrawler_V2.0" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="HXLog" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="HXCrawler_V2.0" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="HXLog" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
           <PATH>
             <PATH_ELEMENT>
               <option name="myItemId" value="HXCrawler_V2.0" />
@@ -248,21 +375,41 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="crawler" />
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="HXCrawler_V2.0" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="HXCrawler_V2.0" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../HXLog" />
     <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="js-jscs-nodeInterpreter" value="D:\Program Files\nodejs\node.exe" />
@@ -888,6 +1035,7 @@
       <workItem from="1491215724728" duration="17000" />
       <workItem from="1491230530958" duration="110000" />
       <workItem from="1491230836201" duration="3000" />
+      <workItem from="1492323649621" duration="342000" />
     </task>
     <servers />
   </component>
@@ -924,11 +1072,10 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="42505000" />
+    <option name="totallyTimeSpent" value="42847000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1096" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -937,28 +1084,28 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32675907" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32675907" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3276414" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17963752" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18123667" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32870865" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39940387" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24963397" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32935917" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32935917" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -1000,336 +1147,51 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/hx/crawler/parser/Values.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-138">
-          <caret line="35" column="32" lean-forward="false" selection-start-line="35" selection-start-column="32" selection-end-line="35" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/hx/crawler/parser/ValuesHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="33" column="27" lean-forward="false" selection-start-line="33" selection-start-column="27" selection-end-line="33" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/hx/crawler/util/recursely_task/RecurseCrawlTaskImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="346">
-          <caret line="112" column="1" lean-forward="false" selection-start-line="112" selection-start-column="1" selection-end-line="112" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/hx/crawler/util/recursely_task/RecurseCrawlTaskFacadeImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="28" column="32" lean-forward="false" selection-start-line="28" selection-start-column="32" selection-end-line="28" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/AssertUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1144">
-          <caret line="66" column="46" lean-forward="false" selection-start-line="66" selection-start-column="46" selection-end-line="66" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/BitMap.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1252">
-          <caret line="22" column="12" lean-forward="false" selection-start-line="22" selection-start-column="7" selection-end-line="22" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/BizUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2198">
-          <caret line="280" column="11" lean-forward="false" selection-start-line="280" selection-start-column="11" selection-end-line="280" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/BufferManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3980">
-          <caret line="43" column="30" lean-forward="false" selection-start-line="43" selection-start-column="30" selection-end-line="43" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/Codec.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3366">
-          <caret line="192" column="63" lean-forward="false" selection-start-line="192" selection-start-column="63" selection-end-line="192" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/CollectionUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3520">
-          <caret line="216" column="12" lean-forward="false" selection-start-line="216" selection-start-column="12" selection-end-line="216" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/Constants.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2686">
-          <caret line="441" column="30" lean-forward="false" selection-start-line="441" selection-start-column="30" selection-end-line="441" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/ConstantsUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="130">
-          <caret line="339" column="26" lean-forward="false" selection-start-line="339" selection-start-column="26" selection-end-line="339" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/DateUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
-          <caret line="32" column="4" lean-forward="false" selection-start-line="32" selection-start-column="4" selection-end-line="32" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/DragMouseAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/Eval.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4865">
-          <caret line="270" column="8" lean-forward="false" selection-start-line="270" selection-start-column="8" selection-end-line="270" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/FileNameMatcher.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1081">
-          <caret line="272" column="41" lean-forward="false" selection-start-line="272" selection-start-column="41" selection-end-line="272" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/FileTransferable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-5">
-          <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/FileUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-5453">
-          <caret line="27" column="35" lean-forward="false" selection-start-line="27" selection-start-column="35" selection-end-line="27" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/GeometryUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1677">
-          <caret line="11" column="19" lean-forward="false" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/HuffmanUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2596">
-          <caret line="135" column="10" lean-forward="false" selection-start-line="135" selection-start-column="4" selection-end-line="135" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/IdxGenerator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="17" column="33" lean-forward="false" selection-start-line="17" selection-start-column="33" selection-end-line="17" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/IdxManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="12" column="13" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/IdxUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="70">
-          <caret line="10" column="19" lean-forward="false" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/ImageTransferable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-5">
-          <caret line="14" column="13" lean-forward="false" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/JSONExtractor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6555">
-          <caret line="354" column="25" lean-forward="false" selection-start-line="354" selection-start-column="25" selection-end-line="354" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/JSONTransferableUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-12147">
-          <caret line="141" column="40" lean-forward="false" selection-start-line="141" selection-start-column="40" selection-end-line="141" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/JSONUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3542">
-          <caret line="173" column="38" lean-forward="false" selection-start-line="173" selection-start-column="38" selection-end-line="173" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/Log.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="21" column="26" lean-forward="false" selection-start-line="21" selection-start-column="26" selection-end-line="21" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/Logger.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-22283">
-          <caret line="22" column="13" lean-forward="false" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/MapUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="9548">
-          <caret line="462" column="25" lean-forward="false" selection-start-line="462" selection-start-column="25" selection-end-line="462" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/MysqlSqlGenerator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="69">
-          <caret line="15" column="19" lean-forward="false" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/NullOutputStream.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="12" column="13" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/OsUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1122">
-          <caret line="18" column="19" lean-forward="false" selection-start-line="18" selection-start-column="19" selection-end-line="18" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/ProjectToJar.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="186" column="32" lean-forward="false" selection-start-line="186" selection-start-column="32" selection-end-line="186" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/ReflectUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="41" column="4" lean-forward="false" selection-start-line="41" selection-start-column="4" selection-end-line="41" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/StringInterceptor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1215">
-          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/StringUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8404">
-          <caret line="409" column="27" lean-forward="false" selection-start-line="409" selection-start-column="27" selection-end-line="409" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/TmpGetter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-357">
-          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/Tools.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4598">
-          <caret line="55" column="19" lean-forward="false" selection-start-line="55" selection-start-column="19" selection-end-line="55" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/TreeUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="201">
-          <caret line="114" column="15" lean-forward="false" selection-start-line="114" selection-start-column="15" selection-end-line="114" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/WordsSeprator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2260">
-          <caret line="117" column="18" lean-forward="false" selection-start-line="117" selection-start-column="18" selection-end-line="117" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/hx/crawler/util/recursely_task/interf/RecurseTaskList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="262">
-          <caret line="35" column="9" lean-forward="false" selection-start-line="35" selection-start-column="9" selection-end-line="35" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/interf/LogPattern.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="404">
-          <caret line="73" column="17" lean-forward="false" selection-start-line="73" selection-start-column="17" selection-end-line="73" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/LogPatternUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="172">
-          <caret line="40" column="33" lean-forward="false" selection-start-line="40" selection-start-column="33" selection-end-line="40" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/hx/crawler/util/recursely_task/RecurseTraskListImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="858">
-          <caret line="49" column="0" lean-forward="false" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/hx/crawler/util/CrawlerUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
-          <caret line="434" column="33" lean-forward="false" selection-start-line="434" selection-start-column="33" selection-end-line="434" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/hx/crawler/util/recursely_task/interf/RecurseCrawlCallback.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-28">
-          <caret line="9" column="17" lean-forward="false" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/hx/crawler/util/recursely_task/RecurseCrawlTaskImpl.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/hx/crawler/util/recursely_task/RecurseCrawlTaskFacadeImpl.java" />
+    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/AssertUtils.java" />
+    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/BitMap.java" />
+    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/BizUtils.java" />
+    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/BufferManager.java" />
+    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/Codec.java" />
+    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/CollectionUtils.java" />
+    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/Constants.java" />
+    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/ConstantsUtils.java" />
+    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/DateUtils.java" />
+    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/DragMouseAdapter.java" />
+    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/Eval.java" />
+    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/FileNameMatcher.java" />
+    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/FileTransferable.java" />
+    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/FileUtils.java" />
+    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/GeometryUtils.java" />
+    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/HuffmanUtils.java" />
+    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/IdxGenerator.java" />
+    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/IdxManager.java" />
+    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/IdxUtils.java" />
+    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/ImageTransferable.java" />
+    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/JSONExtractor.java" />
+    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/JSONTransferableUtils.java" />
+    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/JSONUtils.java" />
+    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/Log.java" />
+    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/Logger.java" />
+    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/MapUtils.java" />
+    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/MysqlSqlGenerator.java" />
+    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/NullOutputStream.java" />
+    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/OsUtils.java" />
+    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/ProjectToJar.java" />
+    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/ReflectUtils.java" />
+    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/StringInterceptor.java" />
+    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/StringUtils.java" />
+    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/TmpGetter.java" />
+    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/Tools.java" />
+    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/TreeUtils.java" />
+    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/WordsSeprator.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/hx/crawler/util/recursely_task/interf/RecurseTaskList.java" />
+    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/interf/LogPattern.java" />
+    <entry file="file://$PROJECT_DIR$/../HXLog/src/com/hx/log/util/LogPatternUtils.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/hx/crawler/util/recursely_task/RecurseTraskListImpl.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/hx/crawler/util/CrawlerUtils.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/hx/crawler/util/recursely_task/interf/RecurseCrawlCallback.java" />
     <entry file="file://$PROJECT_DIR$/test/com/hx/crawler/test/Test04CrawlForGZMeal_Novel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
@@ -1337,28 +1199,39 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/hx/crawler/util/recursely_task/RecurselyTaskUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="19" column="39" lean-forward="false" selection-start-line="19" selection-start-column="39" selection-end-line="19" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/hx/crawler/util/recursely_task/RecurselyTaskUtils.java" />
     <entry file="file://$PROJECT_DIR$/test/com/hx/crawler/test/Test03RecurlyTask.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
           <caret line="32" column="47" lean-forward="false" selection-start-line="32" selection-start-column="47" selection-end-line="32" selection-end-column="47" />
           <folding>
-            <marker date="1490754515888" expanded="true" signature="3659:4883" ph="{...}" />
+            <marker date="1492323729371" expanded="true" signature="3659:4883" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hx/crawler/parser/Attribute.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="125">
+          <caret line="9" column="7" lean-forward="false" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hx/crawler/util/CrawlerUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="60" column="30" lean-forward="false" selection-start-line="60" selection-start-column="30" selection-end-line="60" selection-end-column="30" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="350">
+          <caret line="44" column="18" lean-forward="false" selection-start-line="44" selection-start-column="18" selection-end-line="44" selection-end-column="18" />
           <folding />
         </state>
       </provider>
@@ -1415,7 +1288,7 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>HXCrawler</last-edited>
+          <last-edited>HXCrawler_V2.0</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -1428,7 +1301,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>Maven: commons-beanutils:commons-beanutils:1.7.0</last-edited>
+          <last-edited>Maven: com.hx:HXAttrHandler:0.0.2</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

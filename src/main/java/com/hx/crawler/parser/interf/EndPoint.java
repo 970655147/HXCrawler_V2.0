@@ -8,7 +8,7 @@ package com.hx.crawler.parser.interf;
 
 import com.hx.attr_handler.attr_handler.operation.interf.OperationAttrHandler;
 import com.hx.attr_handler.util.AttrHandlerUtils;
-import com.hx.crawler.util.HXCrawlerConstants;
+import com.hx.crawler.util.CrawlerConstants;
 import com.hx.log.util.Tools;
 
 import com.hx.json.JSONObject;
@@ -17,8 +17,8 @@ import com.hx.json.JSONObject;
 public abstract class EndPoint {
 
     // 常量
-    public static final String VALUES = HXCrawlerConstants.VALUES;
-    public static final String ATTRIBUTE = HXCrawlerConstants.ATTRIBUTE;
+    public static final String VALUES = CrawlerConstants.VALUES;
+    public static final String ATTRIBUTE = CrawlerConstants.ATTRIBUTE;
 
     // 类型, 名称, xpath
     // 注意 : 对于values来说, xpath必需存在
@@ -37,7 +37,7 @@ public abstract class EndPoint {
         this.parent = parent;
         this.xpath = xpath;
 
-        initHandler(HXCrawlerConstants.HANDLER, handlerStr);
+        initHandler(CrawlerConstants.HANDLER, handlerStr);
     }
 
     // 添加孩子, 获取, 孩子的个数
@@ -91,38 +91,38 @@ public abstract class EndPoint {
      */
     private void initHandler(String handlerType, String handlerStr) {
         if (handlerStr != null) {
-            if ((handlerStr.startsWith(HXCrawlerConstants.HANDLER_ADDED)
-                    && (HXCrawlerConstants.HANDLER.equals(handlerType) && (parent.handler == null)))
-                    || (handlerStr.startsWith(HXCrawlerConstants.HANDLER_OVERRIDE)
-                    && HXCrawlerConstants.HANDLER.equals(handlerType))
+            if ((handlerStr.startsWith(CrawlerConstants.HANDLER_ADDED)
+                    && (CrawlerConstants.HANDLER.equals(handlerType) && (parent.handler == null)))
+                    || (handlerStr.startsWith(CrawlerConstants.HANDLER_OVERRIDE)
+                    && CrawlerConstants.HANDLER.equals(handlerType))
                     ) {
-                if (HXCrawlerConstants.HANDLER.equals(handlerType)) {
-                    this.handler = AttrHandlerUtils.handlerParse(handlerStr.substring(1), HXCrawlerConstants.HANDLER);
+                if (CrawlerConstants.HANDLER.equals(handlerType)) {
+                    this.handler = AttrHandlerUtils.handlerParse(handlerStr.substring(1), CrawlerConstants.HANDLER);
                 } else {
                     Tools.assert0("have no this handlerType : " + handlerType + ", please check it !");
                 }
-            } else if (handlerStr.startsWith(HXCrawlerConstants.HANDLER_ADDED)
-                    && (HXCrawlerConstants.HANDLER.equals(handlerType) && (parent.handler != null))
+            } else if (handlerStr.startsWith(CrawlerConstants.HANDLER_ADDED)
+                    && (CrawlerConstants.HANDLER.equals(handlerType) && (parent.handler != null))
                     ) {
-                if (HXCrawlerConstants.HANDLER.equals(handlerType)) {
-                    this.handler = AttrHandlerUtils.combineHandler(parent.handler, AttrHandlerUtils.handlerParse(handlerStr.substring(1), HXCrawlerConstants.HANDLER));
+                if (CrawlerConstants.HANDLER.equals(handlerType)) {
+                    this.handler = AttrHandlerUtils.combineHandler(parent.handler, AttrHandlerUtils.handlerParse(handlerStr.substring(1), CrawlerConstants.HANDLER));
                 } else {
                     Tools.assert0("have no this handlerType : " + handlerType + ", please check it !");
                 }
             } else {
-                Tools.assert0("the handler should startWith : [" + HXCrawlerConstants.HANDLER_ADDED + ", " + HXCrawlerConstants.HANDLER_OVERRIDE + "], around : " + handlerStr);
+                Tools.assert0("the handler should startWith : [" + CrawlerConstants.HANDLER_ADDED + ", " + CrawlerConstants.HANDLER_OVERRIDE + "], around : " + handlerStr);
             }
         } else {
             // default inhert from parent
             if (parent != null) {
-                if (HXCrawlerConstants.HANDLER.equals(handlerType)) {
+                if (CrawlerConstants.HANDLER.equals(handlerType)) {
                     this.handler = parent.handler;
                 } else {
                     Tools.assert0("have no this handlerType : " + handlerType + ", please check it !");
                 }
             } else {
                 // doNothing
-                this.handler = HXCrawlerConstants.DEFAULT_OPERATION_ATTR_HANDLER;
+                this.handler = CrawlerConstants.DEFAULT_OPERATION_ATTR_HANDLER;
             }
         }
     }

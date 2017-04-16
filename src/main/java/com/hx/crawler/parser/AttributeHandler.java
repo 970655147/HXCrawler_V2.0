@@ -11,7 +11,7 @@ import java.util.List;
 
 import org.dom4j.Element;
 
-import com.hx.crawler.util.HXCrawlerConstants;
+import com.hx.crawler.util.CrawlerConstants;
 import com.hx.crawler.parser.interf.EndPoint;
 import com.hx.crawler.parser.interf.EndPointHandler;
 import com.hx.log.util.Tools;
@@ -26,7 +26,7 @@ public final class AttributeHandler extends EndPointHandler {
     public void handle(Element root, Element currentEle, String url, JSONArray res, int idx,
                        EndPoint child, JSONObject curObj) {
         // ∆’Õ®attributeΩ·µ„
-        if (!child.getName().equals(HXCrawlerConstants.ARRAY_ATTR)) {
+        if (!child.getName().equals(CrawlerConstants.ARRAY_ATTR)) {
             child.getHandler().cleanImmediateReturnFlag();
             if (child.getXPath() != null) {
                 Element ele = XPathParser.getSingleResultByXPath(root, currentEle, child.getXPath());
@@ -71,31 +71,31 @@ public final class AttributeHandler extends EndPointHandler {
      * @author 970655147 created at 2017-03-11 12:32
      */
     private static String getValueByAttribute(Element ele, String attribute, String url, int idx) {
-        if (HXCrawlerConstants.INDEX.equals(attribute)) {
+        if (CrawlerConstants.INDEX.equals(attribute)) {
             return String.valueOf(idx);
         }
         if (ele == null) {
-            return HXCrawlerConstants.NULL;
+            return CrawlerConstants.NULL;
         }
 
-        if (HXCrawlerConstants.TEXT.equals(attribute)) {
+        if (CrawlerConstants.TEXT.equals(attribute)) {
             return ele.getText();
-        } else if (HXCrawlerConstants.INNER_TEXT.equals(attribute)) {
+        } else if (CrawlerConstants.INNER_TEXT.equals(attribute)) {
             StringBuilder sb = new StringBuilder();
             getInnerText(ele, sb);
             return sb.toString();
-        } else if (HXCrawlerConstants.INNER_HTML.equals(attribute)) {
+        } else if (CrawlerConstants.INNER_HTML.equals(attribute)) {
             StringBuilder sb = new StringBuilder();
             getInnerHtml(ele, sb);
             return sb.toString();
-        } else if (HXCrawlerConstants.OUTER_HTML.equals(attribute)) {
+        } else if (CrawlerConstants.OUTER_HTML.equals(attribute)) {
             StringBuilder sb = new StringBuilder();
             getOuterHtml(ele, sb);
             return sb.toString();
         }
 
-        String res = ele.attributeValue(attribute, HXCrawlerConstants.ATTR_NOT_SUPPORT);
-        if ((!res.equals(HXCrawlerConstants.ATTR_NOT_SUPPORT)) && HXCrawlerConstants.ATTR_MAY_LINKS.contains(attribute)) {
+        String res = ele.attributeValue(attribute, CrawlerConstants.ATTR_NOT_SUPPORT);
+        if ((!res.equals(CrawlerConstants.ATTR_NOT_SUPPORT)) && CrawlerConstants.ATTR_MAY_LINKS.contains(attribute)) {
             res = Tools.transformUrl(url, res);
         }
         return res;

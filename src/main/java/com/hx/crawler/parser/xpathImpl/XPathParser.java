@@ -14,7 +14,7 @@ import com.hx.json.JSONObject;
 
 import org.dom4j.Element;
 
-import com.hx.crawler.util.HXCrawlerConstants;
+import com.hx.crawler.util.CrawlerConstants;
 import com.hx.crawler.parser.interf.EndPoint;
 import com.hx.crawler.parser.interf.Parser;
 
@@ -40,8 +40,8 @@ public final class XPathParser extends Parser {
 		boolean beFiltered = false;
 		for(int i=0; i<ep.childSize(); i++) {
 			EndPoint child = ep.getChild(i);
-			HXCrawlerConstants.ENDPOINT_TO_HANDLER.get(child.getType() ).handle(root, currentEle, url, res, idx, child, curObj);
-			if(! child.getName().equals(HXCrawlerConstants.ARRAY_ATTR) ) {
+			CrawlerConstants.ENDPOINT_TO_HANDLER.get(child.getType() ).handle(root, currentEle, url, res, idx, child, curObj);
+			if(! child.getName().equals(CrawlerConstants.ARRAY_ATTR) ) {
 				if(child.getHandler().immediateReturn() ) {
 					child.getHandler().handleImmediateReturn();
 					beFiltered = true;

@@ -21,10 +21,10 @@ import com.hx.crawler.parser.interf.EndPointHandler;
 import com.hx.log.util.Tools;
 
 // ³£Á¿
-public final class HXCrawlerConstants {
+public final class CrawlerConstants {
 	
 	// disable constructor
-	private HXCrawlerConstants() {
+	private CrawlerConstants() {
 		Tools.assert0("can't instantiate !");
 	}
 	

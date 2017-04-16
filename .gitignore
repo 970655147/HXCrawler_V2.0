@@ -1,5 +1,6 @@
 # some folder to ignore
 .idea/
+.settings/
 target/
 bin/
 out/
@@ -8,5 +9,6 @@ out/
 *.iml
 *.class
 *.jar
-
+.classpath
+.project
 

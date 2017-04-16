@@ -15,7 +15,7 @@ import java.util.LinkedList;
 import com.hx.json.JSONArray;
 import com.hx.json.JSONObject;
 
-import com.hx.crawler.util.HXCrawlerConstants;
+import com.hx.crawler.util.CrawlerConstants;
 import com.hx.crawler.parser.interf.EndPoint;
 import com.hx.crawler.parser.interf.IndexString;
 
@@ -63,7 +63,7 @@ public final class XpathIndexString extends IndexString {
 		stack = new LinkedList<>();
 		valuesStack = new LinkedList<>();
 		stack.push(idxArr.iterator());
-		root = new Values(HXCrawlerConstants.ROOT, null, null, null);
+		root = new Values(CrawlerConstants.ROOT, null, null, null);
 		valuesStack.push(root);
 		
 		parse();
@@ -93,17 +93,17 @@ public final class XpathIndexString extends IndexString {
 				JSONObject current = (JSONObject) it.next();
 				if(current.containsKey(EndPoint.VALUES) ) {
 					JSONArray values = current.getJSONArray(EndPoint.VALUES);
-					res = new Values(current.getString(HXCrawlerConstants.NAME), current.getString(HXCrawlerConstants.XPATH),
-									current.optString(HXCrawlerConstants.HANDLER, null), valuesStack.peek() 
+					res = new Values(current.getString(CrawlerConstants.NAME), current.getString(CrawlerConstants.XPATH),
+									current.optString(CrawlerConstants.HANDLER, null), valuesStack.peek()
 									);
 					stack.push(values.iterator() );
 					valuesStack.peek().addChild(res);
 					valuesStack.push(res);
 					break ;
 				} else if(current.containsKey(EndPoint.ATTRIBUTE) ) {
-					res = new Attribute(current.optString(HXCrawlerConstants.NAME, HXCrawlerConstants.ARRAY_ATTR),
-										current.optString(HXCrawlerConstants.XPATH, null), current.getString(EndPoint.ATTRIBUTE), 
-										current.optString(HXCrawlerConstants.HANDLER, null), valuesStack.peek() 
+					res = new Attribute(current.optString(CrawlerConstants.NAME, CrawlerConstants.ARRAY_ATTR),
+										current.optString(CrawlerConstants.XPATH, null), current.getString(EndPoint.ATTRIBUTE),
+										current.optString(CrawlerConstants.HANDLER, null), valuesStack.peek()
 										);
 					valuesStack.peek().addChild(res);
 					break ;
