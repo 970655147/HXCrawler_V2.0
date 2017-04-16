@@ -9,7 +9,7 @@ package com.hx.crawler.parser;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.sf.json.JSONObject;
+import com.hx.json.JSONObject;
 
 import com.hx.crawler.parser.interf.EndPoint;
 

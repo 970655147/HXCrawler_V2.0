@@ -11,7 +11,7 @@ import com.hx.attr_handler.util.AttrHandlerUtils;
 import com.hx.crawler.util.HXCrawlerConstants;
 import com.hx.log.util.Tools;
 
-import net.sf.json.JSONObject;
+import com.hx.json.JSONObject;
 
 // 一个EndPint[终端结点 : "values" & "attribute"]
 public abstract class EndPoint {

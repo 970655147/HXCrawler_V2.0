@@ -9,8 +9,8 @@ package com.hx.crawler.parser;
 import com.hx.crawler.parser.xpathImpl.XPathParser;
 import java.util.List;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
+import com.hx.json.JSONArray;
+import com.hx.json.JSONObject;
 
 import org.dom4j.Element;
 

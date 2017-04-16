@@ -13,8 +13,8 @@ import com.hx.crawler.util.CrawlerUtils;
 import com.hx.log.json.JSONExtractor;
 import com.hx.log.util.Constants;
 import com.hx.log.util.Tools;
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
+import com.hx.json.JSONArray;
+import com.hx.json.JSONObject;
 import org.apache.http.HttpResponse;
 
 import static com.hx.log.util.Log.err;
@@ -249,7 +249,7 @@ public final class PipelineTaskUtils {
      * @param scriptParameter 当前stage所需要的参数
      * @param crawlerConfig   发送请求所需要的config
      * @param config          当前stage的配置信息
-     * @return net.sf.json.JSONArray
+     * @return com.hx.json.JSONArray
      * @throws
      * @author 970655147 created at 2017-03-11 14:16
      */

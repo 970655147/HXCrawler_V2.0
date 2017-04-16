@@ -12,8 +12,8 @@ import java.util.Deque;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
+import com.hx.json.JSONArray;
+import com.hx.json.JSONObject;
 
 import com.hx.crawler.util.HXCrawlerConstants;
 import com.hx.crawler.parser.interf.EndPoint;

@@ -16,8 +16,8 @@ import com.hx.crawler.util.recursely_task.interf.RecurseCrawlTaskFacade;
 import com.hx.crawler.util.recursely_task.interf.RecurseTaskList;
 import com.hx.log.util.Tools;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
+import com.hx.json.JSONArray;
+import com.hx.json.JSONObject;
 
 /**
  * file name : Test03RecurlyTask.java

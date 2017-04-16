@@ -16,8 +16,8 @@ import com.hx.crawler.parser.interf.EndPoint;
 import com.hx.crawler.parser.interf.EndPointHandler;
 import com.hx.log.util.Tools;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
+import com.hx.json.JSONArray;
+import com.hx.json.JSONObject;
 
 // attribute 结点的相关业务处理
 public final class AttributeHandler extends EndPointHandler {

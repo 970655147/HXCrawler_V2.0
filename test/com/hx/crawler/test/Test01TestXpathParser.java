@@ -12,7 +12,7 @@ import org.dom4j.io.SAXReader;
 import com.hx.crawler.util.CrawlerUtils;
 import com.hx.log.util.Log;
 
-import net.sf.json.JSONArray;
+import com.hx.json.JSONArray;
 
 // Main 
 public class Test01TestXpathParser {

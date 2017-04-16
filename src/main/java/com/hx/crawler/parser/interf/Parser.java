@@ -8,7 +8,7 @@ package com.hx.crawler.parser.interf;
 
 
 import java.io.StringReader;
-import net.sf.json.JSONArray;
+import com.hx.json.JSONArray;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
@@ -21,7 +21,7 @@ public abstract class Parser {
      * @param root   文档的根节点
      * @param url    文档对应的url
      * @param idxStr xpath索引字符串
-     * @return net.sf.json.JSONArray
+     * @return com.hx.json.JSONArray
      * @throws
      * @author 970655147 created at 2017-03-11 11:59
      */
@@ -33,7 +33,7 @@ public abstract class Parser {
      * @param html   当前文档的内容
      * @param url    文档对应的url
      * @param idxStr xpath索引字符串
-     * @return net.sf.json.JSONArray
+     * @return com.hx.json.JSONArray
      * @throws
      * @author 970655147 created at 2017-03-11 11:59
      */

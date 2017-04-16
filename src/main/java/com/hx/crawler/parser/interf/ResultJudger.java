@@ -6,7 +6,7 @@
 
 package com.hx.crawler.parser.interf;
 
-import net.sf.json.JSONArray;
+import com.hx.json.JSONArray;
 
 // 判断给定的结果是否合法
 public interface ResultJudger {

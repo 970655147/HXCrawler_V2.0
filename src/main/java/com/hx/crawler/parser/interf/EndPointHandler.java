@@ -6,8 +6,8 @@
 
 package com.hx.crawler.parser.interf;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
+import com.hx.json.JSONArray;
+import com.hx.json.JSONObject;
 
 import org.dom4j.Element;
 

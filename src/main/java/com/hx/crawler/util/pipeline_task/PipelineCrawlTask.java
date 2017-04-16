@@ -3,7 +3,7 @@ package com.hx.crawler.util.pipeline_task;
 import com.hx.crawler.crawler.HtmlCrawlerConfig;
 import com.hx.crawler.crawler.SingleUrlTask;
 import com.hx.log.util.Tools;
-import net.sf.json.JSONArray;
+import com.hx.json.JSONArray;
 
 import static com.hx.log.util.Log.err;
 

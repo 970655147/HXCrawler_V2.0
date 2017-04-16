@@ -10,7 +10,7 @@ import com.hx.crawler.util.CrawlerUtils;
 import com.hx.crawler.util.pipeline_task.PipelineTaskUtils;
 import com.hx.log.util.Tools;
 
-import net.sf.json.JSONArray;
+import com.hx.json.JSONArray;
 
 public class Test04CrawlForGZMeal_Novel {
 
