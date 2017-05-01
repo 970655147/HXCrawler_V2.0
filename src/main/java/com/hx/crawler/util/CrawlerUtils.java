@@ -20,6 +20,7 @@ import com.hx.crawler.util.recursely_task.RecurselyTaskUtils;
 import com.hx.crawler.util.recursely_task.interf.RecurseCrawlCallback;
 import com.hx.crawler.util.recursely_task.interf.RecurseCrawlTask;
 import com.hx.crawler.util.recursely_task.interf.RecurseCrawlTaskFacade;
+import com.hx.log.log.LogPatternConstants;
 import com.hx.log.log.LogPatternUtils;
 import com.hx.log.log.log_pattern.LogPatternChain;
 import com.hx.log.str.WordsSeprator;
@@ -281,17 +282,17 @@ public final class CrawlerUtils {
 
     // ------------ 日志相关 --------------------
     // 相关的logPattern
-    public static LogPatternChain taskBeforeLogPatternChain = LogPatternUtils.initLogPattern(Constants.optString(Constants._TASK_BEFORE_LOG_PATTERN));
-    public static LogPatternChain taskAfterLogPatternChain = LogPatternUtils.initLogPattern(Constants.optString(Constants._TASK_AFTER_LOG_PATTERN));
-    public static LogPatternChain taskExceptionLogPatternChain = LogPatternUtils.initLogPattern(Constants.optString(Constants._TASK_EXCEPTION_LOG_PATTERN));
+    public static LogPatternChain taskBeforeLogPatternChain = LogPatternUtils.initLogPattern(Constants.optString(ToolsConstants._TASK_BEFORE_LOG_PATTERN));
+    public static LogPatternChain taskAfterLogPatternChain = LogPatternUtils.initLogPattern(Constants.optString(ToolsConstants._TASK_AFTER_LOG_PATTERN));
+    public static LogPatternChain taskExceptionLogPatternChain = LogPatternUtils.initLogPattern(Constants.optString(ToolsConstants._TASK_EXCEPTION_LOG_PATTERN));
 
     // 打印任务的日志信息
     public static void logBeforeTask(ScriptParameter<?, ?, ?, ?, ?, ?> singleUrlTask, boolean debugEnable) {
         Tools.assert0(singleUrlTask != null, "'singleUrlTask' can't be null ");
         if (debugEnable) {
             String info = LogPatternUtils.formatLogInfo(taskBeforeLogPatternChain, new JSONObject()
-                    .element(Constants.LOG_PATTERN_URL, singleUrlTask.getUrl()).element(Constants.LOG_PATTERN_TASK_NAME, CrawlerUtils.getTaskName(singleUrlTask))
-                    .element(Constants.LOG_PATTERN_MODE, Constants.LOG_MODES[Constants.OUT_IDX])
+                    .element(LogPatternConstants.LOG_PATTERN_URL, singleUrlTask.getUrl()).element(LogPatternConstants.LOG_PATTERN_TASK_NAME, CrawlerUtils.getTaskName(singleUrlTask))
+                    .element(LogPatternConstants.LOG_PATTERN_MODE, Constants.LOG_MODES[Constants.OUT_IDX])
             );
             Log.log(info);
         }
@@ -305,8 +306,8 @@ public final class CrawlerUtils {
         Tools.assert0(singleUrlTask != null, "'singleUrlTask' can't be null ");
         if (debugEnable) {
             String info = LogPatternUtils.formatLogInfo(taskAfterLogPatternChain, new JSONObject()
-                    .element(Constants.LOG_PATTERN_RESULT, fetchedResult).element(Constants.LOG_PATTERN_TASK_NAME, CrawlerUtils.getTaskName(singleUrlTask))
-                    .element(Constants.LOG_PATTERN_SPENT, spent).element(Constants.LOG_PATTERN_MODE, Constants.LOG_MODES[Constants.OUT_IDX])
+                    .element(LogPatternConstants.LOG_PATTERN_RESULT, fetchedResult).element(LogPatternConstants.LOG_PATTERN_TASK_NAME, CrawlerUtils.getTaskName(singleUrlTask))
+                    .element(LogPatternConstants.LOG_PATTERN_SPENT, spent).element(LogPatternConstants.LOG_PATTERN_MODE, Constants.LOG_MODES[Constants.OUT_IDX])
             );
             Log.log(info);
         }
@@ -319,9 +320,9 @@ public final class CrawlerUtils {
     public static void logErrorMsg(ScriptParameter<?, ?, ?, ?, ?, ?> singleUrlTask, Exception e) {
         Tools.assert0(singleUrlTask != null, "'singleUrlTask' can't be null ");
         String info = LogPatternUtils.formatLogInfo(taskExceptionLogPatternChain, new JSONObject()
-                .element(Constants.LOG_PATTERN_EXCEPTION, e.getClass().getName() + " : " + e.getMessage())
-                .element(Constants.LOG_PATTERN_TASK_NAME, CrawlerUtils.getTaskName(singleUrlTask))
-                .element(Constants.LOG_PATTERN_URL, singleUrlTask.getUrl()).element(Constants.LOG_PATTERN_MODE, Constants.LOG_MODES[Constants.ERR_IDX])
+                .element(LogPatternConstants.LOG_PATTERN_EXCEPTION, e.getClass().getName() + " : " + e.getMessage())
+                .element(LogPatternConstants.LOG_PATTERN_TASK_NAME, CrawlerUtils.getTaskName(singleUrlTask))
+                .element(LogPatternConstants.LOG_PATTERN_URL, singleUrlTask.getUrl()).element(LogPatternConstants.LOG_PATTERN_MODE, Constants.LOG_MODES[Constants.ERR_IDX])
         );
         Log.err(info);
     }
