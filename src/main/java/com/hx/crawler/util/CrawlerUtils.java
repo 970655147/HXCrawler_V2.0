@@ -23,7 +23,7 @@ import com.hx.crawler.util.recursely_task.interf.RecurseCrawlTaskFacade;
 import com.hx.log.log.LogPatternConstants;
 import com.hx.log.log.LogPatternUtils;
 import com.hx.log.log.log_pattern.LogPatternChain;
-import com.hx.log.str.WordsSeprator;
+import com.hx.common.str.WordsSeprator;
 import com.hx.log.util.*;
 import com.hx.json.JSONArray;
 import com.hx.json.JSONObject;
