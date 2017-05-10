@@ -28,9 +28,7 @@ import com.hx.log.util.*;
 import com.hx.json.JSONArray;
 import com.hx.json.JSONObject;
 import org.apache.commons.lang.StringEscapeUtils;
-import org.apache.http.Header;
 import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
 import org.ccil.cowan.tagsoup.Parser;
 import org.ccil.cowan.tagsoup.XMLWriter;
 import org.xml.sax.InputSource;
@@ -178,10 +176,9 @@ public final class CrawlerUtils {
      * @param url     需要爬取的url
      * @param param   发送请求所需要的参数
      * @return com.hx.crawler.crawler.SingleUrlTask
-     * @throws
      * @author 970655147 created at 2017-03-11 13:57
      */
-    public static SingleUrlTask newSingleUrlTask(Crawler<HttpResponse, Header, String, NameValuePair, String, String> crawler,
+    public static SingleUrlTask newSingleUrlTask(Crawler<HttpResponse, String, String, String> crawler,
                                                  String url, Map<String, Object> param) {
         SingleUrlTask res = new SingleUrlTask();
         res.setCrawler(crawler);
@@ -198,14 +195,14 @@ public final class CrawlerUtils {
     // 可以改写为JSONArray.toString() 实现 [思路来自'duncen'[newEgg同事] ]
     public static String getRealXPathByXPathObj(String xpath) {
         Tools.assert0(xpath != null, "'xpath' can't be null ");
-        return new JSONArray().element(xpath).toString();
+        return new JSONArray().element(JSONObject.fromObject(xpath)).toString();
     }
 
     public static String getRealXPathByXPathObj(String... xpathes) {
         Tools.assert0(xpathes != null, "'xpathes' can't be null ");
         JSONArray res = new JSONArray();
         for (String xpath : xpathes) {
-            res.add(xpath);
+            res.add(JSONObject.fromObject(xpath) );
         }
 
         return res.toString();
@@ -226,7 +223,6 @@ public final class CrawlerUtils {
      * @param isStaticMethod   给定的方法是否是静态方法
      * @param methodParamTypes 给定的方法的参数类型列表
      * @return void
-     * @throws
      * @author 970655147 created at 2017-03-11 13:56
      */
     public static void parse(String className, String url, Map<String, Object> params, String methodName,
@@ -275,7 +271,7 @@ public final class CrawlerUtils {
     }
 
     // 获取taskName
-    public static String getTaskName(ScriptParameter<?, ?, ?, ?, ?, ?> singleUrlTask) {
+    public static String getTaskName(ScriptParameter<?, ?, ?, ?> singleUrlTask) {
         Tools.assert0(singleUrlTask != null, "'singleUrlTask' can't be null ");
         return "crawl " + singleUrlTask.getParam().get(Tools.TASK) + " from " + singleUrlTask.getParam().get(Tools.SITE);
     }
@@ -287,7 +283,7 @@ public final class CrawlerUtils {
     public static LogPatternChain taskExceptionLogPatternChain = LogPatternUtils.initLogPattern(Constants.optString(ToolsConstants._TASK_EXCEPTION_LOG_PATTERN));
 
     // 打印任务的日志信息
-    public static void logBeforeTask(ScriptParameter<?, ?, ?, ?, ?, ?> singleUrlTask, boolean debugEnable) {
+    public static void logBeforeTask(ScriptParameter<?, ?, ?, ?> singleUrlTask, boolean debugEnable) {
         Tools.assert0(singleUrlTask != null, "'singleUrlTask' can't be null ");
         if (debugEnable) {
             String info = LogPatternUtils.formatLogInfo(taskBeforeLogPatternChain, new JSONObject()
@@ -298,11 +294,11 @@ public final class CrawlerUtils {
         }
     }
 
-    public static void logBeforeTask(ScriptParameter<?, ?, ?, ?, ?, ?> singleUrlTask, String debugEnable) {
+    public static void logBeforeTask(ScriptParameter<?, ?, ?, ?> singleUrlTask, String debugEnable) {
         logBeforeTask(singleUrlTask, Boolean.parseBoolean(debugEnable));
     }
 
-    public static void logAfterTask(ScriptParameter<?, ?, ?, ?, ?, ?> singleUrlTask, String fetchedResult, String spent, boolean debugEnable) {
+    public static void logAfterTask(ScriptParameter<?, ?, ?, ?> singleUrlTask, String fetchedResult, String spent, boolean debugEnable) {
         Tools.assert0(singleUrlTask != null, "'singleUrlTask' can't be null ");
         if (debugEnable) {
             String info = LogPatternUtils.formatLogInfo(taskAfterLogPatternChain, new JSONObject()
@@ -313,11 +309,11 @@ public final class CrawlerUtils {
         }
     }
 
-    public static void logAfterTask(ScriptParameter<?, ?, ?, ?, ?, ?> singleUrlTask, String fetchedResult, String spent, String debugEnable) {
+    public static void logAfterTask(ScriptParameter<?, ?, ?, ?> singleUrlTask, String fetchedResult, String spent, String debugEnable) {
         logAfterTask(singleUrlTask, fetchedResult, spent, Boolean.parseBoolean(debugEnable));
     }
 
-    public static void logErrorMsg(ScriptParameter<?, ?, ?, ?, ?, ?> singleUrlTask, Exception e) {
+    public static void logErrorMsg(ScriptParameter<?, ?, ?, ?> singleUrlTask, Exception e) {
         Tools.assert0(singleUrlTask != null, "'singleUrlTask' can't be null ");
         String info = LogPatternUtils.formatLogInfo(taskExceptionLogPatternChain, new JSONObject()
                 .element(LogPatternConstants.LOG_PATTERN_EXCEPTION, e.getClass().getName() + " : " + e.getMessage())
@@ -425,7 +421,6 @@ public final class CrawlerUtils {
      * @param callback 拿到page之后处理的回调
      * @param isBfs    bfs or dfs
      * @return void
-     * @throws
      * @author 970655147 created at 2017-03-10 19:03
      */
     public static void recurselyTask(String seedUrl, HttpMethod method, CrawlerConfig config, RecurseCrawlCallback callback, boolean isAsync, boolean isBfs) {

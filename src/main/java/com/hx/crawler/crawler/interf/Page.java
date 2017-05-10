@@ -6,17 +6,107 @@
 
 package com.hx.crawler.crawler.interf;
 
+import java.io.InputStream;
 import java.util.Map;
 
-// Page
+/**
+ * 接收响应的Page
+ *
+ * @author Jerry.X.He <970655147@qq.com>
+ * @version 1.0
+ * @date 5/10/2017 7:19 PM
+ */
 public interface Page<ResponseType> {
 
-	// setter & getter
-	public void setCharset(String charset);
-	public ResponseType getResponse();
-	public String getCharset();
-	public Map<String, String> getCookies();
-	// 获取Page的内容
-	public String getContent();
+
+    /**
+     * 配置给定的响应的字符集
+     *
+     * @return void
+     * @author Jerry.X.He
+     * @date 5/10/2017 7:17 PM
+     * @since 1.0
+     */
+    void setCharset(String charset);
+
+    /**
+     * 获取给定的响应
+     *
+     * @return java.lang.String
+     * @author Jerry.X.He
+     * @date 5/10/2017 7:17 PM
+     * @since 1.0
+     */
+    ResponseType getResponse();
+
+    /**
+     * 获取给定的响应的字符集
+     *
+     * @return java.lang.String
+     * @author Jerry.X.He
+     * @date 5/10/2017 7:17 PM
+     * @since 1.0
+     */
+    String getCharset();
+
+    /**
+     * 获取给定的cookie
+     *
+     * @return java.lang.String
+     * @author Jerry.X.He
+     * @date 5/10/2017 7:17 PM
+     * @since 1.0
+     */
+    Map<String, String> getCookies();
+
+    /**
+     * 获取所有的响应头
+     *
+     * @return java.lang.String
+     * @author Jerry.X.He
+     * @date 5/10/2017 7:17 PM
+     * @since 1.0
+     */
+    Map<String, String> getHeaders();
+
+    /**
+     * 获取给定的cookie
+     *
+     * @return java.lang.String
+     * @author Jerry.X.He
+     * @date 5/10/2017 7:17 PM
+     * @since 1.0
+     */
+    String getCookie(String key);
+
+    /**
+     * 获取给定的响应头
+     *
+     * @return java.lang.String
+     * @author Jerry.X.He
+     * @date 5/10/2017 7:17 PM
+     * @since 1.0
+     */
+    String getHeader(String key);
+
+    /**
+     * 获取响应结果的内容
+     *
+     * @return the String of response
+     * @author Jerry.X.He
+     * @date 5/10/2017 7:17 PM
+     * @since 1.0
+     */
+    String getContent();
+
+    /**
+     * 获取响应结果的输入流
+     *
+     * @return the String of response
+     * @author Jerry.X.He
+     * @date 5/10/2017 7:17 PM
+     * @since 1.0
+     */
+    InputStream getInputStream();
 
 }

@@ -34,7 +34,6 @@ public abstract class Parser {
      * @param url    文档对应的url
      * @param idxStr xpath索引字符串
      * @return com.hx.json.JSONArray
-     * @throws
      * @author 970655147 created at 2017-03-11 11:59
      */
     public JSONArray parse(String html, String url, String idxStr) throws Exception {

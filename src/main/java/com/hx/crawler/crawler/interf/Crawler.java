@@ -6,49 +6,127 @@
 
 package com.hx.crawler.crawler.interf;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.entity.ContentType;
+
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.apache.http.Header;
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.entity.ContentType;
+/**
+ * Cralwer 规范
+ *
+ * @author Jerry.X.He <970655147@qq.com>
+ * @version 1.0
+ * @date 5/10/2017 7:41 PM
+ */
+public abstract class Crawler<ResponseType, HeaderValType, DataValType, CookieValType> {
 
-// Cralwer 规范
-public abstract class Crawler<ResponseType, HeaderType, HeaderValType, DataType, DataValType, CookieValType> {
+    /**
+     * 获取当前Crawler组合的脚本参数[Context]对象
+     */
+    protected ScriptParameter<ResponseType, HeaderValType, DataValType, CookieValType> scriptParameter;
 
-	// url参数
-	protected ScriptParameter<ResponseType, HeaderType, HeaderValType, DataType, DataValType, CookieValType> scriptParameter;
-	
-	// getPage
-	public abstract Page<ResponseType> getPage(String url) throws IOException;
-	public abstract Page<ResponseType> getPage(String url, CrawlerConfig<HeaderType, HeaderValType, DataType, DataValType, CookieValType> config) throws IOException;
-	
-	// postPage
-	public abstract Page<ResponseType> postPage(String url) throws IOException;
-	public abstract Page<ResponseType> postPage(String url, CrawlerConfig<HeaderType, HeaderValType, DataType, DataValType, CookieValType> config) throws IOException;
-	public abstract Page<ResponseType> postPage(String url, CrawlerConfig<HeaderType, HeaderValType, DataType, DataValType, CookieValType> config, String bodyData, ContentType contentType) throws IOException;
-	// add at 2016.06.02
-	public abstract Page<HttpResponse> postPage(String url, CrawlerConfig<Header, String, NameValuePair, String, String> config, InputStream inputStream, ContentType contentType) throws IOException;
+    /**
+     * 向目标url发送get请求
+     *
+     * @param url    目标url
+     * @param config 配置
+     * @return com.hx.crawler.crawler.interf.Page
+     * @author Jerry.X.He
+     * @date 5/10/2017 7:41 PM
+     * @since 1.0
+     */
+    public abstract Page<ResponseType> getPage(String url, CrawlerConfig<HeaderValType, DataValType, CookieValType> config) throws IOException;
 
-	// putPage
-	// add at 2017.03.04
-	public abstract Page<ResponseType> putPage(String url) throws IOException;
-	public abstract Page<ResponseType> putPage(String url, CrawlerConfig<HeaderType, HeaderValType, DataType, DataValType, CookieValType> config) throws IOException;
-	
-	// deletePage
-	// add at 2017.03.04
-	public abstract Page<ResponseType> deletePage(String url) throws IOException;
-	public abstract Page<ResponseType> deletePage(String url, CrawlerConfig<HeaderType, HeaderValType, DataType, DataValType, CookieValType> config) throws IOException;
-	
-	// setter & getter
-	public ScriptParameter<ResponseType, HeaderType, HeaderValType, DataType, DataValType, CookieValType> getScriptParameter() {
-		return scriptParameter;
-	}
-	public void setScriptParameter(ScriptParameter<ResponseType, HeaderType, HeaderValType, DataType, DataValType, CookieValType> scriptParameter) {
-		this.scriptParameter = scriptParameter;
-	}
-	
-	// ..
-	
+    public abstract Page<ResponseType> getPage(String url) throws IOException;
+
+    /**
+     * 向目标url发送post请求
+     *
+     * @param url         目标url
+     * @param config      配置
+     * @param bodyData    请求体中的数据
+     * @param contentType contentType
+     * @return com.hx.crawler.crawler.interf.Page
+     * @author Jerry.X.He
+     * @date 5/10/2017 7:41 PM
+     * @since 1.0
+     */
+    public abstract Page<ResponseType> postPage(String url, CrawlerConfig<HeaderValType, DataValType, CookieValType> config, String bodyData, ContentType contentType) throws IOException;
+
+    /**
+     * 向目标url发送post请求           -- add at 2016.06.02
+     *
+     * @param url         目标url
+     * @param config      配置
+     * @param inputStream 请求体中的流
+     * @param contentType contentType
+     * @return com.hx.crawler.crawler.interf.Page
+     * @author Jerry.X.He
+     * @date 5/10/2017 7:41 PM
+     * @since 1.0
+     */
+    public abstract Page<HttpResponse> postPage(String url, CrawlerConfig<String, String, String> config, InputStream inputStream, ContentType contentType) throws IOException;
+
+    public abstract Page<ResponseType> postPage(String url, CrawlerConfig<HeaderValType, DataValType, CookieValType> config) throws IOException;
+
+    public abstract Page<ResponseType> postPage(String url) throws IOException;
+
+    /**
+     * 向目标url发送put请求            -- add at 2017.03.04
+     *
+     * @param url    目标url
+     * @param config 配置
+     * @return com.hx.crawler.crawler.interf.Page
+     * @author Jerry.X.He
+     * @date 5/10/2017 7:41 PM
+     * @since 1.0
+     */
+    public abstract Page<ResponseType> putPage(String url, CrawlerConfig<HeaderValType, DataValType, CookieValType> config) throws IOException;
+
+    public abstract Page<ResponseType> putPage(String url) throws IOException;
+
+    /**
+     * 向目标url发送delete请求            -- add at 2017.03.04
+     *
+     * @param url    目标url
+     * @param config 配置
+     * @return com.hx.crawler.crawler.interf.Page
+     * @author Jerry.X.He
+     * @date 5/10/2017 7:41 PM
+     * @since 1.0
+     */
+    public abstract Page<ResponseType> deletePage(String url, CrawlerConfig<HeaderValType, DataValType, CookieValType> config) throws IOException;
+
+    public abstract Page<ResponseType> deletePage(String url) throws IOException;
+
+    /**
+     * 获取scriptParameter
+     *
+     * @return com.hx.crawler.crawler.interf.ScriptParameter<ResponseType,HeaderValType,DataValType,CookieValType>
+     * @author Jerry.X.He
+     * @date 5/10/2017 7:45 PM
+     * @since 1.0
+     */
+    public ScriptParameter<ResponseType, HeaderValType, DataValType, CookieValType> getScriptParameter() {
+        return scriptParameter;
+    }
+
+    /**
+     * 配置scriptParameter
+     *
+     * @param scriptParameter 给定的scriptParameter
+     * @return void
+     * @author Jerry.X.He
+     * @date 5/10/2017 7:45 PM
+     * @since 1.0
+     */
+    public void setScriptParameter(ScriptParameter<ResponseType, HeaderValType, DataValType, CookieValType> scriptParameter) {
+        this.scriptParameter = scriptParameter;
+    }
+
+
+    // ----------------- 待续 -----------------------
+
+
 }

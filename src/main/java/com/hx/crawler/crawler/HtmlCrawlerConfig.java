@@ -6,46 +6,30 @@
 
 package com.hx.crawler.crawler;
 
-import java.util.ArrayList;
+import com.hx.crawler.crawler.interf.CrawlerConfig;
+import com.hx.log.util.Tools;
+import org.apache.http.HttpHost;
+
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.apache.http.Header;
-import org.apache.http.HttpHost;
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicHeader;
-import org.apache.http.message.BasicNameValuePair;
+/**
+ * HtmlCrawler 关联的一个 CrawlerConfig 的简单实现
+ *
+ * @author Jerry.X.He <970655147@qq.com>
+ * @version 1.0
+ * @date 5/10/2017 7:53 PM
+ */
+public class HtmlCrawlerConfig implements CrawlerConfig<String, String, String> {
 
-import com.hx.crawler.crawler.interf.CrawlerConfig;
-import com.hx.log.util.Tools;
-
-// CrawlerConfig
-public class HtmlCrawlerConfig implements CrawlerConfig<Header, String, NameValuePair, String, String> {
-
-    // 获取get, post 的默认的CrawlerConfig方法
-    public static HtmlCrawlerConfig get() {
-        HtmlCrawlerConfig config = new HtmlCrawlerConfig();
-        return config;
-    }
-
-    public static HtmlCrawlerConfig post() {
-        HtmlCrawlerConfig config = new HtmlCrawlerConfig();
-        config.addHeader(Tools.CONTENT_TYPE, Tools.APPLICATION_URL_ENCODED);
-        return config;
-    }
-
-    // 请求头信息, cookies信息, postData信息
-    // 超时配置
-    private List<Header> headers;
-    private Map<String, String> cookies;
-    private List<NameValuePair> data;
-    private HttpHost proxy;
-    private int timeout;
-
-    // 常量
+    /**
+     * 默认的超时时间
+     */
     private static int DEFAULT_TIMEOUT = 10 * 1000;
+    /**
+     * 默认的请求头
+     */
     private static Map<String, String> DEFAULT_HEADERS = new HashMap<>();
 
     static {
@@ -56,15 +40,67 @@ public class HtmlCrawlerConfig implements CrawlerConfig<Header, String, NameValu
 //		DEFAULT_HEADERS.put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
     }
 
-    // 初始化 添加默认的请求头
+    /**
+     * 获取get请求的默认的CrawlerConfig方法
+     *
+     * @return com.hx.crawler.crawler.HtmlCrawlerConfig
+     * @author Jerry.X.He
+     * @date 5/10/2017 7:54 PM
+     * @since 1.0
+     */
+    public static HtmlCrawlerConfig get() {
+        HtmlCrawlerConfig config = new HtmlCrawlerConfig();
+        return config;
+    }
+
+    /**
+     * 获取post请求的默认的CrawlerConfig方法
+     *
+     * @return com.hx.crawler.crawler.HtmlCrawlerConfig
+     * @author Jerry.X.He
+     * @date 5/10/2017 7:54 PM
+     * @since 1.0
+     */
+    public static HtmlCrawlerConfig post() {
+        HtmlCrawlerConfig config = new HtmlCrawlerConfig();
+        config.addHeader(Tools.CONTENT_TYPE, Tools.APPLICATION_URL_ENCODED);
+        return config;
+    }
+
+    /**
+     * 请求头信息
+     */
+    private Map<String, String> headers;
+    /**
+     * cookies 信息
+     */
+    private Map<String, String> cookies;
+    /**
+     * 额外的数据信息
+     */
+    private Map<String, String> data;
+    /**
+     * 代理信息
+     */
+    private HttpHost proxy;
+    /**
+     * 超时配置
+     */
+    private int timeout;
+
+    /**
+     * 初始化 添加默认的请求头
+     *
+     * @since 1.0
+     */
     public HtmlCrawlerConfig() {
-        headers = new ArrayList<>();
+        headers = new HashMap<>();
         cookies = new HashMap<>();
-        data = new ArrayList<>();
+        data = new HashMap<>();
         timeout = DEFAULT_TIMEOUT;
 
         for (Entry<String, String> header : DEFAULT_HEADERS.entrySet()) {
-            headers.add(new BasicHeader(header.getKey(), header.getValue()));
+            headers.put(header.getKey(), header.getValue());
         }
     }
 
@@ -76,20 +112,23 @@ public class HtmlCrawlerConfig implements CrawlerConfig<Header, String, NameValu
         this.timeout = config.getTimeout();
     }
 
-    // getter & setter
     @Override
-    public void setHeaders(List<Header> headers) {
-        this.headers = headers;
+    public Map<String, String> getHeaders() {
+        return headers;
+    }
+
+    @Override
+    public Map<String, String> getData() {
+        return data;
     }
 
     @Override
     public void setHeaders(Map<String, String> headers) {
+        this.headers.clear();
         if (headers == null) {
-            this.headers = null;
             return;
         }
 
-        this.headers.clear();
         for (Map.Entry<String, String> entry : headers.entrySet()) {
             addHeader(entry.getKey(), entry.getValue());
         }
@@ -101,18 +140,12 @@ public class HtmlCrawlerConfig implements CrawlerConfig<Header, String, NameValu
     }
 
     @Override
-    public void setData(List<NameValuePair> data) {
-        this.data = data;
-    }
-
-    @Override
     public void setData(Map<String, String> data) {
+        this.data.clear();
         if (data == null) {
-            this.data = null;
             return;
         }
 
-        this.data.clear();
         for (Map.Entry<String, String> entry : data.entrySet()) {
             addData(entry.getKey(), entry.getValue());
         }
@@ -129,18 +162,8 @@ public class HtmlCrawlerConfig implements CrawlerConfig<Header, String, NameValu
     }
 
     @Override
-    public List<Header> getHeaders() {
-        return headers;
-    }
-
-    @Override
     public Map<String, String> getCookies() {
         return cookies;
-    }
-
-    @Override
-    public List<NameValuePair> getData() {
-        return data;
     }
 
     @Override
@@ -155,29 +178,13 @@ public class HtmlCrawlerConfig implements CrawlerConfig<Header, String, NameValu
 
     @Override
     public HtmlCrawlerConfig addHeader(String key, String value) {
-        int idx = indexOfHeader(headers, key);
-        if (idx >= 0) {
-            headers.remove(idx);
-        }
-        headers.add(new BasicHeader(key, value));
-
-        return this;
-    }
-
-    @Override
-    public HtmlCrawlerConfig addHeaders(List<Header> headers) {
-        if (headers == null) {
-            return this;
-        }
-        for (Header header : headers) {
-            addHeader(header.getName(), header.getValue());
-        }
+        headers.put(key, value);
         return this;
     }
 
     @Override
     public HtmlCrawlerConfig addHeaders(Map<String, String> headers) {
-        if (headers == null) {
+        if (Tools.isEmpty(headers)) {
             return this;
         }
         for (Entry<String, String> entry : headers.entrySet()) {
@@ -194,7 +201,7 @@ public class HtmlCrawlerConfig implements CrawlerConfig<Header, String, NameValu
 
     @Override
     public HtmlCrawlerConfig addCookies(Map<String, String> cookies) {
-        if (cookies == null) {
+        if (Tools.isEmpty(cookies)) {
             return this;
         }
         for (Entry<String, String> header : cookies.entrySet()) {
@@ -205,65 +212,19 @@ public class HtmlCrawlerConfig implements CrawlerConfig<Header, String, NameValu
 
     @Override
     public HtmlCrawlerConfig addData(String key, String value) {
-        int idx = indexOfData(data, key);
-        if (idx >= 0) {
-            data.remove(idx);
-        }
-        data.add(new BasicNameValuePair(key, value));
-
+        data.put(key, value);
         return this;
     }
 
     @Override
-    public HtmlCrawlerConfig addData(List<NameValuePair> datas) {
-        if (datas == null) {
+    public HtmlCrawlerConfig addData(Map<String, String> data) {
+        if (Tools.isEmpty(data)) {
             return this;
         }
-        for (NameValuePair data : datas) {
-            addData(data.getName(), data.getValue());
+        for (Entry<String, String> entry : data.entrySet()) {
+            addData(entry.getKey(), entry.getValue());
         }
         return this;
-    }
-
-    @Override
-    public HtmlCrawlerConfig addData(Map<String, String> datas) {
-        if (datas == null) {
-            return this;
-        }
-        for (Entry<String, String> data : datas.entrySet()) {
-            addData(data.getKey(), data.getValue());
-        }
-        return this;
-    }
-
-    // key 在headers, data中的索引
-    static int indexOfHeader(List<Header> headers, String key) {
-        for (int i = 0; i < headers.size(); i++) {
-            if (headers.get(i).getName().equals(key)) {
-                return i;
-            }
-        }
-
-        return -1;
-    }
-
-    /**
-     * 查找data中key对应的条目的索引
-     *
-     * @param data 给定的集合
-     * @param key  查找的key
-     * @return int
-     * @throws
-     * @author 970655147 created at 2017-03-11 15:48
-     */
-    private static int indexOfData(List<NameValuePair> data, String key) {
-        for (int i = 0; i < data.size(); i++) {
-            if (data.get(i).getName().equals(key)) {
-                return i;
-            }
-        }
-
-        return -1;
     }
 
 }

@@ -4,7 +4,7 @@
  * created by 970655147
  */
 
-package com.hx.crawler.test;
+package com.hx.test;
 
 import com.hx.crawler.util.CrawlerUtils;
 import com.hx.crawler.util.pipeline_task.PipelineTaskUtils;
@@ -14,7 +14,7 @@ import com.hx.json.JSONArray;
 
 public class Test04CrawlForGZMeal_Novel {
 
-	static String categoryConfigPath = System.getProperty("user.dir") + "/test/com/hx/crawler/test/config/Test04ForCrawlerGZMeal01Category.json";
+	static String categoryConfigPath = System.getProperty("user.dir") + "/com/hx/test/com/hx/crawler/com.hx.test/config/Test04ForCrawlerGZMeal01Category.json";
 
 	// 爬取gzmeal.com的小说
 	public static void main(String[] args) throws Exception {
