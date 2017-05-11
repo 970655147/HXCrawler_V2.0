@@ -7,12 +7,19 @@
 package com.hx.crawler.parser.interf;
 
 
-import java.io.StringReader;
 import com.hx.json.JSONArray;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
-// 通过indexString 和给定的document 解析结果
+import java.io.StringReader;
+
+/**
+ * 通过indexString 和给定的document 解析结果
+ *
+ * @author Jerry.X.He <970655147@qq.com>
+ * @version 1.0
+ * @date 5/11/2017 8:22 PM
+ */
 public abstract class Parser {
 
     /**
@@ -22,7 +29,6 @@ public abstract class Parser {
      * @param url    文档对应的url
      * @param idxStr xpath索引字符串
      * @return com.hx.json.JSONArray
-     * @throws
      * @author 970655147 created at 2017-03-11 11:59
      */
     public abstract JSONArray parse(Element root, String url, String idxStr);

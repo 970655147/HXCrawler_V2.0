@@ -15,8 +15,7 @@ public interface RecurseTaskList<Task> {
      * 添加task的时候, 请注意配置task的createTime
      *
      * @param task 给定的任务
-     * @return
-     * @throws
+     * @return void
      * @author 970655147 created at 2017-03-10 17:23
      */
     void add(Task task);
@@ -29,8 +28,7 @@ public interface RecurseTaskList<Task> {
      * @param url    当前任务的url
      * @param method 请求当前任务的方式
      * @param config 请求当前任务所需要的参数
-     * @return
-     * @throws
+     * @return void
      * @author 970655147 created at 2017-03-10 17:23
      */
     void add(RecurseCrawlTaskFacade parent, String url, HttpMethod method, CrawlerConfig config);
@@ -38,8 +36,7 @@ public interface RecurseTaskList<Task> {
     /**
      * 从任务队列中取出一个
      *
-     * @return
-     * @throws
+     * @return void
      * @author 970655147 created at 2017-03-10 17:23
      */
     Task take();
@@ -47,8 +44,7 @@ public interface RecurseTaskList<Task> {
     /**
      * 当前队列中任务的数量
      *
-     * @return
-     * @throws
+     * @return void
      * @author 970655147 created at 2017-03-10 17:58
      */
     int size();
@@ -56,8 +52,7 @@ public interface RecurseTaskList<Task> {
     /**
      * 当前队列是否为空
      *
-     * @return
-     * @throws
+     * @return void
      * @author 970655147 created at 2017-03-10 17:59
      */
     boolean isEmpty();

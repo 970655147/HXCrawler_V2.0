@@ -8,10 +8,15 @@ package com.hx.crawler.parser.interf;
 
 import com.hx.json.JSONArray;
 import com.hx.json.JSONObject;
-
 import org.dom4j.Element;
 
-// 当碰到具体的Endpoint的时候, 处理其逻辑
+/**
+ * 当碰到具体的Endpoint的时候, 处理其逻辑
+ *
+ * @author Jerry.X.He <970655147@qq.com>
+ * @version 1.0
+ * @date 5/11/2017 8:21 PM
+ */
 public abstract class EndPointHandler {
 
     /**
@@ -25,7 +30,6 @@ public abstract class EndPointHandler {
      * @param child      当前结点
      * @param curObj     当前结点对应的结果集
      * @return void
-     * @throws
      * @author 970655147 created at 2017-03-11 11:54
      */
     public abstract void handle(Element root, Element currentEle, String url, JSONArray res, int idx,

@@ -8,13 +8,14 @@ import com.hx.crawler.crawler.SingleUrlTask;
 import com.hx.crawler.crawler.interf.Crawler;
 import com.hx.crawler.crawler.interf.CrawlerConfig;
 import com.hx.crawler.crawler.interf.Page;
+import com.hx.crawler.parser.interf.ResultContext;
 import com.hx.crawler.parser.interf.ResultJudger;
 import com.hx.crawler.util.CrawlerUtils;
+import com.hx.json.JSONArray;
+import com.hx.json.JSONObject;
 import com.hx.log.json.JSONExtractor;
 import com.hx.log.util.Constants;
 import com.hx.log.util.Tools;
-import com.hx.json.JSONArray;
-import com.hx.json.JSONObject;
 import org.apache.http.HttpResponse;
 
 import static com.hx.log.util.Log.err;
@@ -32,7 +33,10 @@ public final class PipelineTaskUtils {
     }
 
     // ------------ PipelineTask相关  add at 2016.08.13 --------------------
-    // PipelineTask相关常量
+
+    /**
+     * PipelineTask相关常量
+     */
     public static final String URL = "url";
     public static final String METHOD = "method";
     public static final String XPATHES = "xpathes";
@@ -56,81 +60,19 @@ public final class PipelineTaskUtils {
     public static final String NEXT_STAGE_URL_PATTERN = "nextStageUrlPat";
     public static final String NEXT_STAGE_PARAM_PATTERN = "nextStageParamPat";
 
-    // 其他配置
+    /**
+     * 默认的保存格式化之后的文档的路径
+     */
     public static String SAVE_PREPARED_DOC_PATH = Tools.getTmpPath("preparedDoc", Tools.HTML);
+    /**
+     * 默认的结果保存路径
+     */
     public static String SAVE_FETCHED_RESULT_PATH = Tools.getTmpPath("fetchedResult", Tools.TXT);
+    /**
+     * 保存结果数据的缓冲名称
+     */
     public static final String DO_PIPELINE_TASK_NAME = "doPipelineTask";
 
-
-    public static void doPipelineTaskAsync(String configPath) throws Exception {
-        doPipelineTask(configPath, null, null, true);
-    }
-
-    public static void doPipelineTaskAsync(String configPath, SingleUrlTask scriptParameter) throws Exception {
-        doPipelineTask(configPath, scriptParameter, null, true);
-    }
-
-    public static void doPipelineTaskAsync(String configPath, HtmlCrawlerConfig crawlerConfig) throws Exception {
-        doPipelineTask(configPath, null, crawlerConfig, true);
-    }
-
-    public static void doPipelineTaskAsync(String configPath, SingleUrlTask scriptParameter, HtmlCrawlerConfig crawlerConfig) throws Exception {
-        doPipelineTask(configPath, scriptParameter, crawlerConfig, true);
-    }
-
-    public static void doPipelineTaskAsync(JSONArray globalConfig) throws Exception {
-        doPipelineTask(globalConfig, null, null, true);
-    }
-
-    public static void doPipelineTaskAsync(JSONArray globalConfig, SingleUrlTask scriptParameter) throws Exception {
-        doPipelineTask(globalConfig, scriptParameter, null, true);
-    }
-
-    public static void doPipelineTaskAsync(JSONArray globalConfig, HtmlCrawlerConfig crawlerConfig) throws Exception {
-        doPipelineTask(globalConfig, null, crawlerConfig, true);
-    }
-
-    public static void doPipelineTaskAsync(JSONArray globalConfig, SingleUrlTask scriptParameter, HtmlCrawlerConfig crawlerConfig) throws Exception {
-        doPipelineTask(globalConfig, scriptParameter, crawlerConfig, true);
-    }
-
-    public static JSONArray doPipelineTask(String configPath) throws Exception {
-        return doPipelineTask(configPath, null, null, false);
-    }
-
-    public static JSONArray doPipelineTask(String configPath, SingleUrlTask scriptParameter) throws Exception {
-        return doPipelineTask(configPath, scriptParameter, null, false);
-    }
-
-    public static JSONArray doPipelineTask(String configPath, HtmlCrawlerConfig crawlerConfig) throws Exception {
-        return doPipelineTask(configPath, null, crawlerConfig, false);
-    }
-
-    public static JSONArray doPipelineTask(String configPath, SingleUrlTask scriptParameter, HtmlCrawlerConfig crawlerConfig) throws Exception {
-        return doPipelineTask(configPath, scriptParameter, crawlerConfig, false);
-    }
-
-    public static JSONArray doPipelineTask(JSONArray globalConfig) throws Exception {
-        return doPipelineTask(globalConfig, null, null, false);
-    }
-
-    public static JSONArray doPipelineTask(JSONArray globalConfig, SingleUrlTask scriptParameter) throws Exception {
-        return doPipelineTask(globalConfig, scriptParameter, null, false);
-    }
-
-    public static JSONArray doPipelineTask(JSONArray globalConfig, HtmlCrawlerConfig crawlerConfig) throws Exception {
-        return doPipelineTask(globalConfig, null, crawlerConfig, false);
-    }
-
-    public static JSONArray doPipelineTask(JSONArray globalConfig, SingleUrlTask scriptParameter, HtmlCrawlerConfig crawlerConfig) throws Exception {
-        return doPipelineTask(globalConfig, scriptParameter, crawlerConfig, false);
-    }
-
-    private static JSONArray doPipelineTask(String configPath, SingleUrlTask scriptParameter,
-                                            HtmlCrawlerConfig crawlerConfig, boolean async) throws Exception {
-        JSONArray globalConfig = JSONArray.fromObject(Tools.getContent(configPath));
-        return doPipelineTask(globalConfig, scriptParameter, crawlerConfig, async);
-    }
 
     /**
      * @param globalConfig    一级一级的任务配置
@@ -147,7 +89,7 @@ public final class PipelineTaskUtils {
      * @Create at 2016-09-30 20:02:54 by '970655147'
      */
     public static JSONArray doPipelineTask(JSONArray globalConfig, SingleUrlTask scriptParameter,
-                                             HtmlCrawlerConfig crawlerConfig, boolean async) throws Exception {
+                                           HtmlCrawlerConfig crawlerConfig, boolean async) throws Exception {
         Tools.assert0(globalConfig != null, "'globalConfig' can't be null ");
 
         JSONArray res = new JSONArray();
@@ -243,6 +185,78 @@ public final class PipelineTaskUtils {
         return fetchedResult;
     }
 
+    public static void doPipelineTaskAsync(JSONArray globalConfig) throws Exception {
+        doPipelineTask(globalConfig, null, null, true);
+    }
+
+    public static void doPipelineTaskAsync(JSONArray globalConfig, SingleUrlTask scriptParameter) throws Exception {
+        doPipelineTask(globalConfig, scriptParameter, null, true);
+    }
+
+    public static void doPipelineTaskAsync(JSONArray globalConfig, HtmlCrawlerConfig crawlerConfig) throws Exception {
+        doPipelineTask(globalConfig, null, crawlerConfig, true);
+    }
+
+    public static void doPipelineTaskAsync(JSONArray globalConfig, SingleUrlTask scriptParameter, HtmlCrawlerConfig crawlerConfig) throws Exception {
+        doPipelineTask(globalConfig, scriptParameter, crawlerConfig, true);
+    }
+
+    public static JSONArray doPipelineTask(JSONArray globalConfig) throws Exception {
+        return doPipelineTask(globalConfig, null, null, false);
+    }
+
+    public static JSONArray doPipelineTask(JSONArray globalConfig, SingleUrlTask scriptParameter) throws Exception {
+        return doPipelineTask(globalConfig, scriptParameter, null, false);
+    }
+
+    public static JSONArray doPipelineTask(JSONArray globalConfig, HtmlCrawlerConfig crawlerConfig) throws Exception {
+        return doPipelineTask(globalConfig, null, crawlerConfig, false);
+    }
+
+    public static JSONArray doPipelineTask(JSONArray globalConfig, SingleUrlTask scriptParameter, HtmlCrawlerConfig crawlerConfig) throws Exception {
+        return doPipelineTask(globalConfig, scriptParameter, crawlerConfig, false);
+    }
+
+    private static JSONArray doPipelineTask(String configPath, SingleUrlTask scriptParameter,
+                                            HtmlCrawlerConfig crawlerConfig, boolean async) throws Exception {
+        JSONArray globalConfig = JSONArray.fromObject(Tools.getContent(configPath));
+        return doPipelineTask(globalConfig, scriptParameter, crawlerConfig, async);
+    }
+
+    public static void doPipelineTaskAsync(String configPath) throws Exception {
+        doPipelineTask(configPath, null, null, true);
+    }
+
+    public static void doPipelineTaskAsync(String configPath, SingleUrlTask scriptParameter) throws Exception {
+        doPipelineTask(configPath, scriptParameter, null, true);
+    }
+
+    public static void doPipelineTaskAsync(String configPath, HtmlCrawlerConfig crawlerConfig) throws Exception {
+        doPipelineTask(configPath, null, crawlerConfig, true);
+    }
+
+    public static void doPipelineTaskAsync(String configPath, SingleUrlTask scriptParameter, HtmlCrawlerConfig crawlerConfig) throws Exception {
+        doPipelineTask(configPath, scriptParameter, crawlerConfig, true);
+    }
+
+    public static JSONArray doPipelineTask(String configPath) throws Exception {
+        return doPipelineTask(configPath, null, null, false);
+    }
+
+    public static JSONArray doPipelineTask(String configPath, SingleUrlTask scriptParameter) throws Exception {
+        return doPipelineTask(configPath, scriptParameter, null, false);
+    }
+
+    public static JSONArray doPipelineTask(String configPath, HtmlCrawlerConfig crawlerConfig) throws Exception {
+        return doPipelineTask(configPath, null, crawlerConfig, false);
+    }
+
+    public static JSONArray doPipelineTask(String configPath, SingleUrlTask scriptParameter, HtmlCrawlerConfig crawlerConfig) throws Exception {
+        return doPipelineTask(configPath, scriptParameter, crawlerConfig, false);
+    }
+
+    // ----------------- 辅助方法 -----------------------
+
     /**
      * 根据当前stage的配置, 发送请求, 并抓取数据
      *
@@ -250,7 +264,7 @@ public final class PipelineTaskUtils {
      * @param crawlerConfig   发送请求所需要的config
      * @param config          当前stage的配置信息
      * @return com.hx.json.JSONArray
-     * @throws
+     * @throws Exception
      * @author 970655147 created at 2017-03-11 14:16
      */
     private static JSONArray sendRequestAndFetchResult(SingleUrlTask scriptParameter, HtmlCrawlerConfig crawlerConfig,
@@ -289,13 +303,13 @@ public final class PipelineTaskUtils {
 
         JSONArray fetchedResult = CrawlerUtils.getResultByXPathes(html, url, xpathes, new ResultJudger() {
             @Override
-            public boolean isResultNull(int idx, JSONArray fetchedData) {
+            public boolean isResultNull(ResultContext context) {
                 JSONArray judgersConfig = config.optJSONArray(JUDGER);
                 int gotResNum = -1;
                 for (Object _judger : judgersConfig) {
                     String judgerPat = _judger.toString();
                     if (!Tools.isEmpty(judgerPat)) {
-                        JSONArray arr = JSONExtractor.extractInfoFromJSON(fetchedData, judgerPat);
+                        JSONArray arr = JSONExtractor.extractInfoFromJSON(context.fetchedData(), judgerPat);
                         if (Tools.isEmpty(arr)) {
                             return true;
                         }
@@ -325,7 +339,7 @@ public final class PipelineTaskUtils {
      * @param fetchedResult 抓取到的结果
      * @param config        当前stage的配置信息
      * @return void
-     * @throws
+     * @throws Exception
      * @author 970655147 created at 2017-03-11 14:24
      */
     private static void saveFetchedResult(JSONArray fetchedResult, JSONObject config) throws Exception {
@@ -352,7 +366,7 @@ public final class PipelineTaskUtils {
      * @param crawlerConfig 发送请求所需要的config
      * @param stageId       当前stage的id
      * @return void
-     * @throws
+     * @throws Exception
      * @author 970655147 created at 2017-03-11 14:28
      */
     private static void processNextStage(JSONArray globalConfig, JSONArray fetchedResult, JSONObject config,
@@ -398,13 +412,16 @@ public final class PipelineTaskUtils {
     }
 
     /**
-     * @param crawlerConfigObj 配置中的config对象, 将其中的数据封装到CrawlerConfig中
-     * @param crawlerConfig    实际需要封装的CrawlerConfig对象
-     * @Name: encapCrawlerConfig
-     * @Description: 根据给定的配置封装crawlerConfig
+     * 根据给定的配置封装crawlerConfig
      * 如果需要清除 header, cookie, data, 则先清除crawlerConfig中的数据
      * 然后再添加config中配置的header, cookie, data
-     * @Create at 2016-09-30 20:25:14 by '970655147'
+     *
+     * @param crawlerConfigObj 配置中的config对象, 将其中的数据封装到CrawlerConfig中
+     * @param crawlerConfig    实际需要封装的CrawlerConfig对象
+     * @return void
+     * @author Jerry.X.He
+     * @date 5/11/2017 9:18 PM
+     * @since 1.0
      */
     private static void encapCrawlerConfig(JSONObject crawlerConfigObj, CrawlerConfig crawlerConfig) {
         if (!Tools.isEmpty(crawlerConfigObj)) {

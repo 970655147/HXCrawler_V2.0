@@ -9,45 +9,66 @@ package com.hx.crawler.parser;
 import com.hx.crawler.parser.interf.EndPoint;
 import com.hx.json.JSONObject;
 
-// attribute结点
+/**
+ * attribute 结点
+ *
+ * @author Jerry.X.He <970655147@qq.com>
+ * @version 1.0
+ * @date 5/11/2017 8:32 PM
+ */
 public final class Attribute extends EndPoint {
 
-    // attribute[text, innertext, innerhtml, outerhtml]
+    /**
+     * 当前 attribute 确定需要抓取的数据的属性
+     * attribute[text, innertext, innerhtml, outerhtml, 其他属性节点]
+     */
     private String attr;
 
-    // 初始化
+    /**
+     * 初始化
+     *
+     * @param name       name
+     * @param xpath      xpath
+     * @param attr       attr
+     * @param handlerStr handlerStr
+     * @param parent     parent
+     * @since 1.0
+     */
     public Attribute(String name, String xpath, String attr, String handlerStr, EndPoint parent) {
         super(EndPoint.ATTRIBUTE, name, xpath, handlerStr, parent);
         this.attr = attr;
     }
 
-    // 添加子元素[attribute 不支持添加子节点]
     @Override
     public void addChild(EndPoint endPoint) {
         throw new RuntimeException("unsupported operation exception ...");
     }
 
-    // 获取子元素[attribute 没有子元素]
     @Override
     public EndPoint getChild(int idx) {
         throw new RuntimeException("unsupported operation exception ...");
     }
 
-    // Attribute结点的孩子个数为0
     @Override
     public int childSize() {
         return 0;
     }
 
-    // 获取attr
     @Override
     public String getAttribute() {
         return attr;
     }
 
-    // for debug ...
+    /**
+     * for debug ...
+     *
+     * @return java.lang.String
+     * @author Jerry.X.He
+     * @date 5/11/2017 8:34 PM
+     * @since 1.0
+     */
     public String toString() {
-        return new JSONObject().element("fromEndPoint", super.toString()).element("attribute", attr).toString();
+        return new JSONObject().element("super", super.toString()).element("attribute", attr).toString();
     }
 
 }

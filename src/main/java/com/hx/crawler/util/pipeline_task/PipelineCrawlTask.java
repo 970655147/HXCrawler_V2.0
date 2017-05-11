@@ -2,8 +2,8 @@ package com.hx.crawler.util.pipeline_task;
 
 import com.hx.crawler.crawler.HtmlCrawlerConfig;
 import com.hx.crawler.crawler.SingleUrlTask;
-import com.hx.log.util.Tools;
 import com.hx.json.JSONArray;
+import com.hx.log.util.Tools;
 
 import static com.hx.log.util.Log.err;
 
@@ -14,12 +14,30 @@ import static com.hx.log.util.Log.err;
  */
 public class PipelineCrawlTask implements Runnable {
 
+    /**
+     * 当前任务的参数 [任务 用于往线程池里面抛, 而不是一个 任务bean]
+     */
     private SingleUrlTask scriptParameter;
+    /**
+     * 当前任务的爬取数据的配置
+     */
     private HtmlCrawlerConfig crawlerConfig;
+    /**
+     * 当前任务的全局配置
+     */
     private JSONArray globalConfig;
+    /**
+     * 当前任务的 stageId
+     */
     private int stageId;
 
-    public PipelineCrawlTask(SingleUrlTask scriptParameter, HtmlCrawlerConfig crawlerConfig, JSONArray globalConfig, int stageId) {
+    /**
+     * 初始化
+     *
+     * @param scriptParameter scriptParameter
+     * @param crawlerConfig   crawlerConfig
+     * @param globalConfig    globalConfi * @param nullTask(SingleUrlTask scripJerry.X.He5/11/20179:20 PMtParameter, HtmlCrawlerConfig crawlerConfig,
+                             JSONArray globalConfig, int stageId) {
         this.scriptParameter = scriptParameter;
         this.crawlerConfig = crawlerConfig;
         this.globalConfig = globalConfig;

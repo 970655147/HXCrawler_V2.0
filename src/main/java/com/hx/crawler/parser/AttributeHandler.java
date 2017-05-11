@@ -6,20 +6,24 @@
 
 package com.hx.crawler.parser;
 
-import com.hx.crawler.parser.xpathImpl.XPathParser;
-import java.util.List;
-
-import org.dom4j.Element;
-
-import com.hx.crawler.util.CrawlerConstants;
 import com.hx.crawler.parser.interf.EndPoint;
 import com.hx.crawler.parser.interf.EndPointHandler;
-import com.hx.log.util.Tools;
-
+import com.hx.crawler.parser.xpathImpl.XPathParser;
+import com.hx.crawler.util.CrawlerConstants;
 import com.hx.json.JSONArray;
 import com.hx.json.JSONObject;
+import com.hx.log.util.Tools;
+import org.dom4j.Element;
 
-// attribute 结点的相关业务处理
+import java.util.List;
+
+/**
+ * attribute 结点的相关业务处理
+ *
+ * @author Jerry.X.He <970655147@qq.com>
+ * @version 1.0
+ * @date 5/11/2017 8:34 PM
+ */
 public final class AttributeHandler extends EndPointHandler {
 
     @Override
@@ -36,7 +40,7 @@ public final class AttributeHandler extends EndPointHandler {
                 String handledResult = handleResult(child, getValueByAttribute(currentEle, child.getAttribute(), url, idx));
                 curObj.element(child.getName(), handledResult);
             }
-            // arrayAttribute结点
+        // arrayAttribute结点
         } else {
             JSONArray curArr = new JSONArray();
             List<Element> eles = XPathParser.getResultByXPath(root, currentEle, child.getXPath());
@@ -54,7 +58,16 @@ public final class AttributeHandler extends EndPointHandler {
         }
     }
 
-    // 使用当前AttriBute的相关handler处理结果
+    /**
+     * 使用当前 AttriBute 的相关 handler 处理结果
+     *
+     * @param child            给定的子元素
+     * @param valueByAttribute 子元素的值
+     * @return java.lang.String
+     * @author Jerry.X.He
+     * @date 5/11/2017 8:36 PM
+     * @since 1.0
+     */
     private String handleResult(EndPoint child, String valueByAttribute) {
         return child.getHandler().handle(valueByAttribute);
     }
@@ -67,7 +80,6 @@ public final class AttributeHandler extends EndPointHandler {
      * @param url       当前url
      * @param idx       当前元素在父级元素的索引
      * @return java.lang.String
-     * @throws
      * @author 970655147 created at 2017-03-11 12:32
      */
     private static String getValueByAttribute(Element ele, String attribute, String url, int idx) {
@@ -75,7 +87,7 @@ public final class AttributeHandler extends EndPointHandler {
             return String.valueOf(idx);
         }
         if (ele == null) {
-            return CrawlerConstants.NULL;
+            return Tools.NULL;
         }
 
         if (CrawlerConstants.TEXT.equals(attribute)) {
@@ -101,13 +113,31 @@ public final class AttributeHandler extends EndPointHandler {
         return res;
     }
 
-    // 获取ele的innertext [但是不能解决子标签左右两边的文字的位置关系的问题]
-    // 后来使用getStringValue() 方法解决了上面的问题
+    /**
+     * 获取ele的innertext [但是不能解决子标签左右两边的文字的位置关系的问题]
+     * 后来使用getStringValue() 方法解决了上面的问题
+     *
+     * @param ele 给定的节点元素
+     * @param sb  收集数据的sb
+     * @return void
+     * @author Jerry.X.He
+     * @date 5/11/2017 8:34 PM
+     * @since 1.0
+     */
     private static void getInnerText(Element ele, StringBuilder sb) {
         sb.append(ele.getStringValue());
     }
 
-    // 获取ele的innerhtml
+    /**
+     * 获取 ele 的 innerhtml
+     *
+     * @param ele 给定的节点元素
+     * @param sb  收集数据的sb
+     * @return void
+     * @author Jerry.X.He
+     * @date 5/11/2017 8:35 PM
+     * @since 1.0
+     */
     private static void getInnerHtml(Element ele, StringBuilder sb) {
         String outerHtml = ele.asXML();
         int start = outerHtml.indexOf(">") + 1;
@@ -115,7 +145,16 @@ public final class AttributeHandler extends EndPointHandler {
         sb.append(outerHtml, start, end);
     }
 
-    // 获取ele的outerhtml
+    /**
+     * 获取 ele 的 outerhtml
+     *
+     * @param ele 给定的节点元素
+     * @param sb  收集数据的sb
+     * @return void
+     * @author Jerry.X.He
+     * @date 5/11/2017 8:35 PM
+     * @since 1.0
+     */
     private static void getOuterHtml(Element ele, StringBuilder sb) {
         sb.append(ele.asXML());
     }

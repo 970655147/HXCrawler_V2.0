@@ -2,10 +2,10 @@ package com.hx.crawler.util.recursely_task;
 
 import com.hx.crawler.crawler.interf.CrawlerConfig;
 import com.hx.crawler.crawler.interf.HttpMethod;
-import com.hx.crawler.util.CrawlerUtils;
 import com.hx.crawler.util.recursely_task.interf.RecurseCrawlTask;
 import com.hx.crawler.util.recursely_task.interf.RecurseCrawlTaskFacade;
 import com.hx.crawler.util.recursely_task.interf.RecurseTaskList;
+
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.LinkedList;
@@ -17,16 +17,24 @@ import java.util.LinkedList;
  */
 public class RecurseTraskListImpl implements RecurseTaskList<RecurseCrawlTask> {
 
+    /**
+     * 任务队列
+     */
     private Deque<RecurseCrawlTask> list;
+    /**
+     * 是 bfs 还是 dfs
+     */
     private boolean bfs;
 
     /**
      * 初始化
+     *
+     * @param bfs          bfs
+     * @param estimateSize 估计的任务队列的大小
+     * @return
+     * * @param bfs
+ * @param estimateSize1.0
      */
-    public RecurseTraskListImpl(boolean bfs) {
-        this(bfs, 10);
-    }
-
     public RecurseTraskListImpl(boolean bfs, int estimateSize) {
         this.bfs = bfs;
         if (bfs) {
@@ -34,6 +42,10 @@ public class RecurseTraskListImpl implements RecurseTaskList<RecurseCrawlTask> {
         } else {
             list = new ArrayDeque<>(estimateSize);
         }
+    }
+
+    public RecurseTraskListImpl(boolean bfs) {
+        this(bfs, 10);
     }
 
     @Override

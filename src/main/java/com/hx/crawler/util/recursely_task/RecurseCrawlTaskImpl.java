@@ -14,24 +14,55 @@ import com.hx.log.util.Tools;
  */
 public class RecurseCrawlTaskImpl implements RecurseCrawlTask {
 
-    RecurseCrawlTaskFacade parent;
-    String url;
-    int depth;
-    HttpMethod method;
-    CrawlerConfig config;
-    Page page;
-    long createTime;
-    long runTime;
-    long finishTime;
+    /**
+     * 父任务
+     */
+    private RecurseCrawlTaskFacade parent;
+    /**
+     * 需要爬取数据的url
+     */
+    private String url;
+    /**
+     * 当前任务在整个任务栈中的深度
+     */
+    private int depth;
+    /**
+     * 当前请求的方式
+     */
+    private HttpMethod method;
+    /**
+     * 当前的config
+     */
+    private CrawlerConfig config;
+    /**
+     * 当前抓取到的数据的页面
+     */
+    private Page page;
+    /**
+     * 任务创建时间
+     */
+    private long createTime;
+    /**
+     * 任务运行时间
+     */
+    private long runTime;
+    /**
+     * 任务完成时间
+     */
+    private long finishTime;
 
     /**
      * 初始化
+     *
+     * @param parent parent
+     * @param url    url
+     * @param depth  depth
+     * @param method method
+     * @param config config
+     * @since 1.0
      */
-    RecurseCrawlTaskImpl(String url, int depth, HttpMethod method, CrawlerConfig config) {
-        this(null, url, depth, method, config);
-    }
-
-    RecurseCrawlTaskImpl(RecurseCrawlTaskFacade parent, String url, int depth, HttpMethod method, CrawlerConfig config) {
+    RecurseCrawlTaskImpl(RecurseCrawlTaskFacade parent, String url, int depth,
+                         HttpMethod method, CrawlerConfig config) {
         super();
         Tools.assert0(url != null, "url can't be null ! ");
         Tools.assert0(depth >= 0, "depth must gt 0 ! ");
@@ -43,6 +74,10 @@ public class RecurseCrawlTaskImpl implements RecurseCrawlTask {
         this.depth = depth;
         this.method = method;
         this.config = config;
+    }
+
+    RecurseCrawlTaskImpl(String url, int depth, HttpMethod method, CrawlerConfig config) {
+        this(null, url, depth, method, config);
     }
 
     @Override

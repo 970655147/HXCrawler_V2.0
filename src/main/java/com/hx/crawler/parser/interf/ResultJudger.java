@@ -6,20 +6,22 @@
 
 package com.hx.crawler.parser.interf;
 
-import com.hx.json.JSONArray;
-
-// 判断给定的结果是否合法
+/**
+ * 判断给定的结果是否合法
+ *
+ * @author Jerry.X.He <970655147@qq.com>
+ * @version 1.0
+ * @date 5/11/2017 8:22 PM
+ */
 public interface ResultJudger {
 
     /**
      * 判断给定的结果是否为空
      *
-     * @param idx         当前xpath的索引
-     * @param fetchedData 当前xpath取到的结果
-     * @return
-     * @throws
+     * @param context 抓取结果的Context
+     * @return if the fetchedData is valid
      * @author 970655147 created at 2017-03-11 11:58
      */
-    boolean isResultNull(int idx, JSONArray fetchedData);
+    boolean isResultNull(ResultContext context);
 
 }

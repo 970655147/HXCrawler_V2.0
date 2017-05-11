@@ -24,14 +24,6 @@ public final class RecurselyTaskUtils {
         Tools.assert0("can't instantiate !");
     }
 
-    public static void recurselyTask(String seedUrl, HttpMethod method, CrawlerConfig config, RecurseCrawlCallback callback) {
-        recurselyTask(seedUrl, method, config, callback, true);
-    }
-
-    public static void recurselyTask(String seedUrl, HttpMethod method, CrawlerConfig config, RecurseCrawlCallback callback, boolean isBfs) {
-        recurselyTask(seedUrl, method, config, callback, false, isBfs);
-    }
-
     /**
      * 传入一个seedUrl, 以及相关的需要context, 以及拿到page之后的回调
      * callback中抓取数据, 以及拿到需要的子任务, 添加到todo中, 然后 迭代迭代
@@ -71,6 +63,14 @@ public final class RecurselyTaskUtils {
         }
     }
 
+    public static void recurselyTask(String seedUrl, HttpMethod method, CrawlerConfig config, RecurseCrawlCallback callback, boolean isBfs) {
+        recurselyTask(seedUrl, method, config, callback, false, isBfs);
+    }
+
+    public static void recurselyTask(String seedUrl, HttpMethod method, CrawlerConfig config, RecurseCrawlCallback callback) {
+        recurselyTask(seedUrl, method, config, callback, true);
+    }
+
     /**
      * 根据给定个的parent, url, 以及相关的配置创建RecurseCrawlTaskImpl
      * 此处是留给用户的创建实例的唯一入口
@@ -86,6 +86,8 @@ public final class RecurselyTaskUtils {
         int depth = (parent == null) ? 0 : parent.getDepth() + 1;
         return new RecurseCrawlTaskImpl(parent, url, depth, method, config);
     }
+
+    // ----------------- 辅助方法 -----------------------
 
     /**
      * 处理recurselyTask0的核心业务, 发送请求, 并处理callback
@@ -112,12 +114,12 @@ public final class RecurselyTaskUtils {
             sendPosts = true;
             task.setPage(page);
 
-            if(page != null) {
+            if (page != null) {
                 callback.run(new RecurseCrawlTaskFacadeImpl(task), todo);
                 isSucc = true;
             }
         } catch (Exception e) {
-            if(sendPosts) {
+            if (sendPosts) {
                 Log.err("error while send post for url : " + task.getUrl() + ", with config : " + task.getConfig());
             } else {
                 Log.err("error while do callback's task for url : " + task.getUrl() + ", with config : " + task.getConfig());

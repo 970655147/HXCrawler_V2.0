@@ -18,6 +18,8 @@ public class RecurseCrawlTaskFacadeImpl implements RecurseCrawlTaskFacade {
 
     /**
      * 初始化
+     *
+     * @param task 组合的task
      */
     public RecurseCrawlTaskFacadeImpl(RecurseCrawlTask task) {
         Tools.assert0(task != null, "task can't be null !");
