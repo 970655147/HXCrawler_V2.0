@@ -36,7 +36,11 @@ public class PipelineCrawlTask implements Runnable {
      *
      * @param scriptParameter scriptParameter
      * @param crawlerConfig   crawlerConfig
-     * @param globalConfig    globalConfi * @param nullTask(SingleUrlTask scripJerry.X.He5/11/20179:20 PMtParameter, HtmlCrawlerConfig crawlerConfig,
+     * @param globalConfig    globalConfig
+     * @param stageId         stageId
+     * @since 1.0
+     */
+    public PipelineCrawlTask(SingleUrlTask scriptParameter, HtmlCrawlerConfig crawlerConfig,
                              JSONArray globalConfig, int stageId) {
         this.scriptParameter = scriptParameter;
         this.crawlerConfig = crawlerConfig;

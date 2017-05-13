@@ -9,6 +9,7 @@ import com.hx.crawler.util.recursely_task.interf.RecurseCrawlCallback;
 import com.hx.crawler.util.recursely_task.interf.RecurseCrawlTask;
 import com.hx.crawler.util.recursely_task.interf.RecurseCrawlTaskFacade;
 import com.hx.crawler.util.recursely_task.interf.RecurseTaskList;
+import com.hx.log.util.Constants;
 import com.hx.log.util.Log;
 import com.hx.log.util.Tools;
 
@@ -23,6 +24,11 @@ public final class RecurselyTaskUtils {
     private RecurselyTaskUtils() {
         Tools.assert0("can't instantiate !");
     }
+
+    /**
+     * 异步执行 recurselyTask 的时候, 任务队列中没有任务的时候, 随机休眠的ms
+     */
+    public static int RANDOM_SLEEP_UPPER_LIMIT = Constants.optInt("crawler.recurselyTask.randomSleepUpperLimit", 200);
 
     /**
      * 传入一个seedUrl, 以及相关的需要context, 以及拿到page之后的回调
@@ -48,8 +54,13 @@ public final class RecurselyTaskUtils {
         RecurseCrawlTask seedTask = new RecurseCrawlTaskImpl(seedUrl, 0, method, config);
         todo.add(seedTask);
 
-        while (!todo.isEmpty()) {
+        while ((!todo.isEmpty()) || (Tools.isThreadPoolRunning())) {
             final RecurseCrawlTask task = todo.take();
+            if (task == null) {
+                Tools.sleep(Tools.ran.nextInt(RANDOM_SLEEP_UPPER_LIMIT));
+                continue;
+            }
+
             if (!isAsync) {
                 recurselyTask0(task, callback, todo);
             } else {
@@ -124,6 +135,7 @@ public final class RecurselyTaskUtils {
             } else {
                 Log.err("error while do callback's task for url : " + task.getUrl() + ", with config : " + task.getConfig());
             }
+            e.printStackTrace();
         }
 
         task.setFinishTime(System.currentTimeMillis());
