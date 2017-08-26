@@ -6,8 +6,10 @@
 
 package com.hx.crawler.parser;
 
-import com.hx.crawler.parser.interf.EndPoint;
-import com.hx.crawler.parser.interf.EndPointHandler;
+import com.hx.common.interf.common.Result;
+import com.hx.common.util.ResultUtils;
+import com.hx.crawler.parser.interf.Endpoint;
+import com.hx.crawler.parser.interf.EndpointHandler;
 import com.hx.crawler.parser.xpathImpl.XPathParser;
 import com.hx.crawler.util.CrawlerConstants;
 import com.hx.json.JSONArray;
@@ -24,11 +26,41 @@ import java.util.List;
  * @version 1.0
  * @date 5/11/2017 8:34 PM
  */
-public final class AttributeHandler extends EndPointHandler {
+public final class AttributeHandler extends EndpointHandler {
+
+    @Override
+    public Result validate(Endpoint endPoint, JSONObject current) {
+        if (Tools.isEmpty(endPoint.getName())) {
+            return ResultUtils.failed("the attribute 'name' can't be null !");
+        }
+        if (Tools.isEmpty(endPoint.getAttribute())) {
+            return ResultUtils.failed("the attribute 'attribute' can't be null !");
+        }
+
+        // 普通attribute结点
+        if (!endPoint.getName().equals(CrawlerConstants.ARRAY_ATTR)) {
+
+            // arrayAttribute结点
+        } else {
+
+        }
+
+        return ResultUtils.success();
+    }
+
+    @Override
+    public Endpoint createInstance(Endpoint parent, JSONObject current) {
+        String name = current.optString(CrawlerConstants.NAME, CrawlerConstants.ARRAY_ATTR);
+        String xpath = current.optString(CrawlerConstants.XPATH, null);
+        String attribute = current.optString(CrawlerConstants.ATTRIBUTE, null);
+        String handlerStr = current.optString(CrawlerConstants.HANDLER, null);
+        Attribute result = new Attribute(name, xpath, attribute, handlerStr, parent);
+        return result;
+    }
 
     @Override
     public void handle(Element root, Element currentEle, String url, JSONArray res, int idx,
-                       EndPoint child, JSONObject curObj) {
+                       Endpoint child, JSONObject curObj) {
         // 普通attribute结点
         if (!child.getName().equals(CrawlerConstants.ARRAY_ATTR)) {
             child.getHandler().cleanImmediateReturnFlag();
@@ -40,7 +72,7 @@ public final class AttributeHandler extends EndPointHandler {
                 String handledResult = handleResult(child, getValueByAttribute(currentEle, child.getAttribute(), url, idx));
                 curObj.element(child.getName(), handledResult);
             }
-        // arrayAttribute结点
+            // arrayAttribute结点
         } else {
             JSONArray curArr = new JSONArray();
             List<Element> eles = XPathParser.getResultByXPath(root, currentEle, child.getXPath());
@@ -68,7 +100,7 @@ public final class AttributeHandler extends EndPointHandler {
      * @date 5/11/2017 8:36 PM
      * @since 1.0
      */
-    private String handleResult(EndPoint child, String valueByAttribute) {
+    private String handleResult(Endpoint child, String valueByAttribute) {
         return child.getHandler().handle(valueByAttribute);
     }
 

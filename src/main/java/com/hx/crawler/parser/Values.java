@@ -6,7 +6,8 @@
 
 package com.hx.crawler.parser;
 
-import com.hx.crawler.parser.interf.EndPoint;
+import com.hx.crawler.parser.interf.Endpoint;
+import com.hx.crawler.parser.interf.EndpointType;
 import com.hx.json.JSONObject;
 
 import java.util.ArrayList;
@@ -19,12 +20,12 @@ import java.util.List;
  * @version 1.0
  * @date 5/11/2017 8:37 PM
  */
-public final class Values extends EndPoint {
+public final class Values extends Endpoint {
 
     /**
      * values的子元素
      */
-    private List<EndPoint> childs;
+    private List<Endpoint> childs;
 
     /**
      * 初始化
@@ -35,18 +36,18 @@ public final class Values extends EndPoint {
      * @param parent     parent
      * @since 1.0
      */
-    public Values(String name, String xpath, String handlerStr, EndPoint parent) {
-        super(EndPoint.VALUES, name, xpath, handlerStr, parent);
+    public Values(String name, String xpath, String handlerStr, Endpoint parent) {
+        super(EndpointType.VALUES, name, xpath, handlerStr, parent);
         childs = new ArrayList<>();
     }
 
     @Override
-    public void addChild(EndPoint endPoint) {
+    public void addChild(Endpoint endPoint) {
         childs.add(endPoint);
     }
 
     @Override
-    public EndPoint getChild(int idx) {
+    public Endpoint getChild(int idx) {
         return childs.get(idx);
     }
 

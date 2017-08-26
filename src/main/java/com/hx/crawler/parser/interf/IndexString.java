@@ -19,7 +19,8 @@ public abstract class IndexString {
      * 创建root 结点, 并解析
      *
      * @param idxStr 给定的索引字符串
-     * * @param idxStr */
+     *               * @param idxStr
+     */
     public IndexString(String idxStr) {
 
     }
@@ -27,9 +28,9 @@ public abstract class IndexString {
     /**
      * 获取索引字符串解析之后的根节点
      *
-     * @return com.hx.crawler.parser.interf.EndPoint
+     * @return com.hx.crawler.parser.interf.Endpoint
      * @author 970655147 created at 2017-03-11 12:02
      */
-    public abstract EndPoint getRoot();
+    public abstract Endpoint getRoot();
 
 }

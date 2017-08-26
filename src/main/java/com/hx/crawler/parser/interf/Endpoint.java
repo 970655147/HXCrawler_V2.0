@@ -19,21 +19,12 @@ import com.hx.log.util.Tools;
  * @version 1.0
  * @date 5/11/2017 8:13 PM
  */
-public abstract class EndPoint {
-
-    /**
-     * values Endpoint的key
-     */
-    public static final String VALUES = CrawlerConstants.VALUES;
-    /**
-     * attribute Endpoint的key
-     */
-    public static final String ATTRIBUTE = CrawlerConstants.ATTRIBUTE;
+public abstract class Endpoint {
 
     /**
      * 当前节点的类型, attribute 还是 values [目前是这两个, 用于映射 attrHandler]
      */
-    protected String type;
+    protected EndpointType type;
     /**
      * 当前节点的 name [在结果中作为key]
      */
@@ -45,7 +36,7 @@ public abstract class EndPoint {
     /**
      * 当前节点的父节点
      */
-    protected EndPoint parent;
+    protected Endpoint parent;
     /**
      * 当前节点上面附加的 attrHandler
      */
@@ -61,7 +52,7 @@ public abstract class EndPoint {
      * @param parent     parent
      * @since 1.0
      */
-    public EndPoint(String type, String name, String xpath, String handlerStr, EndPoint parent) {
+    public Endpoint(EndpointType type, String name, String xpath, String handlerStr, Endpoint parent) {
         this.type = type;
         this.name = name;
         this.parent = parent;
@@ -80,7 +71,7 @@ public abstract class EndPoint {
      * @date 5/11/2017 8:18 PM
      * @since 1.0
      */
-    public abstract void addChild(EndPoint endPoint);
+    public abstract void addChild(Endpoint endPoint);
 
     /**
      * 获取索引处的孩子节点
@@ -92,7 +83,7 @@ public abstract class EndPoint {
      * @date 5/11/2017 8:18 PM
      * @since 1.0
      */
-    public abstract EndPoint getChild(int idx);
+    public abstract Endpoint getChild(int idx);
 
     /**
      * 获取孩子的数量
@@ -129,7 +120,7 @@ public abstract class EndPoint {
     /**
      * getter
      */
-    public EndPoint getParent() {
+    public Endpoint getParent() {
         return parent;
     }
 
@@ -137,7 +128,7 @@ public abstract class EndPoint {
         return xpath;
     }
 
-    public String getType() {
+    public EndpointType getType() {
         return type;
     }
 

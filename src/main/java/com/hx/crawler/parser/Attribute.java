@@ -6,7 +6,8 @@
 
 package com.hx.crawler.parser;
 
-import com.hx.crawler.parser.interf.EndPoint;
+import com.hx.crawler.parser.interf.Endpoint;
+import com.hx.crawler.parser.interf.EndpointType;
 import com.hx.json.JSONObject;
 
 /**
@@ -16,7 +17,7 @@ import com.hx.json.JSONObject;
  * @version 1.0
  * @date 5/11/2017 8:32 PM
  */
-public final class Attribute extends EndPoint {
+public final class Attribute extends Endpoint {
 
     /**
      * 当前 attribute 确定需要抓取的数据的属性
@@ -34,18 +35,18 @@ public final class Attribute extends EndPoint {
      * @param parent     parent
      * @since 1.0
      */
-    public Attribute(String name, String xpath, String attr, String handlerStr, EndPoint parent) {
-        super(EndPoint.ATTRIBUTE, name, xpath, handlerStr, parent);
+    public Attribute(String name, String xpath, String attr, String handlerStr, Endpoint parent) {
+        super(EndpointType.ATTRIBUTE, name, xpath, handlerStr, parent);
         this.attr = attr;
     }
 
     @Override
-    public void addChild(EndPoint endPoint) {
+    public void addChild(Endpoint endPoint) {
         throw new RuntimeException("unsupported operation exception ...");
     }
 
     @Override
-    public EndPoint getChild(int idx) {
+    public Endpoint getChild(int idx) {
         throw new RuntimeException("unsupported operation exception ...");
     }
 

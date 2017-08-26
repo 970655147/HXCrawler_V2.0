@@ -12,7 +12,8 @@ import com.hx.attr_handler.attr_handler.operation.MapOperationAttrHandler;
 import com.hx.attr_handler.attr_handler.operation.interf.OperationAttrHandler;
 import com.hx.crawler.parser.AttributeHandler;
 import com.hx.crawler.parser.ValuesHandler;
-import com.hx.crawler.parser.interf.EndPointHandler;
+import com.hx.crawler.parser.interf.EndpointHandler;
+import com.hx.crawler.parser.xpathImpl.XPathParser;
 import com.hx.log.util.Tools;
 
 import java.util.HashMap;
@@ -115,7 +116,7 @@ public final class CrawlerConstants {
     /**
      * {'attribute' : AttributeHandler, ... }
      */
-    public final static Map<String, EndPointHandler> ENDPOINT_TO_HANDLER = new HashMap<>();
+    public final static Map<String, EndpointHandler> ENDPOINT_TO_HANDLER = new HashMap<>();
     /**
      * 默认的什么都不做的 attrHandler
      */
@@ -123,9 +124,10 @@ public final class CrawlerConstants {
 
     static {
         ENDPOINT_TO_HANDLER.put(ATTRIBUTE, new AttributeHandler());
-        ENDPOINT_TO_HANDLER.put(VALUES, new ValuesHandler());
-        // 不能向下面 这样写, 因为是EndPoint.ATTRIBUTE的初始化导致了Constants.class的加载, 而执行当前staticBlock的时候, Endpoint.ATTRIBUTE 以及EndPoint.VALUES在初始化阶段初始化的null值		--2016.02.02
-//		ENDPOINT_TO_HANDLER.put(EndPoint.ATTRIBUTE, new ValuesHandler() );
+        // self dependency, 这里的这个 XPathParser 是一个特例
+        ENDPOINT_TO_HANDLER.put(VALUES, new ValuesHandler(new XPathParser(ENDPOINT_TO_HANDLER)));
+        // 不能向下面 这样写, 因为是Endpoint.ATTRIBUTE的初始化导致了Constants.class的加载, 而执行当前staticBlock的时候, Endpoint.ATTRIBUTE 以及Endpoint.VALUES在初始化阶段初始化的null值		--2016.02.02
+//		ENDPOINT_TO_HANDLER.put(Endpoint.ATTRIBUTE, new ValuesHandler() );
     }
 
 }
