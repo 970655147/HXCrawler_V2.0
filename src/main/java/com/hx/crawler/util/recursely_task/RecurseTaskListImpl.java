@@ -11,11 +11,11 @@ import java.util.Deque;
 import java.util.LinkedList;
 
 /**
- * file name : RecurseTraskListImpl.java
+ * file name : RecurseTaskListImpl.java
  * created at : 14:49  2017-03-11
  * created by 970655147
  */
-public class RecurseTraskListImpl implements RecurseTaskList<RecurseCrawlTask> {
+public class RecurseTaskListImpl implements RecurseTaskList<RecurseCrawlTask> {
 
     /**
      * 任务队列
@@ -32,10 +32,8 @@ public class RecurseTraskListImpl implements RecurseTaskList<RecurseCrawlTask> {
      * @param bfs          bfs
      * @param estimateSize 估计的任务队列的大小
      * @return
-     * * @param bfs
- * @param estimateSize1.0
      */
-    public RecurseTraskListImpl(boolean bfs, int estimateSize) {
+    public RecurseTaskListImpl(boolean bfs, int estimateSize) {
         this.bfs = bfs;
         if (bfs) {
             list = new LinkedList<>();
@@ -44,7 +42,7 @@ public class RecurseTraskListImpl implements RecurseTaskList<RecurseCrawlTask> {
         }
     }
 
-    public RecurseTraskListImpl(boolean bfs) {
+    public RecurseTaskListImpl(boolean bfs) {
         this(bfs, 10);
     }
 

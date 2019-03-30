@@ -30,6 +30,10 @@ public interface CrawlerConfig<HeaderValType, DataValType, CookieValType> {
 
     void setTimeout(int timeout);
 
+    void setConnectionTimeout(int timeout);
+
+    void setSocketTimeout(int timeout);
+
     void setProxy(HttpHost proxy);
 
     Map<String, HeaderValType> getHeaders();
@@ -39,6 +43,24 @@ public interface CrawlerConfig<HeaderValType, DataValType, CookieValType> {
     Map<String, DataValType> getData();
 
     int getTimeout();
+
+    /**
+     * 设置获取连接 超时时间
+     *
+     * @author Jerry.X.He
+     * @date 2019/3/30 9:20
+     * @since 1.0
+     */
+    int getConnectionTimeout();
+
+    /**
+     * 设置socket传递数据 超时时间
+     *
+     * @author Jerry.X.He
+     * @date 2019/3/30 9:20
+     * @since 1.0
+     */
+    int getSocketTimeout();
 
     HttpHost getProxy();
 

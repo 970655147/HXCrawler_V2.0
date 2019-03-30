@@ -87,6 +87,14 @@ public class HtmlCrawlerConfig implements CrawlerConfig<String, String, String> 
      * 超时配置
      */
     private int timeout;
+    /**
+     * 连接超时配置
+     */
+    private int connectionTimeout;
+    /**
+     * socket 超时配置
+     */
+    private int socketTimeout;
 
     /**
      * 初始化 添加默认的请求头
@@ -110,6 +118,8 @@ public class HtmlCrawlerConfig implements CrawlerConfig<String, String, String> 
         addData(config.getData());
         addCookies(config.getCookies());
         this.timeout = config.getTimeout();
+        this.connectionTimeout = config.getConnectionTimeout();
+        this.socketTimeout = config.getSocketTimeout();
     }
 
     @Override
@@ -162,6 +172,16 @@ public class HtmlCrawlerConfig implements CrawlerConfig<String, String, String> 
     }
 
     @Override
+    public void setConnectionTimeout(int timeout) {
+        this.connectionTimeout = timeout;
+    }
+
+    @Override
+    public void setSocketTimeout(int timeout) {
+        this.socketTimeout = timeout;
+    }
+
+    @Override
     public Map<String, String> getCookies() {
         return cookies;
     }
@@ -174,6 +194,16 @@ public class HtmlCrawlerConfig implements CrawlerConfig<String, String, String> 
     @Override
     public int getTimeout() {
         return timeout;
+    }
+
+    @Override
+    public int getConnectionTimeout() {
+        return connectionTimeout;
+    }
+
+    @Override
+    public int getSocketTimeout() {
+        return socketTimeout;
     }
 
     @Override

@@ -50,7 +50,7 @@ public final class RecurselyTaskUtils {
         Tools.assert0(callback != null, "'callback' can't be null ");
 
         final RecurseCrawlCallback<RecurseCrawlTask> fCallback = callback;
-        final RecurseTaskList<RecurseCrawlTask> todo = new RecurseTraskListImpl(isBfs);
+        final RecurseTaskList<RecurseCrawlTask> todo = new RecurseTaskListImpl(isBfs);
         RecurseCrawlTask seedTask = new RecurseCrawlTaskImpl(seedUrl, 0, method, config);
         todo.add(seedTask);
 

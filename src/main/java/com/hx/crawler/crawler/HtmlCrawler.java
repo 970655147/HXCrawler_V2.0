@@ -177,7 +177,7 @@ public class HtmlCrawler extends Crawler<HttpResponse, String, String, String> {
      */
     private HtmlPage doExecute(Request req, CrawlerConfig<String, String, String> config,
                                HttpHost proxy) throws IOException {
-        req.connectTimeout(config.getTimeout());
+        configTimeout(req, config);
         setHeadersAndCookies(req, config);
         if (proxy != null) {
             req.viaProxy(proxy);
@@ -188,18 +188,24 @@ public class HtmlCrawler extends Crawler<HttpResponse, String, String, String> {
     }
 
     /**
-     * 将config中的数据 配置到request中
+     * 封装post的request请求, 配置请求头, 参数, 代理等等
      *
-     * @param req    给定的request
-     * @param config 给定的config
-     * @return void
-     * @author Jerry.X.He
-     * @date 5/10/2017 7:49 PM
-     * @since 1.0
+     * @param url    给定的url
+     * @param config 给定的配置属性
+     * @return org.apache.http.client.fluent.Request
+     * @author 970655147 created at 2017-03-11 15:38
      */
-    private static void config(Request req, CrawlerConfig<String, String, String> config) {
+    private Request encapPostReq(String url, CrawlerConfig<String, String, String> config) {
+        Request req = Request.Post(url);
+        configTimeout(req, config);
         setHeadersAndCookies(req, config);
         req.bodyForm(map2NameValuePair(config.getData()));
+        HttpHost proxy = config.getProxy();
+        if (proxy != null) {
+            req.viaProxy(proxy);
+        }
+
+        return req;
     }
 
     /**
@@ -274,23 +280,26 @@ public class HtmlCrawler extends Crawler<HttpResponse, String, String, String> {
     }
 
     /**
-     * 封装post的request请求, 配置请求头, 参数, 代理等等
+     * 配置给定的 请求的超时时间
      *
-     * @param url    给定的url
-     * @param config 给定的配置属性
-     * @return org.apache.http.client.fluent.Request
-     * @author 970655147 created at 2017-03-11 15:38
+     * @param req    req
+     * @param config config
+     * @return void
+     * @author Jerry.X.He
+     * @date 2019/3/30 9:25
+     * @since 1.0
      */
-    private Request encapPostReq(String url, CrawlerConfig<String, String, String> config) {
-        Request req = Request.Post(url);
-        req.connectTimeout(config.getTimeout());
-        config(req, config);
-        HttpHost proxy = config.getProxy();
-        if (proxy != null) {
-            req.viaProxy(proxy);
+    private void configTimeout(Request req, CrawlerConfig<String, String, String> config) {
+        if (config.getTimeout() > 0) {
+            req.connectTimeout(config.getTimeout());
+            req.socketTimeout(config.getTimeout());
         }
-
-        return req;
+        if (config.getConnectionTimeout() > 0) {
+            req.connectTimeout(config.getConnectionTimeout());
+        }
+        if (config.getSocketTimeout() > 0) {
+            req.socketTimeout(config.getSocketTimeout());
+        }
     }
 
 }
